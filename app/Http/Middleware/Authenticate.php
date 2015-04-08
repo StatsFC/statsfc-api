@@ -1,27 +1,10 @@
 <?php namespace App\Http\Middleware;
 
+use App;
+use App\Customer;
 use Closure;
-use Illuminate\Contracts\Auth\Guard;
 
 class Authenticate {
-
-	/**
-	 * The Guard implementation.
-	 *
-	 * @var Guard
-	 */
-	protected $auth;
-
-	/**
-	 * Create a new filter instance.
-	 *
-	 * @param  Guard  $auth
-	 * @return void
-	 */
-	public function __construct(Guard $auth)
-	{
-		$this->auth = $auth;
-	}
 
 	/**
 	 * Handle an incoming request.
@@ -32,19 +15,41 @@ class Authenticate {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if ($this->auth->guest())
-		{
-			if ($request->ajax())
-			{
-				return response('Unauthorized.', 401);
-			}
-			else
-			{
-				return redirect()->guest('auth/login');
-			}
+		if (App::environment() === 'local') {
+			return $next($request);
+		}
+
+		if (! $request->has('key')) {
+			return $this->error();
+		}
+
+		$key = $request->input('key');
+
+		$customers = Customer::where('key', '=', $key)->get();
+
+		if ($customers->count() !== 1) {
+			return $this->error();
+		}
+
+		$customer = $customers->first();
+
+		if ($customer->ip !== $request->ip()) {
+			return $this->error();
 		}
 
 		return $next($request);
+	}
+
+	/**
+	 * Trigger an HTTP error with JSON response.
+	 *
+	 * @param  string  $message
+	 * @param  integer $code
+	 * @return mixed
+	 */
+	private function error($message = 'Unauthorised', $code = 401)
+	{
+		return response(json_encode(['error' => $message]), 401)->header('Content-Type', 'application/json');
 	}
 
 }

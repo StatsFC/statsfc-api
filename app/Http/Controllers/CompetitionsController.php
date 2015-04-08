@@ -11,11 +11,9 @@ class CompetitionsController extends Controller {
 
     public function index()
     {
-        return Competition::select(['name', 'country', 'key'])
-            ->where('online', '=', true)
-            ->orderBy('name')
-            ->get()
-            ->toJson();
+        $competitions = Competition::select(['name', 'country', 'key'])->online()->orderBy('name')->get();
+
+        return response($competitions->toJson())->header('Content-Type', 'application/json');
     }
 
 }

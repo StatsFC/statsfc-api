@@ -4,6 +4,8 @@ use App;
 use App\Customer;
 use Closure;
 
+// 429 Too Many Requests (rate limiting)
+
 class Authenticate {
 
 	/**
@@ -20,7 +22,7 @@ class Authenticate {
 		}
 
 		if (! $request->has('key')) {
-			return $this->error();
+			return $this->error('API key not provided');
 		}
 
 		$key = $request->input('key');
@@ -28,13 +30,13 @@ class Authenticate {
 		$customers = Customer::where('key', '=', $key)->get();
 
 		if ($customers->count() !== 1) {
-			return $this->error();
+			return $this->error('API key not found');
 		}
 
 		$customer = $customers->first();
 
 		if ($customer->ip !== $request->ip()) {
-			return $this->error();
+			return $this->error('IP address does not match');
 		}
 
 		return $next($request);
@@ -47,9 +49,13 @@ class Authenticate {
 	 * @param  integer $code
 	 * @return mixed
 	 */
-	private function error($message = 'Unauthorised', $code = 401)
+	private function error($message = 'Unauthorised', $httpStatusCode = 401)
 	{
-		return response(json_encode(['error' => $message]), 401)->header('Content-Type', 'application/json');
+		return response()->json([
+			'error' => [
+				'message' => $message
+			]
+		], $httpStatusCode);
 	}
 
 }

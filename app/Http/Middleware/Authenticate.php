@@ -2,12 +2,11 @@
 
 use App;
 use App\Customer;
+use App\Http\Controllers\ApiController;
 use Closure;
 
-// 429 Too Many Requests (rate limiting)
-
-class Authenticate {
-
+class Authenticate extends ApiController
+{
 	/**
 	 * Handle an incoming request.
 	 *
@@ -22,40 +21,23 @@ class Authenticate {
 		}
 
 		if (! $request->has('key')) {
-			return $this->error('API key not provided');
+			return $this->setStatusCode(401)->respondUnauthorised('API key not provided');
 		}
 
 		$key = $request->input('key');
 
-		$customers = Customer::where('key', '=', $key)->get();
+		$customers = Customer::where('key', $key)->get();
 
 		if ($customers->count() !== 1) {
-			return $this->error('API key not found');
+			return $this->setStatusCode(401)->respondUnauthorised('API key not found');
 		}
 
 		$customer = $customers->first();
 
 		if ($customer->ip !== $request->ip()) {
-			return $this->error('IP address does not match');
+			return $this->setStatusCode(401)->respondUnauthorised('IP address does not match');
 		}
 
 		return $next($request);
 	}
-
-	/**
-	 * Trigger an HTTP error with JSON response.
-	 *
-	 * @param  string  $message
-	 * @param  integer $code
-	 * @return mixed
-	 */
-	private function error($message = 'Unauthorised', $httpStatusCode = 401)
-	{
-		return response()->json([
-			'error' => [
-				'message' => $message
-			]
-		], $httpStatusCode);
-	}
-
 }

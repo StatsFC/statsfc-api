@@ -1,6 +1,12 @@
 <?php
-Route::get('/', function() {
-    return 'StatsFC API';
-});
+Route::group(['prefix' => 'api/v1'], function()
+{
+    Route::get('/', function()
+    {
+        return 'StatsFC API';
+    });
 
-Route::get('competitions', 'CompetitionsController@index');
+    Route::resource('competitions', 'CompetitionsController', [
+        'only' => ['index', 'show']
+    ]);
+});

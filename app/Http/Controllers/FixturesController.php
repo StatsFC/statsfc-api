@@ -24,8 +24,17 @@ class FixturesController extends GamesController
             ->where('states.ended', false)
             ->whereRaw('DATE(`games`.`timestamp`) >= CURDATE()')
             ->orderBy('games.timestamp')
-            ->orderBy('home.name')
-            ->get();
+            ->orderBy('home.name');
+
+        if ($request->has('team')) {
+            $games = $games->whereRaw('(home.name = ? OR away.name = ?)', [$request->input('team'), $request->input('team')]);
+        }
+
+        $games = $games->get();
+
+        /**
+         * @todo Pass $request and $games to the parent class, to handle filters and response
+         */
 
         return $this->respond([
             'data' => $this->gameTransformer->transformCollection($games->all())

@@ -1,4 +1,5 @@
-<?php namespace App\Http\Controllers;
+<?php
+namespace App\Http\Controllers;
 
 use App\Competition;
 use App\Http\Requests;
@@ -7,18 +8,29 @@ use App\Transformers\CompetitionTransformer;
 
 use Illuminate\Http\Request;
 
-class CompetitionsController extends ApiController {
-
+class CompetitionsController extends ApiController
+{
     /**
      * @var App\Transformers\CompetitionTransformer
      */
     protected $competitionTransformer;
 
+    /**
+     * Set the competition transformer
+     *
+     * @param CompetitionTransformer $competitionTransformer
+     */
     public function __construct(CompetitionTransformer $competitionTransformer)
     {
         $this->competitionTransformer = $competitionTransformer;
     }
 
+    /**
+     * Output a list of competitions
+     *
+     * @param  Request $request
+     * @return mixed
+     */
     public function index(Request $request)
     {
         $competitions = Competition::select('competitionNew.*')->online();
@@ -42,6 +54,12 @@ class CompetitionsController extends ApiController {
         return response($competitions->toJson())->header('Content-Type', 'application/json');*/
     }
 
+    /**
+     * Output details for a single competition
+     *
+     * @param  integer $id
+     * @return mixed
+     */
     public function show($id)
     {
         $competition = Competition::find($id);
@@ -54,5 +72,4 @@ class CompetitionsController extends ApiController {
             'data' => $this->competitionTransformer->transform($competition)
         ]);
     }
-
 }

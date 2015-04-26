@@ -1,4 +1,5 @@
-<?php namespace App\Http\Controllers;
+<?php
+namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -9,6 +10,8 @@ use Illuminate\Http\Response;
 class ApiController extends Controller
 {
     /**
+     * Define default status code
+     *
      * @var integer
      */
     protected $statusCode = Response::HTTP_OK;

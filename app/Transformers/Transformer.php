@@ -1,4 +1,5 @@
-<?php namespace App\Transformers;
+<?php
+namespace App\Transformers;
 
 abstract class Transformer
 {

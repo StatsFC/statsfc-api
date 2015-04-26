@@ -3,6 +3,7 @@ namespace App\Transformers;
 
 use App\Transformers\CompetitionTransformer;
 use App\Transformers\RoundTransformer;
+use App\Transformers\TeamTransformer;
 
 class GameTransformer extends Transformer
 {
@@ -14,14 +15,24 @@ class GameTransformer extends Transformer
      */
     public function transform($game)
     {
-        $roundTransformer       = new RoundTransformer;
         $competitionTransformer = new CompetitionTransformer;
+        $roundTransformer       = new RoundTransformer;
+        $teamTransformer        = new TeamTransformer;
 
         return [
             'id'          => $game->id,
             'timestamp'   => $game->timestamp->toIso8601String(),
+            'competition' => $competitionTransformer->transform($game->round->competition, false),
             'round'       => $roundTransformer->transform($game->round),
-            'competition' => $competitionTransformer->transform($game->round->competition, false)
+            'teams'       => [
+                'home' => $teamTransformer->transform($game->home),
+                'away' => $teamTransformer->transform($game->away)
+            ],
+            'score'       => [
+                $game->homeScore,
+                $game->awayScore
+            ],
+            'events'      => []
         ];
     }
 }

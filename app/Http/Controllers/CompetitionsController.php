@@ -36,7 +36,9 @@ class CompetitionsController extends ApiController
         $competitions = Competition::select('competitions.*')->online();
 
         if ($request->has('region')) {
-            $competitions = $competitions->join('region', 'competitions.region_id', '=', 'region.id')->where('region.name', $request->input('region'));
+            $competitions = $competitions
+                ->join('region', 'competitions.region_id', '=', 'region.id')
+                ->where('region.name', $request->input('region'));
         }
 
         $competitions = $competitions->get();

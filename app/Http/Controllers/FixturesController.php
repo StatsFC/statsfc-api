@@ -19,8 +19,12 @@ class FixturesController extends GamesController
     {
         $games = Game::select('games.*')
             ->join('states', 'games.state_id', '=', 'states.code')
+            ->join('teams AS home', 'games.home_id', '=', 'home.id')
+            ->join('teams AS away', 'games.away_id', '=', 'away.id')
             ->where('states.ended', false)
             ->whereRaw('DATE(`games`.`timestamp`) >= CURDATE()')
+            ->orderBy('games.timestamp')
+            ->orderBy('home.name')
             ->get();
 
         return $this->respond([

@@ -67,7 +67,7 @@ class ApiController extends Controller
      * @param  string $message
      * @return mixed
      */
-    public function respondRateLimit($message = 'Rate limit exceeded')
+    public function respondTooManyRequests($message = 'Rate limit exceeded')
     {
         return $this->setStatusCode(Response::HTTP_TOO_MANY_REQUESTS)->respondWithError($message);
     }

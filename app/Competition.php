@@ -2,7 +2,12 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Competition extends Model {
+class Competition extends Model
+{
+    protected $casts = [
+        'id'     => 'integer',
+        'online' => 'boolean'
+    ];
 
     protected $table = 'competitionNew';
 
@@ -13,12 +18,11 @@ class Competition extends Model {
 
     public function region()
     {
-        return $this->hasOne('App\Region');
+        return $this->belongsTo('App\Region');
     }
 
     public function rounds()
     {
-        return $this->hasMany('App\Round');
+        return $this->hasMany('App\Round', 'competitionNew_id');
     }
-
 }

@@ -1,5 +1,7 @@
 <?php namespace App\StatsFc\Transformers;
 
+use App\StatsFc\Transformers\RoundTransformer;
+
 class CompetitionTransformer extends Transformer
 {
     /**
@@ -10,10 +12,13 @@ class CompetitionTransformer extends Transformer
      */
     public function transform($competition)
     {
+        $roundTransformer = new RoundTransformer;
+
         return [
-            'id'     => (int) $competition['id'],
-            'name'   => $competition['name'],
-            //'region' => $competition->region->name
+            'id'     => $competition->id,
+            'name'   => $competition->name,
+            'region' => $competition->region->name,
+            'rounds' => $roundTransformer->transformCollection($competition->rounds()->active()->get()->all())
         ];
     }
 }

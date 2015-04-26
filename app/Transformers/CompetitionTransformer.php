@@ -11,15 +11,20 @@ class CompetitionTransformer extends Transformer
      * @param  $competition
      * @return array
      */
-    public function transform($competition)
+    public function transform($competition, $includeRounds = true)
     {
-        $roundTransformer = new RoundTransformer;
-
-        return [
+        $data = [
             'id'     => $competition->id,
             'name'   => $competition->name,
-            'region' => $competition->region->name,
-            'rounds' => $roundTransformer->transformCollection($competition->rounds()->active()->get()->all())
+            'region' => $competition->region->name
         ];
+
+        if ($includeRounds) {
+            $roundTransformer = new RoundTransformer;
+
+            $data['rounds'] = $roundTransformer->transformCollection($competition->rounds()->active()->get()->all());
+        }
+
+        return $data;
     }
 }

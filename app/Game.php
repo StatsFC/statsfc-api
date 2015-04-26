@@ -6,6 +6,35 @@ use Illuminate\Database\Eloquent\Model;
 class Game extends Model
 {
     /**
+     * Define fields to be casted
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id'        => 'integer',
+        'round_id'  => 'integer',
+        'home_id'   => 'integer',
+        'away_id'   => 'integer',
+        'state_id'  => 'integer',
+        'homeGoals' => 'integer',
+        'awayGoals' => 'integer',
+    ];
+
+    /**
+     * Define fields to be treated as Carbon dates
+     *
+     * @return array
+     */
+    public function getDates()
+    {
+        return [
+            'timestamp',
+            'created_at',
+            'updated_at'
+        ];
+    }
+
+    /**
      * Define the relationship to a round
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -42,6 +71,6 @@ class Game extends Model
      */
     public function state()
     {
-        return $this->belongsTo('App\State');
+        return $this->belongsTo('App\State', 'code');
     }
 }

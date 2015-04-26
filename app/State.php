@@ -24,7 +24,7 @@ class State extends Model
     }
 
     /**
-     * Define a scope to filter states where the match has ended
+     * Define a scope to filter states where the game has ended
      *
      * @param  Illuminate\Database\Eloquent\Builder $query
      * @return Illuminate\Database\Eloquent\Builder
@@ -35,7 +35,7 @@ class State extends Model
     }
 
     /**
-     * Define a scope to filter states where the match has not ended
+     * Define a scope to filter states where the game has not ended
      *
      * @param  Illuminate\Database\Eloquent\Builder $query
      * @return Illuminate\Database\Eloquent\Builder
@@ -46,7 +46,7 @@ class State extends Model
     }
 
     /**
-     * Define a scope to filter states where the match is void
+     * Define a scope to filter states where the game is void
      *
      * @param  Illuminate\Database\Eloquent\Builder $query
      * @return Illuminate\Database\Eloquent\Builder
@@ -57,7 +57,7 @@ class State extends Model
     }
 
     /**
-     * Define a scope to filter states where the match is not void
+     * Define a scope to filter states where the game is not void
      *
      * @param  Illuminate\Database\Eloquent\Builder $query
      * @return Illuminate\Database\Eloquent\Builder
@@ -68,12 +68,12 @@ class State extends Model
     }
 
     /**
-     * Define the relationship to matches
+     * Define the relationship to games
      *
      * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matches()
+    public function games()
     {
-        return $this->hasMany('App\Match');
+        return $this->hasMany('App\Game');
     }
 }

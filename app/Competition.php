@@ -16,13 +16,6 @@ class Competition extends Model
     ];
 
     /**
-     * Define non-standard table name
-     *
-     * @var string
-     */
-    protected $table = 'competitionNew';
-
-    /**
      * Define a scope to filter online competitions
      *
      * @param  Illuminate\Database\Eloquent\Builder $query
@@ -50,6 +43,6 @@ class Competition extends Model
      */
     public function rounds()
     {
-        return $this->hasMany('App\Round', 'competitionNew_id');
+        return $this->hasMany('App\Round');
     }
 }

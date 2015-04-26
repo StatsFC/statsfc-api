@@ -33,10 +33,10 @@ class CompetitionsController extends ApiController
      */
     public function index(Request $request)
     {
-        $competitions = Competition::select('competitionNew.*')->online();
+        $competitions = Competition::select('competitions.*')->online();
 
         if ($request->has('region')) {
-            $competitions = $competitions->join('region', 'competitionNew.region_id', '=', 'region.id')->where('region.name', $request->input('region'));
+            $competitions = $competitions->join('region', 'competitions.region_id', '=', 'region.id')->where('region.name', $request->input('region'));
         }
 
         $competitions = $competitions->get();
@@ -45,10 +45,10 @@ class CompetitionsController extends ApiController
             'data' => $this->competitionTransformer->transformCollection($competitions->all())
         ]);
 
-        /*$competitions = Competition::select('competitionNew.id', 'competitionNew.name', 'region.name AS region')
+        /*$competitions = Competition::select('competitions.id', 'competitions.name', 'region.name AS region')
             ->online()
-            ->leftJoin('region', 'competitionNew.region_id', '=', 'region.id')
-            ->orderBy('competitionNew.name')
+            ->leftJoin('region', 'competitions.region_id', '=', 'region.id')
+            ->orderBy('competitions.name')
             ->get();
 
         return response($competitions->toJson())->header('Content-Type', 'application/json');*/

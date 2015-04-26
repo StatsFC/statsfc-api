@@ -16,13 +16,6 @@ class Round extends Model
     ];
 
     /**
-     * Define non-standard table name
-     *
-     * @var string
-     */
-    protected $table = 'round';
-
-    /**
      * Define fields to be treated as Carbon dates
      *
      * @return array
@@ -65,16 +58,16 @@ class Round extends Model
      */
     public function competition()
     {
-        return $this->belongsTo('App\Competition', 'competitionNew_id');
+        return $this->belongsTo('App\Competition');
     }
 
     /**
-     * Define the relationship to matches
+     * Define the relationship to games
      *
      * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matches()
+    public function games()
     {
-        return $this->hasMany('App\Match');
+        return $this->hasMany('App\Game');
     }
 }

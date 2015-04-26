@@ -6,13 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 class State extends Model
 {
     /**
-     * Define non-standard table name
-     *
-     * @var string
-     */
-    protected $table = 'stateNew';
-
-    /**
      * Define a scope to filter in-game states
      *
      * @param  Illuminate\Database\Eloquent\Builder $query

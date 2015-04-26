@@ -1,4 +1,4 @@
-<?php namespace App\StatsFc\Transformers;
+<?php namespace App\Transformers;
 
 abstract class Transformer
 {

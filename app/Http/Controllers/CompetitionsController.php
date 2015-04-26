@@ -3,14 +3,14 @@
 use App\Competition;
 use App\Http\Requests;
 use App\Http\Controllers\ApiController;
-use App\StatsFc\Transformers\CompetitionTransformer;
+use App\Transformers\CompetitionTransformer;
 
 use Illuminate\Http\Request;
 
 class CompetitionsController extends ApiController {
 
     /**
-     * @var App\StatsFc\Transformers\CompetitionTransformer
+     * @var App\Transformers\CompetitionTransformer
      */
     protected $competitionTransformer;
 

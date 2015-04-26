@@ -4,13 +4,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ApiController extends Controller
 {
     /**
      * @var integer
      */
-    protected $statusCode = 200;
+    protected $statusCode = Response::HTTP_OK;
 
     /**
      * Get status code
@@ -43,7 +44,7 @@ class ApiController extends Controller
      */
     public function respondUnauthorised($message = 'Unauthorised')
     {
-        return $this->setStatusCode(401)->respondWithError($message);
+        return $this->setStatusCode(Response::HTTP_UNAUTHORIZED)->respondWithError($message);
     }
 
     /**
@@ -54,7 +55,7 @@ class ApiController extends Controller
      */
     public function respondNotFound($message = 'Not found')
     {
-        return $this->setStatusCode(404)->respondWithError($message);
+        return $this->setStatusCode(Response::HTTP_NOT_FOUND)->respondWithError($message);
     }
 
     /**
@@ -65,7 +66,7 @@ class ApiController extends Controller
      */
     public function respondRateLimit($message = 'Rate limit exceeded')
     {
-        return $this->setStatusCode(429)->respondWithError($message);
+        return $this->setStatusCode(Response::HTTP_TOO_MANY_REQUESTS)->respondWithError($message);
     }
 
     /**
@@ -76,7 +77,7 @@ class ApiController extends Controller
      */
     public function respondInternalError($message = 'Internal error')
     {
-        return $this->setStatusCode(500)->respondWithError($message);
+        return $this->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR)->respondWithError($message);
     }
 
     /**

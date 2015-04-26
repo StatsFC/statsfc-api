@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 use App;
 use App\Customer;
 use App\Http\Controllers\ApiController;
+use Carbon\Carbon;
 use Closure;
 
 class Authenticate extends ApiController
@@ -22,7 +23,7 @@ class Authenticate extends ApiController
         }
 
         if (! $request->has('key')) {
-            return $this->setStatusCode(401)->respondUnauthorised('API key not provided');
+            return $this->respondUnauthorised('API key not provided');
         }
 
         $key = $request->input('key');
@@ -30,14 +31,26 @@ class Authenticate extends ApiController
         $customers = Customer::where('key', $key)->get();
 
         if ($customers->count() !== 1) {
-            return $this->setStatusCode(401)->respondUnauthorised('API key not found');
+            return $this->respondUnauthorised('API key not found');
         }
 
         $customer = $customers->first();
 
         if ($customer->ip !== $request->ip()) {
-            return $this->setStatusCode(401)->respondUnauthorised('IP address does not match');
+            return $this->respondUnauthorised('IP address does not match');
         }
+
+        /*if ($customer->lastApiCall < Carbon::now()->toDateString()) {
+            $customer->resetApiCallsRemaining();
+            // $customer->apiCallsRemaining = 100;
+            // $customer->lastApiCall       = Carbon::now()->toDateString();
+        }*/
+
+        if ($customer->apiCallsRemaining === 0) {
+            return $this->respondTooManyRequests();
+        }
+
+        //$customer->decrementApiCallsRemaining();
 
         return $next($request);
     }

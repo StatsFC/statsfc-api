@@ -8,7 +8,7 @@ class Region extends Model {
 
     public function competitions()
     {
-        return $this->hasMany('App\Competitions');
+        return $this->hasMany('App\Competition');
     }
 
 }

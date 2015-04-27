@@ -108,6 +108,8 @@ class ApiController extends Controller
      */
     public function respond($data, $headers = [])
     {
+        header_remove('X-Powered-By');
+
         return response()->json($data, $this->getStatusCode(), $headers);
     }
 }

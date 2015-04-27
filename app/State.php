@@ -6,6 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 class State extends Model
 {
     /**
+     * Define fields to be casted
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id'       => 'integer',
+        'code'     => 'integer',
+        'inGame'   => 'boolean',
+        'inPlay'   => 'boolean',
+        'hasScore' => 'boolean',
+        'knockout' => 'boolean',
+        'void'     => 'boolean',
+        'break'    => 'boolean',
+        'ended'    => 'boolean',
+        'length'   => 'integer',
+        'offset'   => 'integer'
+    ];
+
+    /**
      * Define a scope to filter in-game states
      *
      * @param  Illuminate\Database\Eloquent\Builder $query

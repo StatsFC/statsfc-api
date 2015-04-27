@@ -36,15 +36,13 @@ class CompetitionsController extends ApiController
         $competitions = Competition::select('competitions.*')->online();
 
         if ($request->has('region')) {
-            $competitions = $competitions
+            $competitions
                 ->join('region', 'competitions.region_id', '=', 'region.id')
                 ->where('region.name', $request->input('region'));
         }
 
-        $competitions = $competitions->get();
-
         return $this->respond([
-            'data' => $this->competitionTransformer->transformCollection($competitions->all())
+            'data' => $this->competitionTransformer->transformCollection($competitions->get()->all())
         ]);
 
         /*$competitions = Competition::select('competitions.id', 'competitions.name', 'region.name AS region')

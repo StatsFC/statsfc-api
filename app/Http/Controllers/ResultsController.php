@@ -7,10 +7,10 @@ use App\Http\Controllers\GamesController;
 
 use Illuminate\Http\Request;
 
-class FixturesController extends GamesController
+class ResultsController extends GamesController
 {
     /**
-     * Output a list of games that haven't been played yet
+     * Output a list of games that have been played
      *
      * @param  Request $request
      * @return mixed
@@ -23,8 +23,8 @@ class FixturesController extends GamesController
             ->join('teams AS home', 'games.home_id', '=', 'home.id')
             ->join('teams AS away', 'games.away_id', '=', 'away.id')
             ->join('states', 'games.state_id', '=', 'states.code')
-            ->where('states.ended', false)
-            ->whereRaw('DATE(`games`.`timestamp`) >= CURDATE()')
+            ->where('states.ended', true)
+            ->whereRaw('DATE(`games`.`timestamp`) <= CURDATE()')
             ->orderBy('games.timestamp')
             ->orderBy('home.name');
 

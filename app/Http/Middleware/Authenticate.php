@@ -22,11 +22,11 @@ class Authenticate extends ApiController
             return $next($request);
         }
 
-        if (! $request->has('key')) {
+        $key = $request->header('X-Auth-Key');
+
+        if (! $key) {
             return $this->respondUnauthorised('API key not provided');
         }
-
-        $key = $request->input('key');
 
         $customers = Customer::where('key', $key)->get();
 

@@ -16,6 +16,7 @@ class CompetitionTransformer extends Transformer
         $data = [
             'id'     => $competition->id,
             'name'   => $competition->name,
+            'key'    => $competition->key,
             'region' => $competition->region->name
         ];
 

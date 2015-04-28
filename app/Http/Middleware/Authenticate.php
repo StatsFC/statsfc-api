@@ -3,6 +3,7 @@ namespace App\Http\Middleware;
 
 use App;
 use App\Customer;
+use App\RateLimiter;
 use App\Http\Controllers\ApiController;
 use Carbon\Carbon;
 use Closure;
@@ -40,17 +41,16 @@ class Authenticate extends ApiController
             return $this->respondUnauthorised('IP address does not match');
         }
 
-        /*if ($customer->lastApiCall < Carbon::now()->toDateString()) {
-            $customer->resetApiCallsRemaining();
-            // $customer->apiCallsRemaining = 100;
-            // $customer->lastApiCall       = Carbon::now()->toDateString();
-        }*/
+        $rateLimiter = RateLimiter::firstOrCreate([
+            'customer_id' => $customer->id,
+            'date'        => Carbon::today()->toDateString()
+        ]);
 
-        if ($customer->apiCallsRemaining === 0) {
+        if ($rateLimiter->calls >= RateLimiter::DAILY_LIMIT) {
             return $this->respondTooManyRequests();
         }
 
-        //$customer->decrementApiCallsRemaining();
+        $rateLimiter->increment();
 
         return $next($request);
     }

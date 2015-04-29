@@ -44,14 +44,6 @@ class CompetitionsController extends ApiController
         return $this->respond([
             'data' => $this->competitionTransformer->transformCollection($competitions->get()->all())
         ]);
-
-        /*$competitions = Competition::select('competitions.id', 'competitions.name', 'region.name AS region')
-            ->online()
-            ->leftJoin('region', 'competitions.region_id', '=', 'region.id')
-            ->orderBy('competitions.name')
-            ->get();
-
-        return response($competitions->toJson())->header('Content-Type', 'application/json');*/
     }
 
     /**

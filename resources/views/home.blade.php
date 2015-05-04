@@ -11,34 +11,32 @@
         <div class="col-md-2"></div>
 
         <div class="api-sample col-md-8">
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">
-                    <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
-                </span>
-                <input type="text" class="form-control api-curl" aria-describedby="basic-addon1" value="curl -H &quot;X-Auth-Key: &lt;API key&gt;&quot; https://offside.statsfc.com/api/v1/competitions">
-            </div>
+            <ul class="nav nav-tabs" id="tabs">
+                <li class="active"><a href="#competitions" data-toggle="tab">Competitions</a></li>
+                <li><a href="#states" data-toggle="tab">States</a></li>
+                <li><a href="#fixtures" data-toggle="tab">Fixtures</a></li>
+            </ul>
 
-            <pre><code class="json">{
-    "data": [
-        {
-            "id": 2,
-            "name": "Premier League",
-            "key": "EPL",
-            "region": "England",
-            "rounds": [
-                {
-                    "id": 107,
-                    "name": "Premier League",
-                    "start": "2014-08-15",
-                    "end": null
-                }
-            ]
-        },
-        …
-    ]
-}</code></pre>
+            <div class="tab-content">
+                <div class="tab-pane active" id="competitions">
+                    @include('examples.competitions')
+                </div>
+                <div class="tab-pane" id="states">
+                    @include('examples.states')
+                </div>
+                <div class="tab-pane" id="fixtures">
+                    @include('examples.fixtures')
+                </div>
+            </div>
         </div>
 
         <div class="col-md-2"></div>
     </div>
+
+    <script>
+        $('#tabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    </script>
 @stop

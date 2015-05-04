@@ -23,7 +23,7 @@ class Authenticate extends ApiController
             return $next($request);
         }
 
-        $key = $request->header('X-Auth-Key');
+        $key = $request->header('X-StatsFC-Key');
 
         if (! $key) {
             return $this->respondUnauthorised('API key not provided');

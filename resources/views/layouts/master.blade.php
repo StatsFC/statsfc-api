@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>StastFC Offside - @yield('title')</title>
+        <title>StastFC Dugout - @yield('title')</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 

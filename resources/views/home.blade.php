@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
-    <h1 class="text-center home-title">StatsFC Offside</h1>
+    <h1 class="text-center home-title">StatsFC Dugout</h1>
 
     <p class="text-center home-tagline">The affordable football API{{ Carbon\Carbon::now()->toDateString() < '2015-08-01' ? ' – coming August 2015!' : '' }}</p>
 

@@ -51,7 +51,7 @@ class Authenticate extends ApiController
         }
 
         // Put the customer into a session
-        $request->session()->put('customer', $customer);
+        $request->session()->put('customer_id', $customer->id);
 
         return $next($request);
     }

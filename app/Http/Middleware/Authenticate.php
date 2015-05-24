@@ -19,10 +19,6 @@ class Authenticate extends ApiController
      */
     public function handle($request, Closure $next)
     {
-        if (App::environment() === 'local') {
-            return $next($request);
-        }
-
         $key = $request->header('X-StatsFC-Key');
 
         if (! $key) {
@@ -37,20 +33,25 @@ class Authenticate extends ApiController
 
         $customer = $customers->first();
 
-        if ($customer->ip !== $request->ip()) {
-            return $this->respondUnauthorised('IP address does not match');
+        if (App::environment() !== 'local') {
+            if ($customer->ip !== $request->ip()) {
+                return $this->respondUnauthorised('IP address does not match');
+            }
+
+            $rateLimiter = RateLimiter::firstOrCreate([
+                'customer_id' => $customer->id,
+                'date'        => Carbon::today()->toDateString()
+            ]);
+
+            if ($rateLimiter->calls >= RateLimiter::DAILY_LIMIT) {
+                return $this->respondTooManyRequests();
+            }
+
+            $rateLimiter->increment();
         }
 
-        $rateLimiter = RateLimiter::firstOrCreate([
-            'customer_id' => $customer->id,
-            'date'        => Carbon::today()->toDateString()
-        ]);
-
-        if ($rateLimiter->calls >= RateLimiter::DAILY_LIMIT) {
-            return $this->respondTooManyRequests();
-        }
-
-        $rateLimiter->increment();
+        // Put the customer into a session
+        $request->session()->put('customer', $customer);
 
         return $next($request);
     }

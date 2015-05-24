@@ -21,8 +21,9 @@ class ResultsController extends GamesController
 
         $games = Game::select('games.*')
             ->visibleByCustomer($customer_id)
-            ->filterTeam($request)
+            ->filterSeason($request)
             ->filterCompetition($request)
+            ->filterTeam($request)
             ->hasEnded()
             ->orderBy('games.timestamp', 'games.id');
 

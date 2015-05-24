@@ -74,6 +74,16 @@ class Game extends Model
         }
     }
 
+    public function scopeFilterSeason($query, $request)
+    {
+        // By default, show games for the current season only
+        return $query
+            ->join('seasons', 'rounds.season_id', '=', 'seasons.id')
+            ->whereRaw('? BETWEEN `season`.start` AND `seasons`.`end`', [
+                Carbon::today()->toDateString()
+            ]);
+    }
+
     public function scopeFilterCompetition($query, $request)
     {
         if ($request->has('competition')) {
@@ -87,13 +97,6 @@ class Game extends Model
         if ($request->has('competition_key')) {
             return $query->where('competitions.key', $request->input('competition_key'));
         }
-
-        // By default, show games for the current season only
-        return $query
-            ->join('seasons', 'rounds.season_id', '=', 'seasons.id')
-            ->whereRaw('? BETWEEN `season`.start` AND `seasons`.`end`', [
-                Carbon::today()->toDateString()
-            ]);
     }
 
     public function scopeHasEnded($query)

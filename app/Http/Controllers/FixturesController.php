@@ -25,7 +25,8 @@ class FixturesController extends GamesController
             ->filterCompetition($request)
             ->filterTeam($request)
             ->hasNotEnded()
-            ->orderBy('games.timestamp', 'games.id');
+            ->orderBy('games.timestamp')
+            ->orderBy('games.id');
 
         /**
          * @todo Pass $request and $games to the parent class, to handle filters and response

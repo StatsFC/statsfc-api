@@ -48,6 +48,7 @@ class Game extends Model
         return $query
             ->join('rounds', 'games.round_id', '=', 'rounds.id')
             ->join('competitions', 'rounds.competition_id', '=', 'competitions.id')
+            ->where('competitions.online', true)
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
             ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [

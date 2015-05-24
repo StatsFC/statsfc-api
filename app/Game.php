@@ -93,7 +93,7 @@ class Game extends Model
             ->join('seasons', 'rounds.season_id', '=', 'seasons.id')
             ->whereRaw('? BETWEEN `season`.start` AND `seasons`.`end`', [
                 Carbon::today()->toDateString()
-            ])
+            ]);
     }
 
     public function scopeHasEnded($query)

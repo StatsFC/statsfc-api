@@ -46,6 +46,15 @@ class Competition extends Model
             ->where('payment.customer_id', $customer_id);
     }
 
+    public function scopeFilterRegion($query, $request)
+    {
+        if ($request->has('region')) {
+            return $query
+                ->join('regions', 'competitions.region_id', '=', 'regions.id')
+                ->where('regions.name', $request->input('region'));
+        }
+    }
+
     /**
      * Define the relationship to a region
      *

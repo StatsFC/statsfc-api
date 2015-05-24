@@ -35,16 +35,13 @@ class CompetitionsController extends ApiController
     {
         $customer_id = $request->session()->get('customer_id');
 
-        $competitions = Competition::select('competitions.*')->visibleByCustomer($customer_id);
-
-        if ($request->has('region')) {
-            $competitions
-                ->join('region', 'competitions.region_id', '=', 'region.id')
-                ->where('region.name', $request->input('region'));
-        }
+        $competitions = Competition::select('competitions.*')
+            ->visibleByCustomer($customer_id)
+            ->filterRegion($request)
+            ->get();
 
         return $this->respond([
-            'data' => $this->competitionTransformer->transformCollection($competitions->get()->all())
+            'data' => $this->competitionTransformer->transformCollection($competitions->all())
         ]);
     }
 

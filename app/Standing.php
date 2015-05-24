@@ -44,8 +44,9 @@ class Standing extends Model
             ->where('competitions.online', true)
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
-            ->where('payment.from', '<=', Carbon::today()->toDateString())
-            ->where('payment.to', '>=', Carbon::today()->toDateString())
+            ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
+                Carbon::today()->toDateString()
+            ])
             ->where('payment.customer_id', $customer_id);
     }
 
@@ -60,9 +61,9 @@ class Standing extends Model
         }
 
         // By default, show games for the current season only
-        return $query
-            ->where('seasons.start', '<=', Carbon::today()->toDateString())
-            ->where('seasons.end', '>=', Carbon::today()->toDateString());
+        return $query->whereRaw('? BETWEEN `seasons`.`start` AND `seasons`.`end`', [
+            Carbon::today()->toDateString()
+        ]);
     }
 
     public function scopeFilterCompetition($query, $request)

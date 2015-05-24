@@ -41,8 +41,9 @@ class Competition extends Model
             ->online()
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
-            ->where('payment.from', '<=', Carbon::today()->toDateString())
-            ->where('payment.to', '>=', Carbon::today()->toDateString())
+            ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
+                Carbon::today()->toDateString()
+            ])
             ->where('payment.customer_id', $customer_id);
     }
 

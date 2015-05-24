@@ -47,7 +47,7 @@ class Game extends Model
     {
         return $query
             ->join('rounds', 'games.round_id', '=', 'rounds.id')
-            ->join('competitions', 'rounds.competition_id', '=', 'rounds.id')
+            ->join('competitions', 'rounds.competition_id', '=', 'competitions.id')
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
             ->where('payment.from', '<=', Carbon::today()->toDateString())

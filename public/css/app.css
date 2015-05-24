@@ -5,11 +5,11 @@ pre {
 code,
 pre,
 .api-curl {
-    font-family: 'Source Code Pro', inherit;
+    font-family: 'Source Code Pro', monospace;
 }
 
 .home-title {
-    font-family:   'Source Sans Pro', inherit;
+    font-family:   'Source Sans Pro', monospace;
     font-size:     64pt;
     font-weight:   200;
     margin-top:    0.75em;
@@ -18,7 +18,7 @@ pre,
 }
 
 .home-tagline {
-    font-family:   'Source Sans Pro', inherit;
+    font-family:   'Source Sans Pro', monospace;
     font-size:     24pt;
     font-weight:   300;
     margin-bottom: 1em;

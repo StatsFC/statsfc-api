@@ -21,27 +21,10 @@ class FixturesController extends GamesController
 
         $games = Game::select('games.*')
             ->visibleByCustomer($customer_id)
-            ->join('teams AS home', 'games.home_id', '=', 'home.id')
-            ->join('teams AS away', 'games.away_id', '=', 'away.id')
-            ->join('states', 'games.state_id', '=', 'states.code')
-            ->where('states.ended', false)
-            ->whereRaw('DATE(`games`.`timestamp`) >= CURDATE()')
-            ->orderBy('games.timestamp')
-            ->orderBy('home.name');
-
-        if ($request->has('team')) {
-            $games->whereRaw('? IN (home.`name`, away.`name`)', [$request->input('team')]);
-        } elseif ($request->has('team_id')) {
-            $games->whereRaw('? IN (home.`id`, away.`id`)', [$request->input('team_id')]);
-        }
-
-        if ($request->has('competition')) {
-            $games->where('competitions.name', $request->input('competition'));
-        } elseif ($request->has('competition_id')) {
-            $games->where('competitions.id', $request->input('competition_id'));
-        } elseif ($request->has('competition_key')) {
-            $games->where('competitions.key', $request->input('competition_key'));
-        }
+            ->filterTeam($request)
+            ->filterCompetition($request)
+            ->hasNotEnded()
+            ->orderBy('games.timestamp', 'games.id');
 
         /**
          * @todo Pass $request and $games to the parent class, to handle filters and response

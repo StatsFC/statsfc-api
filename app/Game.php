@@ -50,9 +50,70 @@ class Game extends Model
             ->join('competitions', 'rounds.competition_id', '=', 'competitions.id')
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
-            ->where('payment.from', '<=', Carbon::today()->toDateString())
-            ->where('payment.to', '>=', Carbon::today()->toDateString())
+            ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
+                Carbon::today()->toDateString()
+            ])
             ->where('payment.customer_id', $customer_id);
+    }
+
+    public function scopeFilterTeam($query, $request)
+    {
+        if ($request->has('team_id')) {
+            return $query->whereRaw('? IN (games.`home_id`, games.`away_id`)', [
+                $request->input('team_id')
+            ]);
+        }
+
+        if ($request->has('team')) {
+            return $query
+                ->join('teams AS home', 'games.home_id', '=', 'home.id')
+                ->join('teams AS away', 'games.away_id', '=', 'away.id')
+                ->whereRaw('? IN (home.`name`, away.`name`)', [
+                    $request->input('team')
+                ]);
+        }
+    }
+
+    public function scopeFilterCompetition($query, $request)
+    {
+        if ($request->has('competition')) {
+            return $query->where('competitions.name', $request->input('competition'));
+        }
+
+        if ($request->has('competition_id')) {
+            return $query->where('competitions.id', $request->input('competition_id'));
+        }
+
+        if ($request->has('competition_key')) {
+            return $query->where('competitions.key', $request->input('competition_key'));
+        }
+
+        // By default, show games for the current season only
+        return $query
+            ->join('seasons', 'rounds.season_id', '=', 'seasons.id')
+            ->whereRaw('? BETWEEN `season`.start` AND `seasons`.`end`', [
+                Carbon::today()->toDateString()
+            ])
+    }
+
+    public function scopeHasEnded($query)
+    {
+        return $query
+            ->join('states', 'games.state_id', '=', 'states.code')
+            ->where('states.ended', true)
+            ->whereRaw('DATE(`games`.`timestamp`) <= ?', [
+                Carbon::today()->toDateString()
+            ]);
+    }
+
+    public function scopeHasNotEnded($query)
+    {
+        return $query
+            ->join('states', 'games.state_id', '=', 'states.code')
+            ->where('states.ended', false)
+            ->whereRaw('DATE(`games`.`timestamp`) >= ?', [
+                Carbon::today()->toDateString()
+            ]);
     }
 
     /**

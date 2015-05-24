@@ -33,7 +33,9 @@ class CompetitionsController extends ApiController
      */
     public function index(Request $request)
     {
-        $competitions = Competition::select('competitions.*')->online();
+        $customer_id = $request->session()->get('customer_id');
+
+        $competitions = Competition::select('competitions.*')->visibleByCustomer($customer_id);
 
         if ($request->has('region')) {
             $competitions

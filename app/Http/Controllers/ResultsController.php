@@ -17,9 +17,10 @@ class ResultsController extends GamesController
      */
     public function index(Request $request)
     {
+        $customer_id = $request->session()->get('customer_id');
+
         $games = Game::select('games.*')
-            ->join('rounds', 'games.round_id', '=', 'rounds.id')
-            ->join('competitions', 'rounds.competition_id', '=', 'competitions.id')
+            ->visibleByCustomer($customer_id)
             ->join('teams AS home', 'games.home_id', '=', 'home.id')
             ->join('teams AS away', 'games.away_id', '=', 'away.id')
             ->join('states', 'games.state_id', '=', 'states.code')

@@ -1,7 +1,7 @@
 <?php
 Route::get('/', 'HomeController@index');
 
-Route::group(['prefix' => 'api/v1'], function()
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function()
 {
     Route::resource('competitions', 'CompetitionsController', ['only' => ['index', 'show']]);
     Route::resource('fixtures',     'FixturesController',     ['only' => ['index', 'show']]);

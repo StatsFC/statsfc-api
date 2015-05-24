@@ -69,7 +69,7 @@ class Game extends Model
             return $query
                 ->join('teams AS home', 'games.home_id', '=', 'home.id')
                 ->join('teams AS away', 'games.away_id', '=', 'away.id')
-                ->whereRaw('? IN (home.`name`, away.`name`)', [
+                ->whereRaw('? IN (`home`.`name`, `away`.`name`)', [
                     $request->input('team')
                 ]);
         }
@@ -84,7 +84,7 @@ class Game extends Model
         }
 
         // By default, show games for the current season only
-        return $query->whereRaw('? BETWEEN `season`.start` AND `seasons`.`end`', [
+        return $query->whereRaw('? BETWEEN `seasons`.`start` AND `seasons`.`end`', [
             Carbon::today()->toDateString()
         ]);
     }

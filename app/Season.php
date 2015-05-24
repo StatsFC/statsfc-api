@@ -7,6 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Season extends Model
 {
     /**
+     * Define fields to be treated as Carbon dates
+     *
+     * @return array
+     */
+    public function getDates()
+    {
+        return [
+            'start',
+            'end',
+            'created_at',
+            'updated_at'
+        ];
+    }
+
+    /**
      * Define a scope to filter seasons visible to a customer
      *
      * @param  Illuminate\Database\Eloquent\Builder $query

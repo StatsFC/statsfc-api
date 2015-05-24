@@ -11,11 +11,22 @@ class SeasonTransformer extends Transformer
      */
     public function transform($season)
     {
+        $start = $season->start;
+        $end   = $season->end;
+
+        if (! is_null($start)) {
+            $start = $start->toDateString();
+        }
+
+        if (! is_null($end)) {
+            $end = $end->toDateString();
+        }
+
         $data = [
             'id'    => $season->id,
             'name'  => $season->name,
-            'start' => $season->start,
-            'end'   => $season->end
+            'start' => $start,
+            'end'   => $end
         ];
 
         return $data;

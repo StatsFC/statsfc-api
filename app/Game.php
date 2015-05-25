@@ -38,10 +38,9 @@ class Game extends Model
     /**
      * Define a scope to filter competitions visible to a customer
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @param  int                                  $customer_id
-     *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @param  integer $customer_id
+     * @return Builder
      */
     public function scopeVisibleByCustomer($query, $customer_id)
     {
@@ -57,6 +56,12 @@ class Game extends Model
             ->where('payment.customer_id', $customer_id);
     }
 
+    /**
+     * Define a scope to filter games by team
+     *
+     * @param  Builder $query
+     * @return Builder
+     */
     public function scopeFilterTeam($query, $request)
     {
         if ($request->has('team_id')) {
@@ -75,6 +80,13 @@ class Game extends Model
         }
     }
 
+    /**
+     * Define a scope to filter games by season
+     *
+     * @param  Builder $query
+     * @param  Request $request
+     * @return Builder
+     */
     public function scopeFilterSeason($query, $request)
     {
         $query->join('seasons', 'rounds.season_id', '=', 'seasons.id');
@@ -89,6 +101,13 @@ class Game extends Model
         ]);
     }
 
+    /**
+     * Define a scope to filter games by competition
+     *
+     * @param  Builder $query
+     * @param  Request $request
+     * @return Builder
+     */
     public function scopeFilterCompetition($query, $request)
     {
         if ($request->has('competition')) {
@@ -104,6 +123,12 @@ class Game extends Model
         }
     }
 
+    /**
+     * Define a scope to filter games that have ended
+     *
+     * @param  Builder $query
+     * @return Builder
+     */
     public function scopeHasEnded($query)
     {
         return $query
@@ -114,6 +139,12 @@ class Game extends Model
             ]);
     }
 
+    /**
+     * Define a scope to filter games that have not ended
+     *
+     * @param  Builder $query
+     * @return Builder
+     */
     public function scopeHasNotEnded($query)
     {
         return $query
@@ -127,7 +158,7 @@ class Game extends Model
     /**
      * Define the relationship to a round
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function round()
     {
@@ -137,7 +168,7 @@ class Game extends Model
     /**
      * Define the relationship to a home team
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function home()
     {
@@ -147,7 +178,7 @@ class Game extends Model
     /**
      * Define the relationship to a away team
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function away()
     {
@@ -157,7 +188,7 @@ class Game extends Model
     /**
      * Define the relationship to a state
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function state()
     {
@@ -167,11 +198,21 @@ class Game extends Model
     /**
      * Define the relationship to it's events
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function events()
     {
         return $this->hasMany('App\Event');
+    }
+
+    /**
+     * Define the relationship to it's players
+     *
+     * @return HasMany
+     */
+    public function players()
+    {
+        return $this->hasMany('App\GamePlayer');
     }
 
     /**

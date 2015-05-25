@@ -21,7 +21,9 @@ class CompetitionTransformer extends Transformer
         if ($includeRounds) {
             $roundTransformer = new RoundTransformer;
 
-            $data['rounds'] = $roundTransformer->transformCollection($competition->rounds()->active()->get()->all());
+            $rounds = $competition->rounds()->active()->get();
+
+            $data['rounds'] = $roundTransformer->transformCollection($rounds->all());
         }
 
         return $data;

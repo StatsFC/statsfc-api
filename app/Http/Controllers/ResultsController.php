@@ -26,14 +26,11 @@ class ResultsController extends GamesController
             ->filterTeam($request)
             ->hasEnded()
             ->orderBy('games.timestamp')
-            ->orderBy('games.id');
-
-        /**
-         * @todo Pass $request and $games to the parent class, to handle filters and response
-         */
+            ->orderBy('games.id')
+            ->get();
 
         return $this->respond([
-            'data' => $this->gameTransformer->transformCollection($games->get()->all())
+            'data' => $this->gameTransformer->transformCollection($games->all())
         ]);
     }
 }

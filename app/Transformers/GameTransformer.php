@@ -12,11 +12,12 @@ class GameTransformer extends Transformer
     public function transform($game)
     {
         $competitionTransformer = new CompetitionTransformer;
+        $eventTransformer       = new EventTransformer;
         $gamePlayerTransformer  = new GamePlayerTransformer;
         $roundTransformer       = new RoundTransformer;
-        $teamTransformer        = new TeamTransformer;
         $stateTransformer       = new StateTransformer;
-        $eventTransformer       = new EventTransformer;
+        $teamTransformer        = new TeamTransformer;
+        $venueTransformer       = new VenueTransformer;
 
         $score = null;
 
@@ -45,6 +46,7 @@ class GameTransformer extends Transformer
             ],
             'score'        => $score,
             'currentState' => $stateTransformer->transform($game->state),
+            'venue'        => $venueTransformer->transform($game->venue),
             'events'       => $eventTransformer->transformCollection($game->events->all())
         ];
     }

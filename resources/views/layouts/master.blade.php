@@ -28,7 +28,7 @@
 
         <div class="github-fork-ribbon-wrapper right">
             <div class="github-fork-ribbon">
-                <a href="https://github.com/statsfc/statsfc-api">Fork me on GitHub</a>
+                <a href="https://github.com/StatsFC/statsfc-api">Fork me on GitHub</a>
             </div>
         </div>
     </body>

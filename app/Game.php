@@ -186,6 +186,16 @@ class Game extends Model
     }
 
     /**
+     * Define the relationship to a venue
+     *
+     * @return BelongsTo
+     */
+    public function venue()
+    {
+        return $this->belongsTo('App\Venue');
+    }
+
+    /**
      * Define the relationship to a state
      *
      * @return BelongsTo

@@ -88,4 +88,14 @@ class State extends Model
     {
         return $this->hasMany('App\Game');
     }
+
+    /**
+     * Define the relationship to it's events
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function events()
+    {
+        return $this->hasMany('App\Event');
+    }
 }

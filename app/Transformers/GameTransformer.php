@@ -1,10 +1,6 @@
 <?php
 namespace App\Transformers;
 
-use App\Transformers\CompetitionTransformer;
-use App\Transformers\RoundTransformer;
-use App\Transformers\TeamTransformer;
-
 class GameTransformer extends Transformer
 {
     /**
@@ -19,6 +15,7 @@ class GameTransformer extends Transformer
         $roundTransformer       = new RoundTransformer;
         $teamTransformer        = new TeamTransformer;
         $stateTransformer       = new StateTransformer;
+        $eventTransformer       = new EventTransformer;
 
         $score = null;
 
@@ -40,7 +37,7 @@ class GameTransformer extends Transformer
             ],
             'score'        => $score,
             'currentState' => $stateTransformer->transform($game->state),
-            'events'       => []
+            'events'       => $eventTransformer->transformCollection($game->events->all())
         ];
     }
 }

@@ -1,8 +1,6 @@
 <?php
 namespace App\Transformers;
 
-use App\Transformers\RoundTransformer;
-
 class CompetitionTransformer extends Transformer
 {
     /**

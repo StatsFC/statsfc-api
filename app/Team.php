@@ -25,4 +25,14 @@ class Team extends Model
     {
         return $this->belongsTo('App\Venue');
     }
+
+    /**
+     * Define the relationship to it's events
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function events()
+    {
+        return $this->hasMany('App\Event');
+    }
 }

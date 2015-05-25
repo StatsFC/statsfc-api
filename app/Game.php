@@ -165,6 +165,16 @@ class Game extends Model
     }
 
     /**
+     * Define the relationship to it's events
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function events()
+    {
+        return $this->hasMany('App\Event');
+    }
+
+    /**
      * Return whether or not the match has ended
      *
      * @return boolean

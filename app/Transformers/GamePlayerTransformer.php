@@ -11,13 +11,21 @@ class GamePlayerTransformer extends Transformer
      */
     public function transform($gamePlayer)
     {
+        $name      = null;
+        $shortName = null;
+
+        if ($gamePlayer->player) {
+            $name      = $gamePlayer->player->name;
+            $shortName = $gamePlayer->player->shortName;
+        }
+
         return [
             'id'        => $gamePlayer->player_id,
             'number'    => $gamePlayer->number,
             'position'  => $gamePlayer->position,
             'role'      => $gamePlayer->role,
-            'name'      => $gamePlayer->player->name,
-            'shortName' => $gamePlayer->player->shortName
+            'name'      => $name,
+            'shortName' => $shortName
         ];
     }
 }

@@ -31,6 +31,12 @@ class GameTransformer extends Transformer
         $homePlayers = $game->players()->hasRole()->where('team_id', $game->home_id)->orderByPosition()->get();
         $awayPlayers = $game->players()->hasRole()->where('team_id', $game->away_id)->orderByPosition()->get();
 
+        $venue = null;
+
+        if ($game->venue) {
+            $venueTransformer->transform($game->venue);
+        }
+
         return [
             'id'           => $game->id,
             'timestamp'    => $game->timestamp->toIso8601String(),
@@ -46,7 +52,7 @@ class GameTransformer extends Transformer
             ],
             'score'        => $score,
             'currentState' => $stateTransformer->transform($game->state),
-            'venue'        => $venueTransformer->transform($game->venue),
+            'venue'        => $venue,
             'events'       => $eventTransformer->transformCollection($game->events->all())
         ];
     }

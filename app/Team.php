@@ -12,7 +12,7 @@ class Team extends Model
      */
     protected $casts = [
         'id'       => 'integer',
-        'vanue_id' => 'integer',
+        'venue_id' => 'integer',
         'national' => 'boolean'
     ];
 

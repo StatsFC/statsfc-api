@@ -16,13 +16,19 @@ class Customer extends Model
     /**
      * Define the relationship to rate limiters
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function rateLimiters()
     {
         return $this->hasMany('App\RateLimiter');
     }
 
+    /**
+     * Get the competitions a customer is sibscribed to
+     *
+     * @param  string  $field  Field name to return a list of
+     * @return Collection
+     */
     public function competitions($field = null)
     {
         $query = DB::table('competitions')
@@ -33,7 +39,7 @@ class Customer extends Model
             ->where('competitions.online', true);
 
         if ($field) {
-            return $query->lists('id');
+            return $query->lists($field);
         }
 
         return $query->get();

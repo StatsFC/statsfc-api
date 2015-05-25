@@ -27,8 +27,8 @@ class State extends Model
     /**
      * Define a scope to filter in-game states
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @return Builder
      */
     public function scopeNotInGame($query)
     {
@@ -38,8 +38,8 @@ class State extends Model
     /**
      * Define a scope to filter states where the game has ended
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @return Builder
      */
     public function scopeEnded($query)
     {
@@ -49,8 +49,8 @@ class State extends Model
     /**
      * Define a scope to filter states where the game has not ended
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @return Builder
      */
     public function scopeNotEnded($query)
     {
@@ -60,8 +60,8 @@ class State extends Model
     /**
      * Define a scope to filter states where the game is void
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @return Builder
      */
     public function scopeVoid($query)
     {
@@ -71,8 +71,8 @@ class State extends Model
     /**
      * Define a scope to filter states where the game is not void
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @return Builder
      */
     public function scopeNotVoid($query)
     {
@@ -82,7 +82,7 @@ class State extends Model
     /**
      * Define the relationship to games
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function games()
     {
@@ -92,7 +92,7 @@ class State extends Model
     /**
      * Define the relationship to it's events
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function events()
     {

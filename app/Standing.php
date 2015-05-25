@@ -32,10 +32,9 @@ class Standing extends Model
     /**
      * Define a scope to filter standings visible to a customer
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @param  int                                  $customer_id
-     *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @param  integer $customer_id
+     * @return Builder
      */
     public function scopeVisibleByCustomer($query, $customer_id)
     {
@@ -50,6 +49,13 @@ class Standing extends Model
             ->where('payment.customer_id', $customer_id);
     }
 
+    /**
+     * Define a scope to filter standings by a season
+     *
+     * @param  Builder $query
+     * @param  Request $request
+     * @return Builder
+     */
     public function scopeFilterSeason($query, $request)
     {
         $query
@@ -66,6 +72,13 @@ class Standing extends Model
         ]);
     }
 
+    /**
+     * Define a scope to filter standings by a competition
+     *
+     * @param  Builder $query
+     * @param  Request $request
+     * @return Builder
+     */
     public function scopeFilterCompetition($query, $request)
     {
         if ($request->has('competition')) {
@@ -84,7 +97,7 @@ class Standing extends Model
     /**
      * Define the relationship to a competition
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function competition()
     {
@@ -94,7 +107,7 @@ class Standing extends Model
     /**
      * Define the relationship to a round
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function round()
     {
@@ -104,7 +117,7 @@ class Standing extends Model
     /**
      * Define the relationship to a team
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function team()
     {

@@ -3,8 +3,6 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\Http\Requests;
-use App\Http\Controllers\GamesController;
-
 use Illuminate\Http\Request;
 
 class FixturesController extends GamesController

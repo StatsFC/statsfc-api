@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\Http\Requests;
-use App\Http\Controllers\ApiController;
 use App\Transformers\GameTransformer;
 
 use Illuminate\Http\Request;
@@ -11,7 +10,7 @@ use Illuminate\Http\Request;
 class GamesController extends ApiController
 {
     /**
-     * @var App\Transformers\GameTransformer
+     * @var GameTransformer
      */
     protected $gameTransformer;
 

@@ -39,7 +39,7 @@ class Event extends Model
     /**
      * Define the relationship to a game
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function game()
     {
@@ -49,7 +49,7 @@ class Event extends Model
     /**
      * Define the relationship to a team
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function team()
     {
@@ -59,7 +59,7 @@ class Event extends Model
     /**
      * Define the relationship to a state
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function state()
     {
@@ -69,7 +69,7 @@ class Event extends Model
     /**
      * Define the relationship to a player
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function player()
     {
@@ -79,7 +79,7 @@ class Event extends Model
     /**
      * Define the relationship to a second player
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function player2()
     {

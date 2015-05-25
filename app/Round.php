@@ -33,8 +33,8 @@ class Round extends Model
     /**
      * Define a scope to filter active rounds
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @return Builder
      */
     public function scopeActive($query)
     {
@@ -44,7 +44,7 @@ class Round extends Model
     /**
      * Define the relationship to a season
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function season()
     {
@@ -54,7 +54,7 @@ class Round extends Model
     /**
      * Define the relationship to a competition
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function competition()
     {
@@ -64,7 +64,7 @@ class Round extends Model
     /**
      * Define the relationship to games
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function games()
     {

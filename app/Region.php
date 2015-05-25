@@ -8,7 +8,7 @@ class Region extends Model
     /**
      * Define the relationship to competitions
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function competitions()
     {

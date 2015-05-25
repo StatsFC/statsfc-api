@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class StandingsController extends ApiController
 {
     /**
-     * @var App\Transformers\StandingTransformer
+     * @var StandingTransformer
      */
     protected $standingTransformer;
 

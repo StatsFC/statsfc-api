@@ -24,10 +24,9 @@ class Season extends Model
     /**
      * Define a scope to filter seasons visible to a customer
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @param  int                                  $customer_id
-     *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @param  integer $customer_id
+     * @return Builder
      */
     public function scopeVisibleByCustomer($query, $customer_id)
     {
@@ -46,7 +45,7 @@ class Season extends Model
     /**
      * Define the relationship to rounds
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function rounds()
     {

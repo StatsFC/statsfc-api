@@ -34,8 +34,8 @@ class RateLimiter extends Model
     /**
      * Define a scope to filter online competitions
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @return Builder
      */
     public function scopeToday($query)
     {
@@ -45,7 +45,7 @@ class RateLimiter extends Model
     /**
      * Define the relationship to a customer
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function customer()
     {

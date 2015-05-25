@@ -19,7 +19,7 @@ class Team extends Model
     /**
      * Define the relationship to a venue
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function venue()
     {
@@ -29,7 +29,7 @@ class Team extends Model
     /**
      * Define the relationship to it's events
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function events()
     {

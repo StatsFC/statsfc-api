@@ -19,8 +19,8 @@ class Competition extends Model
     /**
      * Define a scope to filter online competitions
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @return Builder
      */
     public function scopeOnline($query)
     {
@@ -30,10 +30,9 @@ class Competition extends Model
     /**
      * Define a scope to filter competitions visible to a customer
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @param  int                                  $customer_id
-     *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  Builder $query
+     * @param  integer $customer_id
+     * @return Builder
      */
     public function scopeVisibleByCustomer($query, $customer_id)
     {
@@ -47,6 +46,13 @@ class Competition extends Model
             ->where('payment.customer_id', $customer_id);
     }
 
+    /**
+     * Define a scope to filter competitions by region
+     *
+     * @param  Builder $query
+     * @param  Request $request
+     * @return Builder
+     */
     public function scopeFilterRegion($query, $request)
     {
         if ($request->has('region')) {
@@ -59,7 +65,7 @@ class Competition extends Model
     /**
      * Define the relationship to a region
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function region()
     {
@@ -69,7 +75,7 @@ class Competition extends Model
     /**
      * Define the relationship to rounds
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function rounds()
     {

@@ -8,7 +8,7 @@ class Player extends Model
     /**
      * Define the relationship to events
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function events()
     {

@@ -14,8 +14,8 @@ class Authenticate extends ApiController
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  Request  $request
+     * @param  Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -52,6 +52,13 @@ class Authenticate extends ApiController
         return $next($request);
     }
 
+    /**
+     * Check whether the request has come from the customer's IP
+     *
+     * @param  Request  $request
+     * @param  Customer $customer
+     * @return boolean
+     */
     private function authenticateRequestIp($request, $customer)
     {
         if (App::environment() === 'local') {
@@ -61,6 +68,13 @@ class Authenticate extends ApiController
         return ($request->ip() === $customer->ip);
     }
 
+    /**
+     * Check whether the customer has requested a valid competition
+     *
+     * @param  Request  $request
+     * @param  Customer $customer
+     * @return boolean
+     */
     private function hasRequestedInvalidCompetition($request, $customer)
     {
         if ($request->has('competition')) {
@@ -82,6 +96,12 @@ class Authenticate extends ApiController
         return (! in_array($competition->id, $customer->competitions('id')));
     }
 
+    /**
+     * Check whether the customer has exceeded their rate limit
+     *
+     * @param  Customer $customer
+     * @return boolean
+     */
     private function hasExceededRateLimit($customer)
     {
         if (App::environment() === 'local') {

@@ -3,15 +3,13 @@ namespace App\Http\Controllers;
 
 use App\Season;
 use App\Http\Requests;
-use App\Http\Controllers\ApiController;
 use App\Transformers\SeasonTransformer;
-
 use Illuminate\Http\Request;
 
 class SeasonsController extends ApiController
 {
     /**
-     * @var App\Transformers\SeasonTransformer
+     * @var SeasonTransformer
      */
     protected $seasonTransformer;
 

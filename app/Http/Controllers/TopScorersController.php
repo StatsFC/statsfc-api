@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\TopScorer;
+use App\Event;
 use App\Http\Requests;
 use App\Transformers\TopScorerTransformer;
 use Illuminate\Http\Request;
@@ -35,10 +35,17 @@ class TopScorersController extends ApiController
             return $this->respondUnauthorised('You must filter by competition or team');
         }
 
-        $topScorers = TopScorer::get($request);
+        $customer_id = $request->session()->get('customer_id');
+
+        $topScorers = Event::topScorers()
+            ->visibleByCustomer($customer_id)
+            ->filterTeam($request)
+            ->filterSeason($request)
+            ->filterCompetition($request)
+            ->get();
 
         return $this->respond([
-            'data' => $this->topScorerTransformer->transformCollection($topScorers)
+            'data' => $this->topScorerTransformer->transformCollection($topScorers->all())
         ]);
     }
 

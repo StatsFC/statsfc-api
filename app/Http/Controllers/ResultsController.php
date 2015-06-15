@@ -22,6 +22,7 @@ class ResultsController extends GamesController
             ->filterSeason($request)
             ->filterCompetition($request)
             ->filterTeam($request)
+            ->filterDates($request)
             ->hasEnded()
             ->orderBy('games.timestamp')
             ->orderBy('games.id')

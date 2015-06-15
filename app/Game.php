@@ -124,6 +124,30 @@ class Game extends Model
     }
 
     /**
+     * Define a scope to filter games by from/to dates
+     *
+     * @param  Builder $query
+     * @param  Request $request
+     * @return Builder
+     */
+    public function scopeFilterDates($query, $request)
+    {
+        if ($request->has('from')) {
+            $query->whereRaw('DATE(`games`.`timestamp`) >= ?', [
+                $request->input('from')
+            ]);
+        }
+
+        if ($request->has('to')) {
+            $query->whereRaw('DATE(`games`.`timestamp`) <= ?', [
+                $request->input('to')
+            ]);
+        }
+
+        return $query;
+    }
+
+    /**
      * Define a scope to filter games that have ended
      *
      * @param  Builder $query

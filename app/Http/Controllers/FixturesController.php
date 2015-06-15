@@ -22,6 +22,7 @@ class FixturesController extends GamesController
             ->filterSeason($request)
             ->filterCompetition($request)
             ->filterTeam($request)
+            ->filterDates($request)
             ->hasNotEnded()
             ->orderBy('games.timestamp')
             ->orderBy('games.id')

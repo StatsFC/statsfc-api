@@ -12,28 +12,17 @@
 
         <div class="api-sample col-md-8">
             <ul class="nav nav-tabs" id="tabs">
-                <li class="active"><a href="#competitions" data-toggle="tab">Competitions</a></li>
-                <li><a href="#states" data-toggle="tab">States</a></li>
-                <li><a href="#fixtures" data-toggle="tab">Fixtures</a></li>
-                <li><a href="#results" data-toggle="tab">Results</a></li>
+                @foreach ($sections as $id => $name)
+                    <li{!! $id === 'competitions' ? ' class="active"' : '' !!}><a href="#{{ $id }}" data-toggle="tab">{{ $name }}</a></li>
+                @endforeach
             </ul>
 
             <div class="tab-content">
-                <div class="tab-pane active" id="competitions">
-                    @include('examples.competitions')
-                </div>
-
-                <div class="tab-pane" id="states">
-                    @include('examples.states')
-                </div>
-
-                <div class="tab-pane" id="fixtures">
-                    @include('examples.fixtures')
-                </div>
-
-                <div class="tab-pane" id="results">
-                    @include('examples.results')
-                </div>
+                @foreach ($sections as $id => $name)
+                    <div class="tab-pane{!! $id === 'competitions' ? ' active' : '' !!}" id="{{ $id }}">
+                        @include('examples.' . $id)
+                    </div>
+                @endforeach
             </div>
         </div>
 

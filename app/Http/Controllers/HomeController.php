@@ -5,6 +5,18 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $sections = [
+            'competitions' => 'Competitions',
+            'seasons'      => 'Seasons',
+            'states'       => 'States',
+            'fixtures'     => 'Fixtures',
+            'results'      => 'Results',
+            'standings'    => 'Standings',
+            'top-scorers'  => 'Top Scorers',
+        ];
+
+        return view('home', [
+            'sections' => $sections
+        ]);
     }
 }

@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Season extends Model
 {
     /**
+     * Define fields to be casted
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'integer'
+    ];
+
+    /**
      * Define fields to be treated as Carbon dates
      *
      * @return array

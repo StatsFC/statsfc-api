@@ -34,7 +34,7 @@ class GameTransformer extends Transformer
         $venue = null;
 
         if ($game->venue) {
-            $venueTransformer->transform($game->venue);
+            $venue = $venueTransformer->transform($game->venue);
         }
 
         return [

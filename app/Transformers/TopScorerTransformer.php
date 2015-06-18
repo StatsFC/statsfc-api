@@ -21,7 +21,7 @@ class TopScorerTransformer extends Transformer
                 'name'      => $topScorer->teamName,
                 'shortName' => $topScorer->teamShortName
             ],
-            'goals'  => $topScorer->goals
+            'goals'  => (int) $topScorer->goals
         ];
     }
 }

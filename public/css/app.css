@@ -30,3 +30,7 @@ pre,
     background:  none !important;
     white-space: pre !important;
 }
+
+.nav-tabs {
+    border-bottom: none;
+}

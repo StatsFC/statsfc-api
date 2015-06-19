@@ -28,7 +28,9 @@
 
         <div class="col-md-2"></div>
     </div>
+@stop
 
+@section('script')
     <script>
         $('#tabs a').click(function (e) {
             e.preventDefault();

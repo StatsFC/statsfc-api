@@ -22,23 +22,4 @@ class GamesController extends ApiController
     {
         $this->gameTransformer = $gameTransformer;
     }
-
-    /**
-     * Output details for a single game
-     *
-     * @param  integer $id
-     * @return mixed
-     */
-    public function show($id)
-    {
-        $game = Game::find($id);
-
-        if (! $game) {
-            return $this->respondNotFound('Game not found');
-        }
-
-        return $this->respond([
-            'data' => $this->gameTransformer->transform($game)
-        ]);
-    }
 }

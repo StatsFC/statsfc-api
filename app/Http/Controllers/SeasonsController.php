@@ -43,23 +43,4 @@ class SeasonsController extends ApiController
             'data' => $this->seasonTransformer->transformCollection($seasons->all())
         ]);
     }
-
-    /**
-     * Output details for a single season
-     *
-     * @param  integer $id
-     * @return mixed
-     */
-    public function show($id)
-    {
-        $season = Season::find($id);
-
-        if (! $season) {
-            return $this->respondNotFound('Season not found');
-        }
-
-        return $this->respond([
-            'data' => $this->seasonTransformer->transform($season)
-        ]);
-    }
 }

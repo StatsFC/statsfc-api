@@ -42,23 +42,4 @@ class CompetitionsController extends ApiController
             'data' => $this->competitionTransformer->transformCollection($competitions->all())
         ]);
     }
-
-    /**
-     * Output details for a single competition
-     *
-     * @param  integer $id
-     * @return mixed
-     */
-    public function show($id)
-    {
-        $competition = Competition::find($id);
-
-        if (! $competition) {
-            return $this->respondNotFound('Competition not found');
-        }
-
-        return $this->respond([
-            'data' => $this->competitionTransformer->transform($competition)
-        ]);
-    }
 }

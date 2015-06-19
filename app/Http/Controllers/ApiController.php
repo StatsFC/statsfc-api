@@ -49,17 +49,6 @@ class ApiController extends Controller
     }
 
     /**
-     * Respond with 'Not found' error
-     *
-     * @param  string $message
-     * @return mixed
-     */
-    public function respondNotFound($message = 'Not found')
-    {
-        return $this->setStatusCode(Response::HTTP_NOT_FOUND)->respondWithError($message);
-    }
-
-    /**
      * Respond with 'Rate limit' error
      *
      * @param  string $message
@@ -68,17 +57,6 @@ class ApiController extends Controller
     public function respondTooManyRequests($message = 'Rate limit exceeded')
     {
         return $this->setStatusCode(Response::HTTP_TOO_MANY_REQUESTS)->respondWithError($message);
-    }
-
-    /**
-     * Respond with 'Internal error' error
-     *
-     * @param  string $message
-     * @return mixed
-     */
-    public function respondInternalError($message = 'Internal error')
-    {
-        return $this->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR)->respondWithError($message);
     }
 
     /**

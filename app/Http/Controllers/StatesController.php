@@ -35,23 +35,4 @@ class StatesController extends ApiController
             'data' => $this->stateTransformer->transformCollection(State::get()->all())
         ]);
     }
-
-    /**
-     * Output details for a single state
-     *
-     * @param  integer $id
-     * @return mixed
-     */
-    public function show($id)
-    {
-        $state = State::find($id);
-
-        if (! $state) {
-            return $this->respondNotFound('State not found');
-        }
-
-        return $this->respond([
-            'data' => $this->stateTransformer->transform($state)
-        ]);
-    }
 }

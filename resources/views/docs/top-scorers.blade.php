@@ -77,5 +77,5 @@
         </tbody>
     </table>
 
-    <p>At least one of the <samp>competition</samp> or <samp>team</samp> parameters is <strong>required</strong>.</p>
+    <p>At least one of the <code>competition</code> or <code>team</code> parameters is <strong>required</strong>.</p>
 </section>

@@ -1,3 +1,7 @@
+article {
+    margin-bottom: 5em;
+}
+
 pre {
     margin-top: 5px;
 }
@@ -21,8 +25,12 @@ pre,
     font-family:   'Source Sans Pro', monospace;
     font-size:     24pt;
     font-weight:   300;
-    margin-bottom: 1em;
+    margin-bottom: 0.75em;
     color:         #bbb;
+}
+
+.home-docs-button {
+    margin-bottom: 1.5em;
 }
 
 .hljs {

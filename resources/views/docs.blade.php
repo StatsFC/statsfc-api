@@ -3,7 +3,9 @@
 @section('title', 'Documentation')
 
 @section('content')
-    <h1 class="text-center home-title">Documentation</h1>
+    <h1 class="text-center home-title">StatsFC Dugout</h1>
+
+    <p class="text-center home-tagline">The complete documentation of our JSON API</p>
 
     <div class="row">
         <div class="col-md-9">

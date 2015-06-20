@@ -63,3 +63,7 @@ pre,
     border:     none !important;
     background: none;
 }
+
+.affix {
+    top: 20px !important;
+}

@@ -19,11 +19,13 @@
         </div>
 
         <div class="col-md-3">
-            <nav class="list-group">
-                @foreach ($sections as $id => $name)
-                    <a href="#{{ $id }}" class="list-group-item {!! $id === 'authentication' ? 'active' : '' !!}">{{ $name }}</a>
-                @endforeach
-            </nav>
+            <div id="docs-nav">
+                <div class="list-group">
+                    @foreach ($sections as $id => $name)
+                        <a href="#{{ $id }}" class="list-group-item">{{ $name }}</a>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 @stop
@@ -35,6 +37,15 @@
                 $('.list-group-item.active').removeClass('active');
                 $(this).addClass('active');
             });
+
+            var $nav       = $('#docs-nav');
+            var $navParent = $nav.parent();
+
+            $nav.affix({
+                offset: {
+                    top: $navParent.offset().top - 20
+                }
+            }).width($navParent.width());
         });
     </script>
 @stop

@@ -21,6 +21,16 @@ pre,
     color:         #555;
 }
 
+.home-title a {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.home-title a:hover {
+    text-decoration: inherit;
+    color: inherit;
+}
+
 .home-tagline {
     font-family:   'Source Sans Pro', monospace;
     font-size:     24pt;

@@ -14,6 +14,8 @@
 
     <body>
         <div class="container">
+            <h1 class="text-center home-title"><a href="/">StatsFC Dugout</a></h1>
+
             @yield('content')
         </div>
 

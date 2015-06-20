@@ -37,6 +37,12 @@
                         <i class="fa fa-github fa-3x"></i>
                     </a>
                 </li>
+                <li>
+                    <a class="text-muted" href="https://www.linkedin.com/company/stats-fc-ltd" target="_blank">
+                        <span class="sr-only">LinkedIn</span>
+                        <i class="fa fa-linkedin fa-3x"></i>
+                    </a>
+                </li>
             </ul>
 
             <p class="text-muted"><small>Copyright © {{ Carbon\Carbon::now()->year }} Stats FC</small></p>

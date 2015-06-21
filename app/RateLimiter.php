@@ -56,7 +56,7 @@ class RateLimiter extends Model
      *
      * @return void
      */
-    public function increment()
+    public function incrementCalls()
     {
         $this->calls++;
         $this->save();

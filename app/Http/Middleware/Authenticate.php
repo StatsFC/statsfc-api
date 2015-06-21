@@ -117,7 +117,7 @@ class Authenticate extends ApiController
             return true;
         }
 
-        $rateLimiter->increment();
+        $rateLimiter->incrementCalls();
 
         return false;
     }

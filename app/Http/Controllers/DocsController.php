@@ -14,6 +14,7 @@ class DocsController extends Controller
             'results'        => 'Results',
             'standings'      => 'Standings',
             'top-scorers'    => 'Top Scorers',
+            'squads'         => 'Squads',
             'errors'         => 'Errors',
             'faqs'           => 'FAQs'
         ];

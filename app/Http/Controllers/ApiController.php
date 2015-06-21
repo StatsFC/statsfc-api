@@ -77,6 +77,17 @@ class ApiController extends Controller
     }
 
     /**
+     * Respond with 'Service unavailable' error
+     *
+     * @param  string $message
+     * @return mixed
+     */
+    public function respondUnavailable($message = 'Service unavailable')
+    {
+        return $this->setStatusCode(Response::HTTP_SERVICE_UNAVAILABLE)->respondWithError($message);
+    }
+
+    /**
      * Send an error response
      *
      * @param  string $message

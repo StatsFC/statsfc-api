@@ -114,4 +114,23 @@
             Your account has exceeded it's rate limit for the day.
         </div>
     </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <pre>Status: 503 Service Unavailable</pre>
+        </div>
+
+        <div class="panel-body">
+            <pre><code class="json">{
+    "error": {
+        "message": "Down for maintenance. We'll be right back",
+        "statusCode": 503
+    }
+}</code></pre>
+        </div>
+
+        <div class="panel-footer">
+            The API is down for maintenance, but should be back very soon!
+        </div>
+    </div>
 </section>

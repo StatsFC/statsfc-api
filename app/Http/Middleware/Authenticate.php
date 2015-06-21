@@ -20,6 +20,10 @@ class Authenticate extends ApiController
      */
     public function handle($request, Closure $next)
     {
+        if (App::isDownForMaintenance()) {
+            return $this->respondUnavailable('Down for maintenance. We\'ll be right back');
+        }
+
         $key = $request->header('X-StatsFC-Key');
 
         if (! $key) {

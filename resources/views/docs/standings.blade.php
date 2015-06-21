@@ -41,6 +41,7 @@
             "against": 32,
             "difference": 41,
             "points": 87,
+            "info": "top1",
             "notes": null
         }
     ]
@@ -80,6 +81,37 @@
                 <td><samp>competition_key</samp></td>
                 <td><samp>string</samp></td>
                 <td>The key of the competition for the standings</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<sectipn>
+    <h5>Possible Values</h5>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Values</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><samp>info</samp></td>
+                <td><samp>string</samp></td>
+                <td>Meta data about the tier of the league position</td>
+                <td>
+                    <ul class="list-unstyled">
+                        <li><samp>top1</samp></li>
+                        <li><samp>top2</samp></li>
+                        <li><samp>top3</samp></li>
+                        <li><samp>top4</samp></li>
+                        <li><samp>bottom1</samp></li>
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>

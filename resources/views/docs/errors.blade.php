@@ -1,12 +1,11 @@
 <section>
     <h5>Responses</h5>
 
-    <p>An API key has not been provided by the <code>X-StatsFC-Key</code> header.</p>
-
     <div class="panel panel-default">
         <div class="panel-heading">
             <pre>Status: 401 Unauthorized</pre>
         </div>
+
         <div class="panel-body">
             <pre><code class="json">{
     "error": {
@@ -15,14 +14,17 @@
     }
 }</code></pre>
         </div>
-    </div>
 
-    <p>The API key provided cannot be found.</p>
+        <div class="panel-footer">
+            An API key has not been provided by the <code>X-StatsFC-Key</code> header.
+        </div>
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
             <pre>Status: 401 Unauthorized</pre>
         </div>
+
         <div class="panel-body">
             <pre><code class="json">{
     "error": {
@@ -31,14 +33,17 @@
     }
 }</code></pre>
         </div>
-    </div>
 
-    <p>The IP address of your request does not match the IP address in <a href="https://statsfc.com/account" target="_blank">your account</a>.</p>
+        <div class="panel-footer">
+            The API key provided cannot be found.
+        </div>
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
             <pre>Status: 401 Unauthorized</pre>
         </div>
+
         <div class="panel-body">
             <pre><code class="json">{
     "error": {
@@ -47,14 +52,17 @@
     }
 }</code></pre>
         </div>
-    </div>
 
-    <p>The competition requested is not included in your API subscription.</p>
+        <div class="panel-footer">
+            The IP address of your request does not match the IP address in <a href="https://statsfc.com/account" target="_blank">your account</a>.
+        </div>
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
             <pre>Status: 401 Unauthorized</pre>
         </div>
+
         <div class="panel-body">
             <pre><code class="json">{
     "error": {
@@ -63,14 +71,17 @@
     }
 }</code></pre>
         </div>
-    </div>
 
-    <p>The request has not been filtered by competition or team. Relating to <a href="#top-scorers">Top Scorers</a> only.</p>
+        <div class="panel-footer">
+            The competition requested is not included in your API subscription.
+        </div>
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
             <pre>Status: 401 Unauthorized</pre>
         </div>
+
         <div class="panel-body">
             <pre><code class="json">{
     "error": {
@@ -79,14 +90,17 @@
     }
 }</code></pre>
         </div>
-    </div>
 
-    <p>Your account has exceeded it's rate limit for the day.</p>
+        <div class="panel-footer">
+            The request has not been filtered by competition or team. Relating to <a href="#top-scorers">Top Scorers</a> and <a href="#squads">Squads</a> only.
+        </div>
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
             <pre>Status: 429 Too Many Requests</pre>
         </div>
+
         <div class="panel-body">
             <pre><code class="json">{
     "error": {
@@ -94,6 +108,10 @@
         "statusCode": 429
     }
 }</code></pre>
+        </div>
+
+        <div class="panel-footer">
+            Your account has exceeded it's rate limit for the day.
         </div>
     </div>
 </section>

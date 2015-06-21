@@ -174,7 +174,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>
+                <td class="text-nowrap">
                     <samp>players</samp>
                     <i class="fa fa-long-arrow-right"></i>
                     <samp>home</samp>
@@ -205,7 +205,7 @@
                 <td>The player's general position</td>
             </tr>
             <tr>
-                <td>
+                <td class="text-nowrap">
                     <samp>players</samp>
                     <i class="fa fa-long-arrow-right"></i>
                     <samp>home</samp>
@@ -228,7 +228,7 @@
                 <td>The player's role at the start of the match</td>
             </tr>
             <tr>
-                <td>
+                <td class="text-nowrap">
                     <samp>events</samp>
                     <i class="fa fa-long-arrow-right"></i>
                     <samp>type</samp>
@@ -253,7 +253,7 @@
                 <td>The primary type of the event</td>
             </tr>
             <tr>
-                <td>
+                <td class="text-nowrap">
                     <samp>events</samp>
                     <i class="fa fa-long-arrow-right"></i>
                     <samp>subType</samp>

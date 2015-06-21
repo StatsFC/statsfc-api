@@ -31,7 +31,15 @@ class TopScorersController extends ApiController
      */
     public function index(Request $request)
     {
-        if (! $this->hasRequiredFilter($request)) {
+        $required = [
+            'competition_id',
+            'competition_key',
+            'competition',
+            'team_id',
+            'team'
+        ];
+
+        if (! $this->hasRequiredFilter($request, $required)) {
             return $this->respondUnauthorised('You must filter by competition or team');
         }
 
@@ -47,30 +55,5 @@ class TopScorersController extends ApiController
         return $this->respond([
             'data' => $this->topScorerTransformer->transformCollection($topScorers->all())
         ]);
-    }
-
-    /**
-     * Check if the request has a required filters
-     *
-     * @param  Request  $request
-     * @return boolean
-     */
-    private function hasRequiredFilter(Request $request)
-    {
-        $filters = [
-            'competition_id',
-            'competition_key',
-            'competition',
-            'team_id',
-            'team'
-        ];
-
-        foreach ($filters as $filter) {
-            if ($request->has($filter)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

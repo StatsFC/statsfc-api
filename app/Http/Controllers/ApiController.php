@@ -15,6 +15,23 @@ class ApiController extends Controller
     protected $statusCode = Response::HTTP_OK;
 
     /**
+     * Check if the request has a required filters
+     *
+     * @param  Request  $request
+     * @return boolean
+     */
+    public function hasRequiredFilter(Request $request, $filters = [])
+    {
+        foreach ($filters as $filter) {
+            if ($request->has($filter)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Get status code
      *
      * @return integer

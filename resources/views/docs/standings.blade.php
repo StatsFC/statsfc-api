@@ -94,15 +94,14 @@
             <tr>
                 <th>Name</th>
                 <th>Type</th>
-                <th>Description</th>
                 <th>Values</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td><samp>info</samp></td>
                 <td><samp>string</samp></td>
-                <td>Meta data about the tier of the league position</td>
                 <td>
                     <ul class="list-unstyled">
                         <li><samp>top1</samp></li>
@@ -112,6 +111,7 @@
                         <li><samp>bottom1</samp></li>
                     </ul>
                 </td>
+                <td>Meta data about the tier of the league position</td>
             </tr>
         </tbody>
     </table>

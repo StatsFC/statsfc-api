@@ -56,6 +56,8 @@
         <script src="{{ asset('js/highlight.pack.js') }}"></script>
         <script>hljs.initHighlightingOnLoad();</script>
 
+        <script src="{{ asset('js/tracking.js') }}"></script>
+
         @yield('script')
     </body>
 </html>

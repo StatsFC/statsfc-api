@@ -57,8 +57,7 @@
                 "capacity": 27740
             },
             "events": []
-        },
-        …
+        }
     ]
 }</code></pre>
         </div>

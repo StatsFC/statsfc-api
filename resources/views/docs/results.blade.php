@@ -159,3 +159,124 @@
         </tbody>
     </table>
 </section>
+
+<sectipn>
+    <h5>Possible Values</h5>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Values</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <samp>players</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>home</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>position</samp>
+                    <br>
+                    <samp>players</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>away</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>position</samp>
+                    <br>
+                    <samp>events</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>player</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>position</samp>
+                </td>
+                <td><samp>string</samp></td>
+                <td>
+                    <ul class="list-unstyled">
+                        <li><samp>GK</samp></li>
+                        <li><samp>DF</samp></li>
+                        <li><samp>MF</samp></li>
+                        <li><samp>FW</samp></li>
+                    </ul>
+                </td>
+                <td>The player's general position</td>
+            </tr>
+            <tr>
+                <td>
+                    <samp>players</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>home</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>role</samp>
+                    <br>
+                    <samp>players</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>away</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>role</samp>
+                </td>
+                <td><samp>string</samp></td>
+                <td>
+                    <ul class="list-unstyled">
+                        <li><samp>starting</samp></li>
+                        <li><samp>sub</samp></li>
+                    </ul>
+                </td>
+                <td>The player's role at the start of the match</td>
+            </tr>
+            <tr>
+                <td>
+                    <samp>events</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>type</samp>
+                </td>
+                <td><samp>string</samp></td>
+                <td>
+                    <ul class="list-unstyled">
+                        <li><samp>goal</samp></li>
+                        <li><samp>card</samp></li>
+                        <li><samp>substitution</samp></li>
+                        <li><samp>state</samp></li>
+                    </ul>
+                </td>
+                <td>The primary type of the event</td>
+            </tr>
+            <tr>
+                <td>
+                    <samp>events</samp>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <samp>subType</samp>
+                </td>
+                <td><samp>string</samp></td>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <samp>penalty</samp>
+                            <small>(relating to <samp>goal</samp> type)</small>
+                        </li>
+                        <li>
+                            <samp>own-goal</samp>
+                            <small>(relating to <samp>goal</samp> type)</small>
+                        </li>
+                        <li>
+                            <samp>first-yellow</samp>
+                            <small>(relating to <samp>card</samp> type)</small>
+                        </li>
+                        <li>
+                            <samp>second-yellow</samp>
+                            <small>(relating to <samp>card</samp> type)</small>
+                        </li>
+                        <li>
+                            <samp>red</samp>
+                            <small>(relating to <samp>card</samp> type)</small>
+                        </li>
+                    </ul>
+                </td>
+                <td>The secondary type of the event</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

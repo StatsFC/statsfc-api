@@ -44,6 +44,14 @@
                     top: $navParent.offset().top - 20
                 }
             }).width($navParent.width());
+
+            $('#accordion .panel-heading a').append(
+                $('<i>').addClass('fa fa-arrow-down pull-right')
+            );
+
+            $('#accordion .panel-heading a').on('click', function(e) {
+                $(this).find('i').toggleClass('fa-arrow-down').toggleClass('fa-arrow-up');
+            });
         });
     </script>
 @stop

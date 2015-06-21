@@ -1,6 +1,9 @@
 <?php
-Route::get('/',    'HomeController@index');
-Route::get('docs', 'DocsController@index');
+Route::group(['middleware' => 'maintenance'], function()
+{
+    Route::get('/',    'HomeController@index');
+    Route::get('docs', 'DocsController@index');
+});
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function()
 {

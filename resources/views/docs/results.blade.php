@@ -240,6 +240,14 @@
                         <li><samp>card</samp></li>
                         <li><samp>substitution</samp></li>
                         <li><samp>state</samp></li>
+                        <li>
+                            <samp>penalties</samp>
+                            <small>(indicating the start of a penalty shootout)</small>
+                        </li>
+                        <li>
+                            <samp>penalty</samp>
+                            <small>(indicating an individual penalty in a shootout)</small>
+                        </li>
                     </ul>
                 </td>
                 <td>The primary type of the event</td>

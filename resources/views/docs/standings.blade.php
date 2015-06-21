@@ -89,7 +89,7 @@
 <sectipn>
     <h5>Possible Values</h5>
 
-    <table>
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Name</th>

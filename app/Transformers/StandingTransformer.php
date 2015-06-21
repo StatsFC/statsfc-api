@@ -28,6 +28,7 @@ class StandingTransformer extends Transformer
             'against'      => $standing->against,
             'difference'   => $standing->difference,
             'points'       => $standing->points,
+            'info'         => $standing->class,
             'notes'        => $standing->notes
         ];
     }

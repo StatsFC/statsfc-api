@@ -39,7 +39,7 @@ class Customer extends Model
             ->where('competitions.online', true);
 
         if ($field) {
-            return $query->lists($field);
+            return $query->lists($field)->all();
         }
 
         return $query->get();

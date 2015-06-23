@@ -13,6 +13,7 @@ class HomeController extends Controller
             'results'      => 'Results',
             'standings'    => 'Standings',
             'top-scorers'  => 'Top Scorers',
+            'squads'       => 'Squads',
         ];
 
         return view('home', [

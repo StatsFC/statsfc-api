@@ -74,6 +74,18 @@ pre,
     background: none;
 }
 
-.affix {
-    top: 20px !important;
+.fa-twitter:hover {
+    color: #6CADDE;
+}
+
+.fa-envelope:hover {
+    color: #F7CC32;
+}
+
+.fa-github:hover {
+    color: #171515;
+}
+
+.fa-linkedin:hover {
+    color: #1378B3;
 }

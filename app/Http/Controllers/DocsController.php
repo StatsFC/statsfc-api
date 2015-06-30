@@ -6,6 +6,7 @@ class DocsController extends Controller
     public function index()
     {
         $sections = [
+            'rate-limits'    => 'Rate Limits',
             'authentication' => 'Authentication',
             'competitions'   => 'Competitions',
             'seasons'        => 'Seasons',

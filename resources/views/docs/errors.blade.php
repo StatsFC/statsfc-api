@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" id="errors-rate-limit">
         <div class="panel-heading">
             <pre>Status: 429 Too Many Requests</pre>
         </div>

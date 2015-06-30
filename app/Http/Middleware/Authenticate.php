@@ -11,6 +11,8 @@ use Closure;
 
 class Authenticate extends ApiController
 {
+    const LAUNCH_DATE = '2015-08-01';
+
     /**
      * Handle an incoming request.
      *
@@ -20,6 +22,10 @@ class Authenticate extends ApiController
      */
     public function handle($request, Closure $next)
     {
+        if (Carbon::today()->toDateString() < static::LAUNCH_DATE) {
+            return $this->respondUnavailable('The API will launch on ' . Carbon::parse(static::LAUNCH_DATE)->format('jS F Y'));
+        }
+
         if (App::isDownForMaintenance()) {
             return $this->respondUnavailable('Down for maintenance. We\'ll be right back');
         }

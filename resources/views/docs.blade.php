@@ -31,19 +31,30 @@
 @section('script')
     <script>
         $(function() {
+            var $nav        = $('#docs-nav');
+            var offsetTop   = $nav.offset().top;
+            var startSticky = (offsetTop - 20);
+
+            $(document).on('scroll', function() {
+                var top = $(document).scrollTop();
+
+                if (top > startSticky) {
+                    $nav.css({
+                        position: 'fixed',
+                        top:      '20px',
+                        width:    $nav.parent().width()
+                    });
+                } else {
+                    $nav.css({
+                        position: 'relative'
+                    });
+                }
+            });
+
             $('.list-group-item').on('click', function() {
                 $('.list-group-item.active').removeClass('active');
                 $(this).addClass('active');
             });
-
-            var $nav       = $('#docs-nav');
-            var $navParent = $nav.parent();
-
-            $nav.affix({
-                offset: {
-                    top: $navParent.offset().top - 20
-                }
-            }).width($navParent.width());
 
             $('#accordion .panel-heading a').append(
                 $('<i>').addClass('fa fa-arrow-down pull-right')

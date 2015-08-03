@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RateLimiter extends Model
 {
-    const DAILY_LIMIT = 250;
-
     /**
      * Define fields to be casted
      *

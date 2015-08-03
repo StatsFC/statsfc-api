@@ -123,7 +123,7 @@ class Authenticate extends ApiController
             'date'        => Carbon::today()->toDateString()
         ]);
 
-        if ($rateLimiter->calls >= RateLimiter::DAILY_LIMIT) {
+        if ($rateLimiter->calls >= $customer->dailyRateLimit()) {
             return true;
         }
 

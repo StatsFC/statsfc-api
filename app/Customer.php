@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,6 +37,9 @@ class Customer extends Model
             ->join('payment', 'payment_competition.payment_id', '=', 'payment.id')
             ->select('competitions.*')
             ->where('payment.customer_id', $this->id)
+            ->where('payment.type', 'API')
+            ->where('payment.from', '<=', Carbon::today()->toDateString())
+            ->where('payment.to', '>=', Carbon::today()->toDateString())
             ->where('competitions.online', true);
 
         if ($field) {
@@ -43,5 +47,28 @@ class Customer extends Model
         }
 
         return $query->get();
+    }
+
+    /**
+     * Get the current daily rate limit
+     *
+     * @return boolean|integer
+     */
+    public function dailyRateLimit()
+    {
+        $query = DB::table('payment')
+            ->select('dailyRateLimit')
+            ->where('customer_id', $this->id)
+            ->where('type', 'API')
+            ->where('from', '<=', Carbon::today()->toDateString())
+            ->where('to', '>=', Carbon::today()->toDateString());
+
+        $payments = $query->get();
+
+        if (count($payments) === 0) {
+            return false;
+        }
+
+        return (int) $payments[0]->dailyRateLimit;
     }
 }

@@ -10,6 +10,8 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/highlight/github.css') }}" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <script src="https://pl.statsfc.com/j/iframeResizer.contentWindow.min.js"></script>
     </head>
 
     <body>

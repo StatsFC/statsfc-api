@@ -69,6 +69,10 @@ class Authenticate extends ApiController
             return true;
         }
 
+        if ($customer->liftIpRestriction) {
+            return true;
+        }
+
         return ($request->ip() === $customer->ip);
     }
 

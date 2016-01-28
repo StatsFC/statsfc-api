@@ -36,6 +36,7 @@ class SeasonsController extends ApiController
         $seasons = Season::select('seasons.*')
             ->distinct()
             ->visibleByCustomer($customer_id)
+            ->groupBy('seasons.id')
             ->orderBy('seasons.start')
             ->get();
 

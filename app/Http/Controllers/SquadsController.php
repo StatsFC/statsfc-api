@@ -51,6 +51,7 @@ class SquadsController extends ApiController
             ->filterSeason($request)
             ->filterCompetition($request)
             ->filterTeam($request)
+            ->groupBy('teams.id')
             ->orderBy('teams.name')
             ->get();
 

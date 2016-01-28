@@ -36,6 +36,7 @@ class CompetitionsController extends ApiController
         $competitions = Competition::select('competitions.*')
             ->visibleByCustomer($customer_id)
             ->filterRegion($request)
+            ->groupBy('competitions.id')
             ->get();
 
         return $this->respond([

@@ -24,6 +24,7 @@ class ResultsController extends GamesController
             ->filterTeam($request)
             ->filterDates($request)
             ->hasEnded()
+            ->groupBy('games.id')
             ->orderBy('games.timestamp')
             ->orderBy('games.id')
             ->get();

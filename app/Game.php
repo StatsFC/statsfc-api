@@ -156,7 +156,7 @@ class Game extends Model
     public function scopeHasEnded($query)
     {
         return $query
-            ->join('states', 'games.state_id', '=', 'states.code')
+            ->join('states', 'games.state_id', '=', 'states.id')
             ->where('states.ended', true)
             ->whereRaw('DATE(`games`.`timestamp`) <= ?', [
                 Carbon::today()->toDateString()
@@ -172,7 +172,7 @@ class Game extends Model
     public function scopeHasNotEnded($query)
     {
         return $query
-            ->join('states', 'games.state_id', '=', 'states.code')
+            ->join('states', 'games.state_id', '=', 'states.id')
             ->where('states.ended', false)
             ->whereRaw('DATE(`games`.`timestamp`) >= ?', [
                 Carbon::today()->toDateString()
@@ -226,7 +226,7 @@ class Game extends Model
      */
     public function state()
     {
-        return $this->belongsTo('App\State', 'state_id', 'code');
+        return $this->belongsTo('App\State');
     }
 
     /**

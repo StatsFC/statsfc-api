@@ -37,7 +37,11 @@ class StandingsController extends ApiController
             ->visibleByCustomer($customer_id)
             ->filterSeason($request)
             ->filterCompetition($request)
-            ->groupBy('tables.id')
+            ->groupBy([
+                'tables.competition_id',
+                'tables.round_id',
+                'tables.team_id',
+            ])
             ->orderBy('competitions.order')
             ->orderBy('tables.position')
             ->get();

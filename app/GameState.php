@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class GameState extends Model
 {
     /**
+     * Define non-standard table name
+     *
+     * @var string
+     */
+    protected $table = 'gameStates';
+
+    /**
      * Define fields to be casted
      *
      * @var array

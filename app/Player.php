@@ -16,12 +16,32 @@ class Player extends Model
     }
 
     /**
-     * Define the relationship to events
+     * Define the relationship to cards
      *
      * @return HasMany
      */
-    public function events()
+    public function cards()
     {
-        return $this->hasMany('App\Event');
+        return $this->hasMany('App\Card');
+    }
+
+    /**
+     * Define the relationship to goals
+     *
+     * @return HasMany
+     */
+    public function goals()
+    {
+        return $this->hasMany('App\Goal');
+    }
+
+    /**
+     * Define the relationship to substitutions
+     *
+     * @return HasMany
+     */
+    public function substitutions()
+    {
+        return $this->hasMany('App\Substitution');
     }
 }

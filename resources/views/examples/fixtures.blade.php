@@ -49,7 +49,12 @@
                 "name": "Britannia Stadium",
                 "capacity": 27740
             },
-            "events": []
+            "events": [
+                "cards": [],
+                "goals": [],
+                "states": [],
+                "substitutions": []
+            ]
         },
         …
     ]

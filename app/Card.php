@@ -5,7 +5,7 @@ use DB;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Card extends Model
 {
     /**
      * Define fields to be casted
@@ -16,11 +16,7 @@ class Event extends Model
         'id'         => 'integer',
         'game_id'    => 'integer',
         'team_id'    => 'integer',
-        'state_id'   => 'integer',
         'player_id'  => 'integer',
-        'player2_id' => 'integer',
-        'homeGoals'  => 'integer',
-        'awayGoals'  => 'integer',
     ];
 
     /**
@@ -58,16 +54,6 @@ class Event extends Model
     }
 
     /**
-     * Define the relationship to a state
-     *
-     * @return BelongsTo
-     */
-    public function state()
-    {
-        return $this->belongsTo('App\State');
-    }
-
-    /**
      * Define the relationship to a player
      *
      * @return BelongsTo
@@ -75,39 +61,6 @@ class Event extends Model
     public function player()
     {
         return $this->belongsTo('App\Player');
-    }
-
-    /**
-     * Define the relationship to a second player
-     *
-     * @return BelongsTo
-     */
-    public function player2()
-    {
-        return $this->belongsTo('App\Player', 'player2_id');
-    }
-
-    public static function topScorers()
-    {
-        $instance = new static;
-
-        return $instance->newQuery()
-            ->select([
-                'players.id',
-                'players.name AS playerName',
-                'players.shortName AS playerShortName',
-                'teams.name AS teamName',
-                'teams.shortName AS teamShortName',
-                DB::raw('COUNT(events.id) AS goals')
-            ])
-            ->join('players', 'events.player_id', '=', 'players.id')
-            ->join('teams', 'events.team_id', '=', 'teams.id')
-            ->join('games', 'events.game_id', '=', 'games.id')
-            ->where('events.type', 'goal')
-            ->whereRaw('IFNULL(events.subType, "") != "own-goal"')
-            ->groupBy('players.id')
-            ->orderBy('goals', 'desc')
-            ->orderBy('players.shortName', 'asc');
     }
 
     /**
@@ -141,7 +94,7 @@ class Event extends Model
     public function scopeFilterTeam($query, $request)
     {
         if ($request->has('team_id')) {
-            return $query->where('events.team_id', $request->input('team_id'));
+            return $query->where('cards.team_id', $request->input('team_id'));
         }
 
         if ($request->has('team')) {

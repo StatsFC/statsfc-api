@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Event;
+use App\Goal;
 use App\Http\Requests;
 use App\Transformers\TopScorerTransformer;
 use Illuminate\Http\Request;
@@ -45,7 +45,7 @@ class TopScorersController extends ApiController
 
         $customer_id = $request->session()->get('customer_id');
 
-        $topScorers = Event::topScorers()
+        $topScorers = Goal::topScorers()
             ->visibleByCustomer($customer_id)
             ->filterTeam($request)
             ->filterSeason($request)

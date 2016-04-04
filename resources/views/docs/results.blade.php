@@ -78,24 +78,29 @@
                 "capacity": 27740
             },
             "events": [
-                {
-                    "id": 15726,
-                    "timestamp": "2015-05-24T14:13:33+0000",
-                    "matchTime": "13'",
-                    "type": "card",
-                    "subType": "first-yellow",
-                    "team": {
-                        "id": 1,
-                        "name": "Liverpool",
-                        "shortName": "Liverpool"
-                    },
-                    "player": {
-                        "id": "17017",
-                        "name": "Lucas Leiva",
-                        "shortName": "Leiva",
-                        "position": "MF"
+                "cards": [
+                    {
+                        "id": 15726,
+                        "timestamp": "2015-05-24T14:13:33+0000",
+                        "matchTime": "13'",
+                        "type": "card",
+                        "subType": "first-yellow",
+                        "team": {
+                            "id": 1,
+                            "name": "Liverpool",
+                            "shortName": "Liverpool"
+                        },
+                        "player": {
+                            "id": "17017",
+                            "name": "Lucas Leiva",
+                            "shortName": "Leiva",
+                            "position": "MF"
+                        }
                     }
-                }
+                ],
+                "goals": [],
+                "states": [],
+                "substitutions": []
             ]
         }
     ]

@@ -11,13 +11,16 @@ class GameTransformer extends Transformer
      */
     public function transform($game)
     {
-        $competitionTransformer = new CompetitionTransformer;
-        $eventTransformer       = new EventTransformer;
-        $gamePlayerTransformer  = new GamePlayerTransformer;
-        $roundTransformer       = new RoundTransformer;
-        $stateTransformer       = new StateTransformer;
-        $teamTransformer        = new TeamTransformer;
-        $venueTransformer       = new VenueTransformer;
+        $cardTransformer         = new CardTransformer;
+        $competitionTransformer  = new CompetitionTransformer;
+        $gamePlayerTransformer   = new GamePlayerTransformer;
+        $gameStateTransformer    = new GameStateTransformer;
+        $goalTransformer         = new GoalTransformer;
+        $roundTransformer        = new RoundTransformer;
+        $stateTransformer        = new StateTransformer;
+        $substitutionTransformer = new SubstitutionTransformer;
+        $teamTransformer         = new TeamTransformer;
+        $venueTransformer        = new VenueTransformer;
 
         $score = null;
 
@@ -53,7 +56,12 @@ class GameTransformer extends Transformer
             'score'        => $score,
             'currentState' => $stateTransformer->transform($game->state),
             'venue'        => $venue,
-            'events'       => $eventTransformer->transformCollection($game->events->all())
+            'events'       => [
+                'cards'         => $cardTransformer->transformCollection($game->cards->all()),
+                'goals'         => $goalTransformer->transformCollection($game->goals->all()),
+                'states'        => $gameStateTransformer->transformCollection($game->gameStates->all()),
+                'substitutions' => $substitutionTransformer->transformCollection($game->substitutions->all()),
+            ],
         ];
     }
 }

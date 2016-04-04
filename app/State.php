@@ -90,12 +90,12 @@ class State extends Model
     }
 
     /**
-     * Define the relationship to it's events
+     * Define the relationship to it's game states
      *
      * @return HasMany
      */
-    public function events()
+    public function gameStates()
     {
-        return $this->hasMany('App\Event');
+        return $this->hasMany('App\GameState');
     }
 }

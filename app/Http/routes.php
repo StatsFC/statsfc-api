@@ -5,7 +5,7 @@ Route::group(['middleware' => 'maintenance'], function()
     Route::get('docs', 'DocsController@index');
 });
 
-Route::group(['prefix' => 'api/v1', 'middleware' => 'auth'], function()
+Route::group(['prefix' => 'api/v1', 'middleware' => ['auth', 'db']], function()
 {
     Route::resource('competitions', 'CompetitionsController', ['only' => ['index']]);
     Route::resource('fixtures',     'FixturesController',     ['only' => ['index']]);

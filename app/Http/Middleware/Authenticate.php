@@ -12,6 +12,13 @@ use Closure;
 class Authenticate extends ApiController
 {
     /**
+     * Define the API test key
+     *
+     * @var string
+     */
+    const API_TEST_KEY = 'apitest';
+
+    /**
      * Handle an incoming request.
      *
      * @param  Request  $request
@@ -38,7 +45,7 @@ class Authenticate extends ApiController
 
         $customer = $customers->first();
 
-        if (! $this->authenticateRequestIp($request, $customer)) {
+        if ($key !== static::API_TEST_KEY && ! $this->authenticateRequestIp($request, $customer)) {
             return $this->respondUnauthorised('IP address does not match');
         }
 

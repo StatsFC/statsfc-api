@@ -76,5 +76,21 @@
                 </ul>
             </div>
         </div>
+
+        <div class="panel-heading" role="tab" id="faq-heading-test">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#faq-collapse-test" aria-expanded="true" aria-controls="faq-collapse-test">
+                    Can I try the API before I sign up?
+                </a>
+            </h4>
+        </div>
+
+        <div id="faq-collapse-test" class="panel-collapse collapse" role="tabpanel" aria-labeledby="faq-heading-test">
+            <div class="panel-body">
+                <p>Of course! Use our API test key: <code>apitest</code>.</p>
+
+                <p>This will give you access to test all the endpoints, but is restricted to the <em>FA Community Shield</em> competition. (We won't just give all of our data away for free!)</p>
+            </div>
+        </div>
     </div>
 </div>

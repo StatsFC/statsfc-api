@@ -16,7 +16,7 @@
 
     <body>
         <div class="container">
-            <h1 class="text-center home-title"><a href="/">StatsFC Dugout</a></h1>
+            <h1 class="text-center home-title"><a href="/">Stats FC Dugout</a></h1>
 
             @yield('content')
         </div>

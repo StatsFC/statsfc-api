@@ -17,7 +17,8 @@ class DocsController extends Controller
             'top-scorers'    => 'Top Scorers',
             'squads'         => 'Squads',
             'errors'         => 'Errors',
-            'faqs'           => 'FAQs'
+            'faqs'           => 'FAQs',
+            'coverage'       => 'Competition Coverage',
         ];
 
         return view('docs', [

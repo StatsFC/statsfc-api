@@ -22,8 +22,9 @@
                     <li>
                         Europe
                         <ul>
-                            <li>UEFA Champions League</li>
-                            <li>UEFA Europa League</li>
+                            <li>Champions League</li>
+                            <li>Champions League Qualification</li>
+                            <li>Europa League</li>
                             <li>UEFA Super Cup</li>
                         </ul>
                     </li>
@@ -35,15 +36,15 @@
                             <li>League One</li>
                             <li>League Two</li>
                             <li>FA Cup</li>
-                            <li>Football League Cup</li>
+                            <li>League Cup</li>
                             <li>Football League Trophy</li>
-                            <li>FA Community Shield</li>
+                            <li>Community Shield</li>
                         </ul>
                     </li>
                     <li>
                         Spain
                         <ul>
-                            <li>Primera División <em>(La Liga)</em></li>
+                            <li>La Liga</li>
                             <li>Copa del Rey</li>
                             <li>Supercopa de España</li>
                         </ul>
@@ -52,8 +53,9 @@
                         Germany
                         <ul>
                             <li>Bundesliga</li>
-                            <li>DFB-Pokal</li>
-                            <li>DFL-Supercup</li>
+                            <li>2. Bundesliga</li>
+                            <li>DFB Pokal</li>
+                            <li>DFL Supercup</li>
                         </ul>
                     </li>
                     <li>
@@ -71,6 +73,14 @@
                             <li>Coupe de France</li>
                             <li>Coupe de la Ligue</li>
                             <li>Trophée des Champions</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Scotland
+                        <ul>
+                            <li>Scottish Premiership</li>
+                            <li>Scottish Cup</li>
+                            <li>Scottish League Cup</li>
                         </ul>
                     </li>
                 </ul>

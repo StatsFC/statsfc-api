@@ -11,6 +11,7 @@ class GoalTransformer extends Transformer
      */
     public function transform($goal)
     {
+        $assistTransformer = new AssistTransformer;
         $playerTransformer = new PlayerTransformer;
         $teamTransformer   = new TeamTransformer;
 
@@ -28,6 +29,10 @@ class GoalTransformer extends Transformer
 
         if ($goal->player) {
             $data['player'] = $playerTransformer->transform($goal->player);
+        }
+
+        if ($goal->assist) {
+            $data['assist'] = $assistTransformer->transform($goal->assist);
         }
 
         return $data;

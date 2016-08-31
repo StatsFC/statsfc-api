@@ -17,6 +17,7 @@ class Goal extends Model
         'game_id'    => 'integer',
         'team_id'    => 'integer',
         'player_id'  => 'integer',
+        'assist_id'  => 'integer',
         'homeGoals'  => 'integer',
         'awayGoals'  => 'integer',
     ];
@@ -61,6 +62,16 @@ class Goal extends Model
      * @return BelongsTo
      */
     public function player()
+    {
+        return $this->belongsTo('App\Player');
+    }
+
+    /**
+     * Define the relationship to an assist
+     *
+     * @return BelongsTo
+     */
+    public function assist()
     {
         return $this->belongsTo('App\Player');
     }

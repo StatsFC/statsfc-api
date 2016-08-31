@@ -37,7 +37,7 @@
                 <td class="bg-info">September</td>
             </tr>
             <tr>
-                <td>Champions League Qualification</td>
+                <td>Champions League Qual.</td>
                 <td class="bg-info text-center text-muted">N/A</td>
                 <td class="bg-warning text-center"><i class="fa fa-exclamation"></i></td>
                 <td class="bg-danger text-center"><i class="fa fa-times"></i></td>

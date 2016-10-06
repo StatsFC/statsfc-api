@@ -50,9 +50,9 @@
             </ul>
 
             <p class="text-muted">
-                <small>Copyright © {{ Carbon\Carbon::now()->year }} Stats FC</small>
-                <i class="fa fa-fw fa-flash"></i>
                 <a href="http://status.statsfc.com" target="_blank">Status</a>
+                <i class="fa fa-fw fa-flash"></i>
+                <small>Copyright © {{ Carbon\Carbon::now()->year }} Stats FC</small>
             </p>
         </footer>
 

@@ -49,7 +49,11 @@
                 </li>
             </ul>
 
-            <p class="text-muted"><small>Copyright © {{ Carbon\Carbon::now()->year }} Stats FC</small></p>
+            <p class="text-muted">
+                <small>Copyright © {{ Carbon\Carbon::now()->year }} Stats FC</small>
+                <i class="fa fa-fw fa-flash"></i>
+                <a href="http://status.statsfc.com" target="_blank">Status</a>
+            </p>
         </footer>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

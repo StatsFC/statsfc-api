@@ -18,7 +18,7 @@ class SquadTransformer extends Transformer
 
         return [
             'team'    => $teamTransformer->transform($team),
-            'players' => $playerTransformer->transformCollection($players->all())
+            'players' => $playerTransformer->transformCollection($players->all()),
         ];
     }
 }

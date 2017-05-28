@@ -1,8 +1,8 @@
 <?php
 namespace App;
 
-use DB;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Goal extends Model
@@ -32,7 +32,7 @@ class Goal extends Model
         return [
             'timestamp',
             'created_at',
-            'updated_at'
+            'updated_at',
         ];
     }
 
@@ -87,7 +87,7 @@ class Goal extends Model
                 'players.shortName AS playerShortName',
                 'teams.name AS teamName',
                 'teams.shortName AS teamShortName',
-                DB::raw('COUNT(goals.id) AS goals')
+                DB::raw('COUNT(goals.id) AS goals'),
             ])
             ->join('players', 'goals.player_id', '=', 'players.id')
             ->join('teams', 'goals.team_id', '=', 'teams.id')
@@ -114,7 +114,7 @@ class Goal extends Model
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
             ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
-                Carbon::today()->toDateString()
+                Carbon::today()->toDateString(),
             ])
             ->where('payment.customer_id', $customer_id);
     }
@@ -156,7 +156,7 @@ class Goal extends Model
 
         // By default, show games for the current season only
         return $query->whereRaw('? BETWEEN `seasons`.`start` AND `seasons`.`end`', [
-            Carbon::today()->toDateString()
+            Carbon::today()->toDateString(),
         ]);
     }
 

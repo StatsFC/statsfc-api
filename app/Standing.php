@@ -26,7 +26,7 @@ class Standing extends Model
         'for'            => 'integer',
         'against'        => 'integer',
         'difference'     => 'integer',
-        'points'         => 'integer'
+        'points'         => 'integer',
     ];
 
     /**
@@ -44,7 +44,7 @@ class Standing extends Model
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
             ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
-                Carbon::today()->toDateString()
+                Carbon::today()->toDateString(),
             ])
             ->where('payment.customer_id', $customer_id);
     }
@@ -68,7 +68,7 @@ class Standing extends Model
 
         // By default, show games for the current season only
         return $query->whereRaw('? BETWEEN `seasons`.`start` AND `seasons`.`end`', [
-            Carbon::today()->toDateString()
+            Carbon::today()->toDateString(),
         ]);
     }
 

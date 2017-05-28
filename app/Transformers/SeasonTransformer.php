@@ -26,7 +26,7 @@ class SeasonTransformer extends Transformer
             'id'    => $season->id,
             'name'  => $season->name,
             'start' => $start,
-            'end'   => $end
+            'end'   => $end,
         ];
 
         return $data;

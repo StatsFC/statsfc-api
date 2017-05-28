@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\State;
-use App\Http\Requests;
 use App\Transformers\StateTransformer;
 use Illuminate\Http\Request;
 
@@ -32,7 +31,7 @@ class StatesController extends ApiController
     public function index(Request $request)
     {
         return $this->respond([
-            'data' => $this->stateTransformer->transformCollection(State::get()->all())
+            'data' => $this->stateTransformer->transformCollection(State::get()->all()),
         ]);
     }
 }

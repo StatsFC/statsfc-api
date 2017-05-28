@@ -14,7 +14,7 @@ class StateTransformer extends Transformer
         return [
             'id'   => $state->id,
             'key'  => $state->key,
-            'name' => $state->name
+            'name' => $state->name,
         ];
     }
 }

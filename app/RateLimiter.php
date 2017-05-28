@@ -14,7 +14,7 @@ class RateLimiter extends Model
     protected $casts = [
         'id'          => 'integer',
         'customer_id' => 'integer',
-        'calls'       => 'integer'
+        'calls'       => 'integer',
     ];
 
     /**
@@ -25,7 +25,7 @@ class RateLimiter extends Model
     protected $fillable = [
         'customer_id',
         'date',
-        'calls'
+        'calls',
     ];
 
     /**

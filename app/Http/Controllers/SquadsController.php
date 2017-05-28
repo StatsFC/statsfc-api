@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Team;
-use App\Http\Requests;
 use App\Transformers\SquadTransformer;
 use Illuminate\Http\Request;
 
@@ -36,7 +35,7 @@ class SquadsController extends ApiController
             'competition_key',
             'competition',
             'team_id',
-            'team'
+            'team',
         ];
 
         if (! $this->hasRequiredFilter($request, $required)) {
@@ -56,7 +55,7 @@ class SquadsController extends ApiController
             ->get();
 
         return $this->respond([
-            'data' => $this->squadTransformer->transformCollection($squads->all())
+            'data' => $this->squadTransformer->transformCollection($squads->all()),
         ]);
     }
 }

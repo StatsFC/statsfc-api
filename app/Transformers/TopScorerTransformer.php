@@ -15,13 +15,13 @@ class TopScorerTransformer extends Transformer
             'id'     => $topScorer->id,
             'player' => [
                 'name'      => $topScorer->playerName,
-                'shortName' => $topScorer->playerShortName
+                'shortName' => $topScorer->playerShortName,
             ],
             'team'   => [
                 'name'      => $topScorer->teamName,
-                'shortName' => $topScorer->teamShortName
+                'shortName' => $topScorer->teamShortName,
             ],
-            'goals'  => (int) $topScorer->goals
+            'goals'  => (int) $topScorer->goals,
         ];
     }
 }

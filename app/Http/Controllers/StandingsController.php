@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Standing;
-use App\Http\Requests;
 use App\Transformers\StandingTransformer;
 use Illuminate\Http\Request;
 
@@ -47,7 +46,7 @@ class StandingsController extends ApiController
             ->get();
 
         return $this->respond([
-            'data' => $this->standingTransformer->transformCollection($standings->all())
+            'data' => $this->standingTransformer->transformCollection($standings->all()),
         ]);
     }
 }

@@ -12,7 +12,7 @@ class Season extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer'
+        'id' => 'integer',
     ];
 
     /**
@@ -26,7 +26,7 @@ class Season extends Model
             'start',
             'end',
             'created_at',
-            'updated_at'
+            'updated_at',
         ];
     }
 
@@ -46,7 +46,7 @@ class Season extends Model
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
             ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
-                Carbon::today()->toDateString()
+                Carbon::today()->toDateString(),
             ])
             ->where('payment.customer_id', $customer_id);
     }

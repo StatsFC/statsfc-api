@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Game;
-use App\Http\Requests;
 use Illuminate\Http\Request;
 
 class FixturesController extends GamesController
@@ -30,7 +29,7 @@ class FixturesController extends GamesController
             ->get();
 
         return $this->respond([
-            'data' => $this->gameTransformer->transformCollection($games->all())
+            'data' => $this->gameTransformer->transformCollection($games->all()),
         ]);
     }
 }

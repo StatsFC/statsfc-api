@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Season;
-use App\Http\Requests;
 use App\Transformers\SeasonTransformer;
 use Illuminate\Http\Request;
 
@@ -41,7 +40,7 @@ class SeasonsController extends ApiController
             ->get();
 
         return $this->respond([
-            'data' => $this->seasonTransformer->transformCollection($seasons->all())
+            'data' => $this->seasonTransformer->transformCollection($seasons->all()),
         ]);
     }
 }

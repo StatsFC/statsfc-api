@@ -25,7 +25,7 @@ class GamePlayerTransformer extends Transformer
             'position'  => $gamePlayer->position,
             'role'      => $gamePlayer->role,
             'name'      => $name,
-            'shortName' => $shortName
+            'shortName' => $shortName,
         ];
     }
 }

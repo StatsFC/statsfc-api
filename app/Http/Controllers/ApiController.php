@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -98,8 +97,8 @@ class ApiController extends Controller
         return $this->respond([
             'error' => [
                 'message'    => $message,
-                'statusCode' => $this->getStatusCode()
-            ]
+                'statusCode' => $this->getStatusCode(),
+            ],
         ]);
     }
 

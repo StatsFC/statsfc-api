@@ -21,7 +21,7 @@ class State extends Model
         'break'    => 'boolean',
         'ended'    => 'boolean',
         'length'   => 'integer',
-        'offset'   => 'integer'
+        'offset'   => 'integer',
     ];
 
     /**

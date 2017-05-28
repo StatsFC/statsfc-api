@@ -27,7 +27,7 @@ class GameTransformer extends Transformer
         if ($game->hasEnded()) {
             $score = [
                 $game->homeGoals,
-                $game->awayGoals
+                $game->awayGoals,
             ];
         }
 
@@ -47,11 +47,11 @@ class GameTransformer extends Transformer
             'round'        => $roundTransformer->transform($game->round),
             'teams'        => [
                 'home' => $teamTransformer->transform($game->home),
-                'away' => $teamTransformer->transform($game->away)
+                'away' => $teamTransformer->transform($game->away),
             ],
             'players'      => [
                 'home' => $gamePlayerTransformer->transformCollection($homePlayers->all()),
-                'away' => $gamePlayerTransformer->transformCollection($awayPlayers->all())
+                'away' => $gamePlayerTransformer->transformCollection($awayPlayers->all()),
             ],
             'score'        => $score,
             'currentState' => $stateTransformer->transform($game->state),

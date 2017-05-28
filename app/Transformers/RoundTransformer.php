@@ -26,7 +26,7 @@ class RoundTransformer extends Transformer
             'id'    => $round->id,
             'name'  => $round->name,
             'start' => $start,
-            'end'   => $end
+            'end'   => $end,
         ];
     }
 }

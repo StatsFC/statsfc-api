@@ -98,7 +98,7 @@ class ApiController extends Controller
             'error' => [
                 'message'    => $message,
                 'statusCode' => $this->getStatusCode(),
-            ]
+            ],
         ]);
     }
 

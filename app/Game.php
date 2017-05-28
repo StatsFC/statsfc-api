@@ -31,7 +31,7 @@ class Game extends Model
         return [
             'timestamp',
             'created_at',
-            'updated_at'
+            'updated_at',
         ];
     }
 
@@ -51,7 +51,7 @@ class Game extends Model
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
             ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
-                Carbon::today()->toDateString()
+                Carbon::today()->toDateString(),
             ])
             ->where('payment.customer_id', $customer_id);
     }
@@ -66,7 +66,7 @@ class Game extends Model
     {
         if ($request->has('team_id')) {
             return $query->whereRaw('? IN (games.`home_id`, games.`away_id`)', [
-                $request->input('team_id')
+                $request->input('team_id'),
             ]);
         }
 
@@ -75,7 +75,7 @@ class Game extends Model
                 ->join('teams AS home', 'games.home_id', '=', 'home.id')
                 ->join('teams AS away', 'games.away_id', '=', 'away.id')
                 ->whereRaw('? IN (`home`.`name`, `away`.`name`)', [
-                    $request->input('team')
+                    $request->input('team'),
                 ]);
         }
     }
@@ -101,7 +101,7 @@ class Game extends Model
 
         // By default, show games for the current season only
         return $query->whereRaw('? BETWEEN `seasons`.`start` AND `seasons`.`end`', [
-            Carbon::today()->toDateString()
+            Carbon::today()->toDateString(),
         ]);
     }
 
@@ -138,13 +138,13 @@ class Game extends Model
     {
         if ($request->has('from')) {
             $query->whereRaw('DATE(`games`.`timestamp`) >= ?', [
-                $request->input('from')
+                $request->input('from'),
             ]);
         }
 
         if ($request->has('to')) {
             $query->whereRaw('DATE(`games`.`timestamp`) <= ?', [
-                $request->input('to')
+                $request->input('to'),
             ]);
         }
 
@@ -163,7 +163,7 @@ class Game extends Model
             ->join('states', 'games.state_id', '=', 'states.id')
             ->where('states.ended', true)
             ->whereRaw('DATE(`games`.`timestamp`) <= ?', [
-                Carbon::today()->toDateString()
+                Carbon::today()->toDateString(),
             ]);
     }
 
@@ -179,7 +179,7 @@ class Game extends Model
             ->join('states', 'games.state_id', '=', 'states.id')
             ->where('states.ended', false)
             ->whereRaw('DATE(`games`.`timestamp`) >= ?', [
-                Carbon::today()->toDateString()
+                Carbon::today()->toDateString(),
             ]);
     }
 

@@ -2,7 +2,6 @@
 namespace App;
 
 use DB;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class GamePlayer extends Model
@@ -31,7 +30,7 @@ class GamePlayer extends Model
     {
         return $query->whereIn('role', [
             'starting',
-            'sub'
+            'sub',
         ]);
     }
 

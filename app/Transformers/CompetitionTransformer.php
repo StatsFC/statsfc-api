@@ -15,7 +15,7 @@ class CompetitionTransformer extends Transformer
             'id'     => $competition->id,
             'name'   => $competition->name,
             'key'    => $competition->key,
-            'region' => $competition->region->name
+            'region' => $competition->region->name,
         ];
 
         if ($includeRounds) {

@@ -15,7 +15,7 @@ class PlayerTransformer extends Transformer
             'id'        => $player->id,
             'name'      => $player->name,
             'shortName' => $player->shortName,
-            'position'  => $player->position
+            'position'  => $player->position,
         ];
     }
 }

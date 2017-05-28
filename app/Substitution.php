@@ -1,8 +1,8 @@
 <?php
 namespace App;
 
-use DB;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Substitution extends Model
@@ -30,7 +30,7 @@ class Substitution extends Model
         return [
             'timestamp',
             'created_at',
-            'updated_at'
+            'updated_at',
         ];
     }
 
@@ -90,7 +90,7 @@ class Substitution extends Model
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
             ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
-                Carbon::today()->toDateString()
+                Carbon::today()->toDateString(),
             ])
             ->where('payment.customer_id', $customer_id);
     }
@@ -132,7 +132,7 @@ class Substitution extends Model
 
         // By default, show games for the current season only
         return $query->whereRaw('? BETWEEN `seasons`.`start` AND `seasons`.`end`', [
-            Carbon::today()->toDateString()
+            Carbon::today()->toDateString(),
         ]);
     }
 

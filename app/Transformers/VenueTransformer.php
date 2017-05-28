@@ -14,7 +14,7 @@ class VenueTransformer extends Transformer
         return [
             'id'       => $venue->id,
             'name'     => $venue->name,
-            'capacity' => $venue->capacity
+            'capacity' => $venue->capacity,
         ];
     }
 }

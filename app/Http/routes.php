@@ -1,12 +1,10 @@
 <?php
-Route::group(['middleware' => 'maintenance'], function()
-{
+Route::group(['middleware' => 'maintenance'], function () {
     Route::get('/',    'HomeController@index');
     Route::get('docs', 'DocsController@index');
 });
 
-Route::group(['prefix' => 'api/v1', 'middleware' => ['auth', 'db']], function()
-{
+Route::group(['prefix' => 'api/v1', 'middleware' => ['auth', 'db']], function () {
     Route::resource('competitions', 'CompetitionsController', ['only' => ['index']]);
     Route::resource('fixtures',     'FixturesController',     ['only' => ['index']]);
     Route::resource('results',      'ResultsController',      ['only' => ['index']]);

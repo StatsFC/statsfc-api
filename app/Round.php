@@ -12,7 +12,7 @@ class Round extends Model
      */
     protected $casts = [
         'id'     => 'integer',
-        'active' => 'boolean'
+        'active' => 'boolean',
     ];
 
     /**
@@ -26,7 +26,7 @@ class Round extends Model
             'start',
             'end',
             'created_at',
-            'updated_at'
+            'updated_at',
         ];
     }
 

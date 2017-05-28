@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Goal;
-use App\Http\Requests;
 use App\Transformers\TopScorerTransformer;
 use Illuminate\Http\Request;
 
@@ -36,7 +35,7 @@ class TopScorersController extends ApiController
             'competition_key',
             'competition',
             'team_id',
-            'team'
+            'team',
         ];
 
         if (! $this->hasRequiredFilter($request, $required)) {
@@ -53,7 +52,7 @@ class TopScorersController extends ApiController
             ->get();
 
         return $this->respond([
-            'data' => $this->topScorerTransformer->transformCollection($topScorers->all())
+            'data' => $this->topScorerTransformer->transformCollection($topScorers->all()),
         ]);
     }
 }

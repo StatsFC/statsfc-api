@@ -13,7 +13,7 @@ class Competition extends Model
      */
     protected $casts = [
         'id'     => 'integer',
-        'online' => 'boolean'
+        'online' => 'boolean',
     ];
 
     /**
@@ -41,7 +41,7 @@ class Competition extends Model
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
             ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
-                Carbon::today()->toDateString()
+                Carbon::today()->toDateString(),
             ])
             ->where('payment.customer_id', $customer_id);
     }

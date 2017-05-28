@@ -125,7 +125,7 @@ class Authenticate extends ApiController
 
         $rateLimiter = RateLimiter::firstOrCreate([
             'customer_id' => $customer->id,
-            'date'        => Carbon::today()->toDateString()
+            'date'        => Carbon::today()->toDateString(),
         ]);
 
         if ($rateLimiter->calls >= $customer->dailyRateLimit()) {

@@ -14,6 +14,6 @@ class Venue extends Model
         'id'        => 'integer',
         'capacity'  => 'integer',
         'latitude'  => 'decimal',
-        'longitude' => 'decimal'
+        'longitude' => 'decimal',
     ];
 }

@@ -22,7 +22,7 @@ class DocsController extends Controller
         ];
 
         return view('docs', [
-            'sections' => $sections
+            'sections' => $sections,
         ]);
     }
 }

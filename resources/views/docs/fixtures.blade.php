@@ -87,6 +87,11 @@
                 <td>The season the fixtures are in</td>
             </tr>
             <tr>
+                <td><samp>season_id</samp></td>
+                <td><samp>integer</samp></td>
+                <td>The ID of the season the fixtures are in</td>
+            </tr>
+            <tr>
                 <td><samp>competition</samp></td>
                 <td><samp>string</samp></td>
                 <td>The name of the competition the fixtures are in</td>

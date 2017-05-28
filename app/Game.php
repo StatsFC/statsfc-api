@@ -89,6 +89,10 @@ class Game extends Model
      */
     public function scopeFilterSeason($query, $request)
     {
+        if ($request->has('season_id')) {
+            return $query->where('rounds.season_id', '=', $request->input('season_id'));
+        }
+
         $query->join('seasons', 'rounds.season_id', '=', 'seasons.id');
 
         if ($request->has('season')) {

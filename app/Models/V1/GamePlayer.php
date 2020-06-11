@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
@@ -66,6 +66,6 @@ class GamePlayer extends Model
      */
     public function player()
     {
-        return $this->belongsTo('App\Player');
+        return $this->belongsTo('App\Models\V1\Player');
     }
 }

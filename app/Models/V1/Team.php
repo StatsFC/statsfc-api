@@ -1,11 +1,10 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Carbon\Carbon;
-use DB;
 use Illuminate\Database\Eloquent\Model;
 
-class Substitution extends Model
+class Team extends Model
 {
     /**
      * Define fields to be casted
@@ -13,65 +12,59 @@ class Substitution extends Model
      * @var array
      */
     protected $casts = [
-        'id'         => 'integer',
-        'game_id'    => 'integer',
-        'team_id'    => 'integer',
-        'player_id'  => 'integer',
-        'player2_id' => 'integer',
+        'id'       => 'integer',
+        'venue_id' => 'integer',
+        'national' => 'boolean',
     ];
 
     /**
-     * Define fields to be treated as Carbon dates
-     *
-     * @return array
-     */
-    public function getDates()
-    {
-        return [
-            'timestamp',
-            'created_at',
-            'updated_at',
-        ];
-    }
-
-    /**
-     * Define the relationship to a game
+     * Define the relationship to a venue
      *
      * @return BelongsTo
      */
-    public function game()
+    public function venue()
     {
-        return $this->belongsTo('App\Game');
+        return $this->belongsTo('App\Models\V1\Venue');
     }
 
     /**
-     * Define the relationship to a team
+     * Define the relationship to it's cards
      *
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function team()
+    public function cards()
     {
-        return $this->belongsTo('App\Team');
+        return $this->hasMany('App\Models\V1\Card');
     }
 
     /**
-     * Define the relationship to a player
+     * Define the relationship to it's goals
      *
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function player()
+    public function goals()
     {
-        return $this->belongsTo('App\Player');
+        return $this->hasMany('App\Models\V1\Goal');
     }
 
     /**
-     * Define the relationship to a second player
+     * Define the relationship to it's substitutions
      *
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function player2()
+    public function substitutions()
     {
-        return $this->belongsTo('App\Player', 'player2_id');
+        return $this->hasMany('App\Models\V1\Substitution');
+    }
+
+    /**
+     * Define the relationship to it's players
+     *
+     * @return HasMany
+     */
+    public function players()
+    {
+        return $this->hasMany('App\Models\V1\Player');
     }
 
     /**
@@ -84,6 +77,9 @@ class Substitution extends Model
     public function scopeVisibleByCustomer($query, $customer_id)
     {
         return $query
+            ->join('games', function ($join) {
+                $join->on('teams.id', '=', 'games.home_id')->orOn('teams.id', '=', 'games.away_id');
+            })
             ->join('rounds', 'games.round_id', '=', 'rounds.id')
             ->join('competitions', 'rounds.competition_id', '=', 'competitions.id')
             ->where('competitions.online', true)
@@ -93,26 +89,6 @@ class Substitution extends Model
                 Carbon::today()->toDateString(),
             ])
             ->where('payment.customer_id', $customer_id);
-    }
-
-    /**
-     * Define a scope to filter games by team
-     *
-     * @param  Builder $query
-     * @param  Request $request
-     * @return Builder
-     */
-    public function scopeFilterTeam($query, $request)
-    {
-        if ($request->has('team_id')) {
-            return $query->where('substitutions.team_id', $request->input('team_id'));
-        }
-
-        if ($request->has('team')) {
-            return $query->where('teams.name', $request->input('team'));
-        }
-
-        return $query;
     }
 
     /**
@@ -155,6 +131,26 @@ class Substitution extends Model
 
         if ($request->has('competition_key')) {
             return $query->where('competitions.key', $request->input('competition_key'));
+        }
+
+        return $query;
+    }
+
+    /**
+     * Define a scope to filter games by team
+     *
+     * @param  Builder $query
+     * @param  Request $request
+     * @return Builder
+     */
+    public function scopeFilterTeam($query, $request)
+    {
+        if ($request->has('team_id')) {
+            return $query->where('teams.id', $request->input('team_id'));
+        }
+
+        if ($request->has('team')) {
+            return $query->where('teams.name', $request->input('team'));
         }
 
         return $query;

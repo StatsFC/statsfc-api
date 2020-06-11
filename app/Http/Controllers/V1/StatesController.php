@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\ApiController;
-use App\State;
+use App\Models\V1\State;
 use App\Transformers\V1\StateTransformer;
 use Illuminate\Http\Request;
 

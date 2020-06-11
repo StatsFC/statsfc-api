@@ -30,7 +30,7 @@ return [
 	],
 
 	'stripe' => [
-		'model'  => 'App\User',
+		'model'  => 'App\Models\V1\User',
 		'secret' => '',
 	],
 

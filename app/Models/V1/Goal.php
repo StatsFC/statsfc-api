@@ -1,30 +1,25 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
-class GameState extends Model
+class Goal extends Model
 {
-    /**
-     * Define non-standard table name
-     *
-     * @var string
-     */
-    protected $table = 'gameStates';
-
     /**
      * Define fields to be casted
      *
      * @var array
      */
     protected $casts = [
-        'id'        => 'integer',
-        'game_id'   => 'integer',
-        'state_id'  => 'integer',
-        'homeGoals' => 'integer',
-        'awayGoals' => 'integer',
+        'id'         => 'integer',
+        'game_id'    => 'integer',
+        'team_id'    => 'integer',
+        'player_id'  => 'integer',
+        'assist_id'  => 'integer',
+        'homeGoals'  => 'integer',
+        'awayGoals'  => 'integer',
     ];
 
     /**
@@ -48,17 +43,59 @@ class GameState extends Model
      */
     public function game()
     {
-        return $this->belongsTo('App\Game');
+        return $this->belongsTo('App\Models\V1\Game');
     }
 
     /**
-     * Define the relationship to a state
+     * Define the relationship to a team
      *
      * @return BelongsTo
      */
-    public function state()
+    public function team()
     {
-        return $this->belongsTo('App\State');
+        return $this->belongsTo('App\Models\V1\Team');
+    }
+
+    /**
+     * Define the relationship to a player
+     *
+     * @return BelongsTo
+     */
+    public function player()
+    {
+        return $this->belongsTo('App\Models\V1\Player');
+    }
+
+    /**
+     * Define the relationship to an assist
+     *
+     * @return BelongsTo
+     */
+    public function assist()
+    {
+        return $this->belongsTo('App\Models\V1\Player');
+    }
+
+    public static function topScorers()
+    {
+        $instance = new static;
+
+        return $instance->newQuery()
+            ->select([
+                'players.id',
+                'players.name AS playerName',
+                'players.shortName AS playerShortName',
+                'teams.name AS teamName',
+                'teams.shortName AS teamShortName',
+                DB::raw('COUNT(goals.id) AS goals'),
+            ])
+            ->join('players', 'goals.player_id', '=', 'players.id')
+            ->join('teams', 'goals.team_id', '=', 'teams.id')
+            ->join('games', 'goals.game_id', '=', 'games.id')
+            ->whereRaw('IFNULL(goals.subType, "") != "own-goal"')
+            ->groupBy('players.id')
+            ->orderBy('goals', 'desc')
+            ->orderBy('players.shortName', 'asc');
     }
 
     /**
@@ -92,7 +129,7 @@ class GameState extends Model
     public function scopeFilterTeam($query, $request)
     {
         if ($request->has('team_id')) {
-            return $query->where('gameStates.team_id', $request->input('team_id'));
+            return $query->where('goals.team_id', $request->input('team_id'));
         }
 
         if ($request->has('team')) {

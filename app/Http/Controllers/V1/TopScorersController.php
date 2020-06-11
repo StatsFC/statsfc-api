@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\V1;
 
-use App\Goal;
 use App\Http\Controllers\ApiController;
+use App\Models\V1\Goal;
 use App\Transformers\V1\TopScorerTransformer;
 use Illuminate\Http\Request;
 

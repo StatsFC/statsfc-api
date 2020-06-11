@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +12,6 @@ class Region extends Model
      */
     public function competitions()
     {
-        return $this->hasMany('App\Competition');
+        return $this->hasMany('App\Models\V1\Competition');
     }
 }

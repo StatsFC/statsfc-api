@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,7 +48,7 @@ class Round extends Model
      */
     public function season()
     {
-        return $this->belongsTo('App\Season');
+        return $this->belongsTo('App\Models\V1\Season');
     }
 
     /**
@@ -58,7 +58,7 @@ class Round extends Model
      */
     public function competition()
     {
-        return $this->belongsTo('App\Competition');
+        return $this->belongsTo('App\Models\V1\Competition');
     }
 
     /**
@@ -68,6 +68,6 @@ class Round extends Model
      */
     public function games()
     {
-        return $this->hasMany('App\Game');
+        return $this->hasMany('App\Models\V1\Game');
     }
 }

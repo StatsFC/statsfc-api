@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -69,7 +69,7 @@ class Competition extends Model
      */
     public function region()
     {
-        return $this->belongsTo('App\Region');
+        return $this->belongsTo('App\Models\V1\Region');
     }
 
     /**
@@ -79,6 +79,6 @@ class Competition extends Model
      */
     public function rounds()
     {
-        return $this->hasMany('App\Round');
+        return $this->hasMany('App\Models\V1\Round');
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Carbon\Carbon;
 use DB;
@@ -21,7 +21,7 @@ class Customer extends Model
      */
     public function rateLimiters()
     {
-        return $this->hasMany('App\RateLimiter');
+        return $this->hasMany('App\Models\V1\RateLimiter');
     }
 
     /**

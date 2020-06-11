@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -86,7 +86,7 @@ class State extends Model
      */
     public function games()
     {
-        return $this->hasMany('App\Game');
+        return $this->hasMany('App\Models\V1\Game');
     }
 
     /**
@@ -96,6 +96,6 @@ class State extends Model
      */
     public function gameStates()
     {
-        return $this->hasMany('App\GameState');
+        return $this->hasMany('App\Models\V1\GameState');
     }
 }

@@ -1,12 +1,18 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
-class Standing extends Model
+class GameState extends Model
 {
-    protected $table = 'tables';
+    /**
+     * Define non-standard table name
+     *
+     * @var string
+     */
+    protected $table = 'gameStates';
 
     /**
      * Define fields to be casted
@@ -14,23 +20,49 @@ class Standing extends Model
      * @var array
      */
     protected $casts = [
-        'id'             => 'integer',
-        'competition_id' => 'integer',
-        'round_id'       => 'integer',
-        'team_id'        => 'integer',
-        'position'       => 'integer',
-        'played'         => 'integer',
-        'wins'           => 'integer',
-        'draws'          => 'integer',
-        'losses'         => 'integer',
-        'for'            => 'integer',
-        'against'        => 'integer',
-        'difference'     => 'integer',
-        'points'         => 'integer',
+        'id'        => 'integer',
+        'game_id'   => 'integer',
+        'state_id'  => 'integer',
+        'homeGoals' => 'integer',
+        'awayGoals' => 'integer',
     ];
 
     /**
-     * Define a scope to filter standings visible to a customer
+     * Define fields to be treated as Carbon dates
+     *
+     * @return array
+     */
+    public function getDates()
+    {
+        return [
+            'timestamp',
+            'created_at',
+            'updated_at',
+        ];
+    }
+
+    /**
+     * Define the relationship to a game
+     *
+     * @return BelongsTo
+     */
+    public function game()
+    {
+        return $this->belongsTo('App\Models\V1\Game');
+    }
+
+    /**
+     * Define the relationship to a state
+     *
+     * @return BelongsTo
+     */
+    public function state()
+    {
+        return $this->belongsTo('App\Models\V1\State');
+    }
+
+    /**
+     * Define a scope to filter competitions visible to a customer
      *
      * @param  Builder $query
      * @param  integer $customer_id
@@ -39,7 +71,8 @@ class Standing extends Model
     public function scopeVisibleByCustomer($query, $customer_id)
     {
         return $query
-            ->join('competitions', 'tables.competition_id', '=', 'competitions.id')
+            ->join('rounds', 'games.round_id', '=', 'rounds.id')
+            ->join('competitions', 'rounds.competition_id', '=', 'competitions.id')
             ->where('competitions.online', true)
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
@@ -50,7 +83,27 @@ class Standing extends Model
     }
 
     /**
-     * Define a scope to filter standings by a season
+     * Define a scope to filter games by team
+     *
+     * @param  Builder $query
+     * @param  Request $request
+     * @return Builder
+     */
+    public function scopeFilterTeam($query, $request)
+    {
+        if ($request->has('team_id')) {
+            return $query->where('gameStates.team_id', $request->input('team_id'));
+        }
+
+        if ($request->has('team')) {
+            return $query->where('teams.name', $request->input('team'));
+        }
+
+        return $query;
+    }
+
+    /**
+     * Define a scope to filter games by season
      *
      * @param  Builder $query
      * @param  Request $request
@@ -58,9 +111,7 @@ class Standing extends Model
      */
     public function scopeFilterSeason($query, $request)
     {
-        $query
-            ->join('rounds', 'tables.round_id', '=', 'rounds.id')
-            ->join('seasons', 'rounds.season_id', '=', 'seasons.id');
+        $query->join('seasons', 'rounds.season_id', '=', 'seasons.id');
 
         if ($request->has('season')) {
             return $query->where('seasons.name', $request->input('season'));
@@ -73,7 +124,7 @@ class Standing extends Model
     }
 
     /**
-     * Define a scope to filter standings by a competition
+     * Define a scope to filter games by competition
      *
      * @param  Builder $query
      * @param  Request $request
@@ -92,35 +143,7 @@ class Standing extends Model
         if ($request->has('competition_key')) {
             return $query->where('competitions.key', $request->input('competition_key'));
         }
-    }
 
-    /**
-     * Define the relationship to a competition
-     *
-     * @return BelongsTo
-     */
-    public function competition()
-    {
-        return $this->belongsTo('App\Competition');
-    }
-
-    /**
-     * Define the relationship to a round
-     *
-     * @return BelongsTo
-     */
-    public function round()
-    {
-        return $this->belongsTo('App\Round');
-    }
-
-    /**
-     * Define the relationship to a team
-     *
-     * @return BelongsTo
-     */
-    public function team()
-    {
-        return $this->belongsTo('App\Team');
+        return $query;
     }
 }

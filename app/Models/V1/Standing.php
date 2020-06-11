@@ -1,70 +1,36 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Carbon\Carbon;
-use DB;
 use Illuminate\Database\Eloquent\Model;
 
-class Card extends Model
+class Standing extends Model
 {
+    protected $table = 'tables';
+
     /**
      * Define fields to be casted
      *
      * @var array
      */
     protected $casts = [
-        'id'         => 'integer',
-        'game_id'    => 'integer',
-        'team_id'    => 'integer',
-        'player_id'  => 'integer',
+        'id'             => 'integer',
+        'competition_id' => 'integer',
+        'round_id'       => 'integer',
+        'team_id'        => 'integer',
+        'position'       => 'integer',
+        'played'         => 'integer',
+        'wins'           => 'integer',
+        'draws'          => 'integer',
+        'losses'         => 'integer',
+        'for'            => 'integer',
+        'against'        => 'integer',
+        'difference'     => 'integer',
+        'points'         => 'integer',
     ];
 
     /**
-     * Define fields to be treated as Carbon dates
-     *
-     * @return array
-     */
-    public function getDates()
-    {
-        return [
-            'timestamp',
-            'created_at',
-            'updated_at',
-        ];
-    }
-
-    /**
-     * Define the relationship to a game
-     *
-     * @return BelongsTo
-     */
-    public function game()
-    {
-        return $this->belongsTo('App\Game');
-    }
-
-    /**
-     * Define the relationship to a team
-     *
-     * @return BelongsTo
-     */
-    public function team()
-    {
-        return $this->belongsTo('App\Team');
-    }
-
-    /**
-     * Define the relationship to a player
-     *
-     * @return BelongsTo
-     */
-    public function player()
-    {
-        return $this->belongsTo('App\Player');
-    }
-
-    /**
-     * Define a scope to filter competitions visible to a customer
+     * Define a scope to filter standings visible to a customer
      *
      * @param  Builder $query
      * @param  integer $customer_id
@@ -73,8 +39,7 @@ class Card extends Model
     public function scopeVisibleByCustomer($query, $customer_id)
     {
         return $query
-            ->join('rounds', 'games.round_id', '=', 'rounds.id')
-            ->join('competitions', 'rounds.competition_id', '=', 'competitions.id')
+            ->join('competitions', 'tables.competition_id', '=', 'competitions.id')
             ->where('competitions.online', true)
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
             ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
@@ -85,27 +50,7 @@ class Card extends Model
     }
 
     /**
-     * Define a scope to filter games by team
-     *
-     * @param  Builder $query
-     * @param  Request $request
-     * @return Builder
-     */
-    public function scopeFilterTeam($query, $request)
-    {
-        if ($request->has('team_id')) {
-            return $query->where('cards.team_id', $request->input('team_id'));
-        }
-
-        if ($request->has('team')) {
-            return $query->where('teams.name', $request->input('team'));
-        }
-
-        return $query;
-    }
-
-    /**
-     * Define a scope to filter games by season
+     * Define a scope to filter standings by a season
      *
      * @param  Builder $query
      * @param  Request $request
@@ -113,7 +58,9 @@ class Card extends Model
      */
     public function scopeFilterSeason($query, $request)
     {
-        $query->join('seasons', 'rounds.season_id', '=', 'seasons.id');
+        $query
+            ->join('rounds', 'tables.round_id', '=', 'rounds.id')
+            ->join('seasons', 'rounds.season_id', '=', 'seasons.id');
 
         if ($request->has('season')) {
             return $query->where('seasons.name', $request->input('season'));
@@ -126,7 +73,7 @@ class Card extends Model
     }
 
     /**
-     * Define a scope to filter games by competition
+     * Define a scope to filter standings by a competition
      *
      * @param  Builder $query
      * @param  Request $request
@@ -145,7 +92,35 @@ class Card extends Model
         if ($request->has('competition_key')) {
             return $query->where('competitions.key', $request->input('competition_key'));
         }
+    }
 
-        return $query;
+    /**
+     * Define the relationship to a competition
+     *
+     * @return BelongsTo
+     */
+    public function competition()
+    {
+        return $this->belongsTo('App\Models\V1\Competition');
+    }
+
+    /**
+     * Define the relationship to a round
+     *
+     * @return BelongsTo
+     */
+    public function round()
+    {
+        return $this->belongsTo('App\Models\V1\Round');
+    }
+
+    /**
+     * Define the relationship to a team
+     *
+     * @return BelongsTo
+     */
+    public function team()
+    {
+        return $this->belongsTo('App\Models\V1\Team');
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -190,7 +190,7 @@ class Game extends Model
      */
     public function round()
     {
-        return $this->belongsTo('App\Round');
+        return $this->belongsTo('App\Models\V1\Round');
     }
 
     /**
@@ -200,7 +200,7 @@ class Game extends Model
      */
     public function home()
     {
-        return $this->belongsTo('App\Team', 'home_id');
+        return $this->belongsTo('App\Models\V1\Team', 'home_id');
     }
 
     /**
@@ -210,7 +210,7 @@ class Game extends Model
      */
     public function away()
     {
-        return $this->belongsTo('App\Team', 'away_id');
+        return $this->belongsTo('App\Models\V1\Team', 'away_id');
     }
 
     /**
@@ -220,7 +220,7 @@ class Game extends Model
      */
     public function venue()
     {
-        return $this->belongsTo('App\Venue');
+        return $this->belongsTo('App\Models\V1\Venue');
     }
 
     /**
@@ -230,7 +230,7 @@ class Game extends Model
      */
     public function state()
     {
-        return $this->belongsTo('App\State');
+        return $this->belongsTo('App\Models\V1\State');
     }
 
     /**
@@ -240,7 +240,7 @@ class Game extends Model
      */
     public function cards()
     {
-        return $this->hasMany('App\Card');
+        return $this->hasMany('App\Models\V1\Card');
     }
 
     /**
@@ -250,7 +250,7 @@ class Game extends Model
      */
     public function goals()
     {
-        return $this->hasMany('App\Goal');
+        return $this->hasMany('App\Models\V1\Goal');
     }
 
     /**
@@ -260,7 +260,7 @@ class Game extends Model
      */
     public function gameStates()
     {
-        return $this->hasMany('App\GameState');
+        return $this->hasMany('App\Models\V1\GameState');
     }
 
     /**
@@ -270,7 +270,7 @@ class Game extends Model
      */
     public function substitutions()
     {
-        return $this->hasMany('App\Substitution');
+        return $this->hasMany('App\Models\V1\Substitution');
     }
 
     /**
@@ -280,7 +280,7 @@ class Game extends Model
      */
     public function players()
     {
-        return $this->hasMany('App\GamePlayer');
+        return $this->hasMany('App\Models\V1\GamePlayer');
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class Player extends Model
      */
     public function team()
     {
-        return $this->belongsTo('App\Team');
+        return $this->belongsTo('App\Models\V1\Team');
     }
 
     /**
@@ -22,7 +22,7 @@ class Player extends Model
      */
     public function cards()
     {
-        return $this->hasMany('App\Card');
+        return $this->hasMany('App\Models\V1\Card');
     }
 
     /**
@@ -32,7 +32,7 @@ class Player extends Model
      */
     public function goals()
     {
-        return $this->hasMany('App\Goal');
+        return $this->hasMany('App\Models\V1\Goal');
     }
 
     /**
@@ -42,6 +42,6 @@ class Player extends Model
      */
     public function substitutions()
     {
-        return $this->hasMany('App\Substitution');
+        return $this->hasMany('App\Models\V1\Substitution');
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Models\V1;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -46,7 +46,7 @@ class RateLimiter extends Model
      */
     public function customer()
     {
-        return $this->belongsTo('App\Customer');
+        return $this->belongsTo('App\Models\V1\Customer');
     }
 
     /**

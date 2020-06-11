@@ -2,8 +2,8 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\ApiController;
-use App\Team;
 use App\Transformers\V1\SquadTransformer;
+use App\Models\V1\Team;
 use Illuminate\Http\Request;
 
 class SquadsController extends ApiController

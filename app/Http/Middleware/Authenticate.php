@@ -2,10 +2,10 @@
 namespace App\Http\Middleware;
 
 use App;
-use App\Competition;
-use App\Customer;
-use App\RateLimiter;
 use App\Http\Controllers\ApiController;
+use App\Models\V1\Competition;
+use App\Models\V1\Customer;
+use App\Models\V1\RateLimiter;
 use Carbon\Carbon;
 use Closure;
 

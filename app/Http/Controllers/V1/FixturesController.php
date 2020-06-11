@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\V1;
 
-use App\Game;
+use App\Models\V1\Game;
 use Illuminate\Http\Request;
 
 class FixturesController extends GamesController

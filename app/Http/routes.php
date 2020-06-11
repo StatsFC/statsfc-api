@@ -2,6 +2,7 @@
 Route::group(['middleware' => 'maintenance'], function () {
     Route::get('/',    'HomeController@index');
     Route::get('docs', 'DocsController@index');
+    Route::get('test', 'V1\TestController@index');
 });
 
 Route::group(['prefix' => 'api/v1', 'middleware' => ['auth', 'db']], function () {

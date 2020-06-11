@@ -1,7 +1,8 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
 use App\Competition;
+use App\Http\Controllers\ApiController;
 use App\Transformers\CompetitionTransformer;
 use Illuminate\Http\Request;
 

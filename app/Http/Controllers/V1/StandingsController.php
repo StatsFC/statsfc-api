@@ -1,6 +1,7 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
+use App\Http\Controllers\ApiController;
 use App\Standing;
 use App\Transformers\StandingTransformer;
 use Illuminate\Http\Request;

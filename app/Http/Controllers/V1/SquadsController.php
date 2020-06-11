@@ -1,29 +1,30 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
-use App\Goal;
-use App\Transformers\TopScorerTransformer;
+use App\Http\Controllers\ApiController;
+use App\Team;
+use App\Transformers\SquadTransformer;
 use Illuminate\Http\Request;
 
-class TopScorersController extends ApiController
+class SquadsController extends ApiController
 {
     /**
-     * @var TopScorerTransformer
+     * @var SquadTransformer
      */
-    protected $topScorerTransformer;
+    protected $squadTransformer;
 
     /**
-     * Set the top scorer transformer
+     * Set the squad transformer
      *
-     * @param TopScorerTransformer $topScorerTransformer
+     * @param SquadTransformer $squadTransformer
      */
-    public function __construct(TopScorerTransformer $topScorerTransformer)
+    public function __construct(SquadTransformer $squadTransformer)
     {
-        $this->topScorerTransformer = $topScorerTransformer;
+        $this->squadTransformer = $squadTransformer;
     }
 
     /**
-     * Output a list of top scorers
+     * Output a list of squads
      *
      * @param  Request $request
      * @return mixed
@@ -44,15 +45,18 @@ class TopScorersController extends ApiController
 
         $customer_id = $request->session()->get('customer_id');
 
-        $topScorers = Goal::topScorers()
+        $squads = Team::select('teams.*')
+            ->distinct()
             ->visibleByCustomer($customer_id)
-            ->filterTeam($request)
             ->filterSeason($request)
             ->filterCompetition($request)
+            ->filterTeam($request)
+            ->groupBy('teams.id')
+            ->orderBy('teams.name')
             ->get();
 
         return $this->respond([
-            'data' => $this->topScorerTransformer->transformCollection($topScorers->all()),
+            'data' => $this->squadTransformer->transformCollection($squads->all()),
         ]);
     }
 }

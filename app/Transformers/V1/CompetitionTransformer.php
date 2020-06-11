@@ -1,5 +1,7 @@
 <?php
-namespace App\Transformers;
+namespace App\Transformers\V1;
+
+use App\Transformers\Transformer;
 
 class CompetitionTransformer extends Transformer
 {

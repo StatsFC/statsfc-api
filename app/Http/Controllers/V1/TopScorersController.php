@@ -3,7 +3,7 @@ namespace App\Http\Controllers\V1;
 
 use App\Goal;
 use App\Http\Controllers\ApiController;
-use App\Transformers\TopScorerTransformer;
+use App\Transformers\V1\TopScorerTransformer;
 use Illuminate\Http\Request;
 
 class TopScorersController extends ApiController

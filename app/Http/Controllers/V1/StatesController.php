@@ -3,7 +3,7 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\ApiController;
 use App\State;
-use App\Transformers\StateTransformer;
+use App\Transformers\V1\StateTransformer;
 use Illuminate\Http\Request;
 
 class StatesController extends ApiController

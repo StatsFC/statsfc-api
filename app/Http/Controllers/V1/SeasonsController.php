@@ -3,7 +3,7 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\ApiController;
 use App\Season;
-use App\Transformers\SeasonTransformer;
+use App\Transformers\V1\SeasonTransformer;
 use Illuminate\Http\Request;
 
 class SeasonsController extends ApiController

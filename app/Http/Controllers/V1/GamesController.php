@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\ApiController;
-use App\Transformers\GameTransformer;
+use App\Transformers\V1\GameTransformer;
 
 class GamesController extends ApiController
 {

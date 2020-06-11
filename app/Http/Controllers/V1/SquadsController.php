@@ -3,7 +3,7 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\ApiController;
 use App\Team;
-use App\Transformers\SquadTransformer;
+use App\Transformers\V1\SquadTransformer;
 use Illuminate\Http\Request;
 
 class SquadsController extends ApiController

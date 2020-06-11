@@ -3,7 +3,7 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\ApiController;
 use App\Standing;
-use App\Transformers\StandingTransformer;
+use App\Transformers\V1\StandingTransformer;
 use Illuminate\Http\Request;
 
 class StandingsController extends ApiController

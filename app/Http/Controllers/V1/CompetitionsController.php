@@ -3,7 +3,7 @@ namespace App\Http\Controllers\V1;
 
 use App\Competition;
 use App\Http\Controllers\ApiController;
-use App\Transformers\CompetitionTransformer;
+use App\Transformers\V1\CompetitionTransformer;
 use Illuminate\Http\Request;
 
 class CompetitionsController extends ApiController

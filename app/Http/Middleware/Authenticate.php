@@ -3,9 +3,9 @@ namespace App\Http\Middleware;
 
 use App;
 use App\Http\Controllers\ApiController;
-use App\Models\V1\Competition;
-use App\Models\V1\Customer;
-use App\Models\V1\RateLimiter;
+use App\Models\Competition;
+use App\Models\Customer;
+use App\Models\RateLimiter;
 use Carbon\Carbon;
 use Closure;
 
@@ -37,7 +37,7 @@ class Authenticate extends ApiController
             return $this->respondUnauthorised('API key not provided');
         }
 
-        $customers = Customer::where('key', $key)->get();
+        $customers = Customer::query()->where('key', $key)->get();
 
         if ($customers->count() !== 1) {
             return $this->respondUnauthorised('API key not found');
@@ -76,7 +76,7 @@ class Authenticate extends ApiController
             return true;
         }
 
-        if ($customer->liftIpRestriction) {
+        if ($customer->lift_ip_restriction) {
             return true;
         }
 
@@ -93,11 +93,11 @@ class Authenticate extends ApiController
     private function hasRequestedInvalidCompetition($request, $customer)
     {
         if ($request->has('competition')) {
-            $competitions = Competition::where('name', $request->input('competition'))->get();
+            $competitions = Competition::query()->where('name', $request->input('competition'))->get();
         } elseif ($request->has('competition_id')) {
-            $competitions = Competition::where('id', $request->input('competition_id'))->get();
+            $competitions = Competition::query()->where('id', $request->input('competition_id'))->get();
         } elseif ($request->has('competition_key')) {
-            $competitions = Competition::where('key', $request->input('competition_key'))->get();
+            $competitions = Competition::query()->where('key', $request->input('competition_key'))->get();
         } else {
             return false;
         }

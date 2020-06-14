@@ -29,6 +29,38 @@ class Event extends Model
         'away_score'   => 'integer',
     ];
 
+    public function matchTime()
+    {
+        return $this->minute . ($this->extra_minute ? '+' . $this->extra_minute : '') . "'";
+    }
+
+    public function subType()
+    {
+        switch ($this->type) {
+            case self::TYPE_GOAL:
+                if ($this->penalty) {
+                    return 'penalty';
+                }
+
+                if ($this->own_goal) {
+                    return 'own-goal';
+                }
+
+                break;
+
+            case self::TYPE_YELLOW_CARD:
+                return 'first-yellow';
+
+            case self::TYPE_SECOND_YELLOW_CARD:
+                return 'second-yellow';
+
+            case self::TYPE_RED_CARD:
+                return 'red';
+        }
+
+        return null;
+    }
+
     public static function topScorers()
     {
         return (new static)->newQuery()

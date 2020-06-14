@@ -19,7 +19,7 @@ class Standing extends Model
         'lost'               => 'integer',
         'goals_for'          => 'integer',
         'goals_against'      => 'integer',
-        'goals_difference'   => 'integer',
+        'goal_difference'    => 'integer',
         'points'             => 'integer',
         'home_played'        => 'integer',
         'home_won'           => 'integer',

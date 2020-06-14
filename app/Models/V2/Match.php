@@ -45,6 +45,25 @@ class Match extends Model
         return in_array($this->status, ['Postp.', 'FT', 'Pen.', 'AET', 'Aban.']);
     }
 
+    public function cards()
+    {
+        return $this->events()->whereIn('events.type', [
+            Event::TYPE_RED_CARD,
+            Event::TYPE_SECOND_YELLOW_CARD,
+            Event::TYPE_YELLOW_CARD,
+        ]);
+    }
+
+    public function goals()
+    {
+        return $this->events()->where('events.type', '=', Event::TYPE_GOAL);
+    }
+
+    public function substitutions()
+    {
+        return $this->events()->where('events.type', '=', Event::TYPE_SUBSTITUTION);
+    }
+
     public function away()
     {
         return $this->belongsTo('App\Models\V2\Team', 'away_id');

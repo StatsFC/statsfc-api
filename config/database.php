@@ -54,12 +54,12 @@ return [
 
 		'mysql' => [
 			'driver'    => 'mysql',
-			'host'      => (env('VERSION', '1') === '1' ? env('DB_HOST', 'localhost') : env('DB_HOST_V2', 'localhost')),
-			'database'  => (env('VERSION', '1') === '1' ? env('DB_DATABASE', 'forge') : env('DB_DATABASE_V2', 'forge')),
-			'username'  => (env('VERSION', '1') === '1' ? env('DB_USERNAME', 'forge') : env('DB_USERNAME_V2', 'forge')),
-			'password'  => (env('VERSION', '1') === '1' ? env('DB_PASSWORD', '') : env('DB_PASSWORD_V2', '')),
-			'charset'   => (env('VERSION', '1') === '1' ? 'utf8' : 'utf8mb4'),
-			'collation' => (env('VERSION', '1') === '1' ? 'utf8_unicode_ci' : 'utf8mb4_general_ci'),
+			'host'      => env('DB_HOST', 'localhost'),
+			'database'  => env('DB_DATABASE', 'forge'),
+			'username'  => env('DB_USERNAME', 'forge'),
+			'password'  => env('DB_PASSWORD', ''),
+			'charset'   => 'utf8mb4',
+			'collation' => 'utf8mb4_general_ci',
 			'prefix'    => '',
 			'strict'    => false,
 		],

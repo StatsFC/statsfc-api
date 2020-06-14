@@ -3,9 +3,9 @@ namespace App\Http\Middleware;
 
 use App;
 use App\Http\Controllers\ApiController;
-use App\Models\V1\Competition;
-use App\Models\V1\Customer;
-use App\Models\V1\RateLimiter;
+use App\Models\Competition;
+use App\Models\Customer;
+use App\Models\RateLimiter;
 use Carbon\Carbon;
 use Closure;
 

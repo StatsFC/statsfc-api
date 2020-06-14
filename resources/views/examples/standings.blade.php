@@ -16,9 +16,7 @@
             },
             "round": {
                 "id": 107,
-                "name": "Premier League",
-                "start": "2014-08-15",
-                "end": null
+                "name": "Premier League"
             },
             "team": {
                 "id": 7,

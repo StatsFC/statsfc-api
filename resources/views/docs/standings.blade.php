@@ -24,8 +24,6 @@
             "round": {
                 "id": 107,
                 "name": "Premier League",
-                "start": "2014-08-15",
-                "end": null
             },
             "team": {
                 "id": 7,
@@ -41,7 +39,6 @@
             "against": 32,
             "difference": 41,
             "points": 87,
-            "info": "top1",
             "notes": null
         }
     ]

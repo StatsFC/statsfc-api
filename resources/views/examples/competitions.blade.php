@@ -15,9 +15,7 @@
             "rounds": [
                 {
                     "id": 435,
-                    "name": "Premier League",
-                    "start": "2015-08-07",
-                    "end": "2016-05-14"
+                    "name": "Premier League"
                 }
             ]
         },

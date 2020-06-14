@@ -15,7 +15,7 @@
             <pre><code class="json">{
     "data": [
         {
-            "id": 2,
+            "id": 9,
             "name": "Premier League",
             "key": "EPL",
             "region": "England",
@@ -23,8 +23,6 @@
                 {
                     "id": 435,
                     "name": "Premier League",
-                    "start": "2015-08-07",
-                    "end": "2016-05-14"
                 }
             ]
         }

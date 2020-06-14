@@ -16,7 +16,7 @@
     "data": [
         {
             "id": 21159,
-            "timestamp": "2015-08-08T14:00:00+0000",
+            "timestamp": "2015-08-09T14:00:00+0000",
             "competition": {
                 "id": 2,
                 "name": "Premier League",
@@ -26,8 +26,6 @@
             "round": {
                 "id": 435,
                 "name": "Premier League",
-                "start": "2015-08-07",
-                "end": "2016-05-14"
             },
             "teams": {
                 "home": {
@@ -45,21 +43,14 @@
                 "home": [],
                 "away": []
             },
-            "score": null,
-            "currentState": {
-                "id": 4,
-                "key": "HT",
-                "name": "Half-Time"
-            },
-            "venue": {
-                "id": 665,
-                "name": "Britannia Stadium",
-                "capacity": 27740
-            },
+            "score": [
+                0,
+                0
+            ],
+            "currentState": "HT",
             "events": [
                 "cards": [],
                 "goals": [],
-                "states": [],
                 "substitutions": []
             ]
         }

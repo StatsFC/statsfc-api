@@ -26,8 +26,6 @@
             "round": {
                 "id": 1044,
                 "name": "Premier League",
-                "start": null,
-                "end": null
             },
             "teams": {
                 "home": {
@@ -48,8 +46,7 @@
                         "number": 33,
                         "position": "GK",
                         "role": "starting",
-                        "name": "Petr \u010cech",
-                        "shortName": "\u010cech"
+                        "name": "P. \u010cech",
                     }
                 ],
                 "away": [
@@ -58,8 +55,7 @@
                         "number": 22,
                         "position": "GK",
                         "role": "starting",
-                        "name": "Simon Mignolet",
-                        "shortName": "Mignolet"
+                        "name": "S. Mignolet",
                     }
                 ]
             },
@@ -67,16 +63,7 @@
                 3,
                 4
             ],
-            "currentState": {
-                "id": 9,
-                "key": "FT",
-                "name": "Full-Time"
-            },
-            "venue": {
-                "id": 47,
-                "name": "Emirates Stadium",
-                "capacity": 60338
-            },
+            "currentState": "FT",
             "events": {
                 "cards": [
                     {
@@ -92,8 +79,7 @@
                         },
                         "player": {
                             "id": "17235",
-                            "name": "Adam Lallana",
-                            "shortName": "Lallana",
+                            "name": "A. Lallana",
                             "position": "MF"
                         }
                     }
@@ -112,28 +98,13 @@
                         },
                         "player": {
                             "id": "17476",
-                            "name": "Theo Walcott",
-                            "shortName": "Walcott",
+                            "name": "T. Walcott",
                             "position": "FW"
                         },
                         "assist": {
                             "id": "34666",
-                            "name": "Alex Iwobi",
-                            "shortName": "Iwobi",
+                            "name": "A. Iwobi",
                             "position": "FW"
-                        }
-                    }
-                ],
-                "states": [
-                    {
-                        "id": 213309,
-                        "timestamp": "2016-08-14T15:01:41+0000",
-                        "matchTime": "1'",
-                        "type": "state",
-                        "state": {
-                            "id": 1,
-                            "key": "1H",
-                            "name": "1st Half"
                         }
                     }
                 ],
@@ -151,14 +122,12 @@
                         },
                         "playerOff": {
                             "id": "17478",
-                            "name": "Aaron Ramsey",
-                            "shortName": "Ramsey",
+                            "name": "A. Ramsey",
                             "position": "MF"
                         },
                         "playerOn": {
                             "id": "17480",
-                            "name": "Santi Cazorla",
-                            "shortName": "Cazorla",
+                            "name": "S. Cazorla",
                             "position": "MF"
                         }
                     }

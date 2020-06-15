@@ -15,7 +15,11 @@
             "rounds": [
                 {
                     "id": 435,
-                    "name": "Premier League"
+                    "name": "Premier League",
+                    "season": {
+                        "id": 10,
+                        "name": "2015\/2016"
+                    }
                 }
             ]
         },

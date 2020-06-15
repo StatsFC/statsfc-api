@@ -101,6 +101,8 @@ class Standing extends Model
         if ($request->has('competition_key')) {
             return $query->where('competitions.key', $request->input('competition_key'));
         }
+
+        return $query;
     }
 
     /**

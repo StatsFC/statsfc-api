@@ -98,6 +98,8 @@ class Match extends Model
                     $request->input('team'),
                 ]);
         }
+
+        return $query;
     }
 
     /**
@@ -142,6 +144,8 @@ class Match extends Model
         if ($request->has('competition_key')) {
             return $query->where('competitions.key', $request->input('competition_key'));
         }
+
+        return $query;
     }
 
     /**

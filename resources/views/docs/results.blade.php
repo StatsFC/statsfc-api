@@ -50,7 +50,7 @@
                         "number": 33,
                         "position": "GK",
                         "role": "starting",
-                        "name": "Petr \u010cech"
+                        "name": "P. \u010cech"
                     }
                 ],
                 "away": [
@@ -59,7 +59,7 @@
                         "number": 22,
                         "position": "GK",
                         "role": "starting",
-                        "name": "Simon Mignolet"
+                        "name": "S. Mignolet"
                     }
                 ]
             },
@@ -82,7 +82,7 @@
                         },
                         "player": {
                             "id": "17235",
-                            "name": "Adam Lallana",
+                            "name": "A. Lallana",
                             "position": "MF"
                         }
                     }
@@ -100,12 +100,12 @@
                         },
                         "player": {
                             "id": "17476",
-                            "name": "Theo Walcott",
+                            "name": "T. Walcott",
                             "position": "FW"
                         },
                         "assist": {
                             "id": "34666",
-                            "name": "Alex Iwobi",
+                            "name": "A. Iwobi",
                             "position": "FW"
                         }
                     }
@@ -123,12 +123,12 @@
                         },
                         "playerOff": {
                             "id": "17478",
-                            "name": "Aaron Ramsey",
+                            "name": "A. Ramsey",
                             "position": "MF"
                         },
                         "playerOn": {
                             "id": "17480",
-                            "name": "Santi Cazorla",
+                            "name": "S. Cazorla",
                             "position": "MF"
                         }
                     }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class ResultsController extends MatchesController
 {
     /**
-     * Output a list of games that have been played
+     * Output a list of matches that have been played
      *
      * @param  Request $request
      * @return mixed

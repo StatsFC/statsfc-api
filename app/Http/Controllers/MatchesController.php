@@ -11,7 +11,7 @@ class MatchesController extends ApiController
     protected $matchTransformer;
 
     /**
-     * Set the game transformer
+     * Set the match transformer
      *
      * @param MatchTransformer $matchTransformer
      */

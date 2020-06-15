@@ -67,7 +67,7 @@ class Event extends Model
     }
 
     /**
-     * Define the relationship to a game
+     * Define the relationship to a match
      *
      * @return BelongsTo
      */
@@ -149,7 +149,7 @@ class Event extends Model
     }
 
     /**
-     * Define a scope to filter games by team
+     * Define a scope to filter matches by team
      *
      * @param  Builder $query
      * @param  Request $request
@@ -169,7 +169,7 @@ class Event extends Model
     }
 
     /**
-     * Define a scope to filter games by season
+     * Define a scope to filter matches by season
      *
      * @param  Builder $query
      * @param  Request $request
@@ -187,7 +187,7 @@ class Event extends Model
     }
 
     /**
-     * Define a scope to filter games by competition
+     * Define a scope to filter matches by competition
      *
      * @param  Builder $query
      * @param  Request $request

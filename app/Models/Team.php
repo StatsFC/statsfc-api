@@ -60,7 +60,7 @@ class Team extends Model
     }
 
     /**
-     * Define a scope to filter games by season
+     * Define a scope to filter matches by season
      *
      * @param  Builder $query
      * @param  Request $request
@@ -78,7 +78,7 @@ class Team extends Model
     }
 
     /**
-     * Define a scope to filter games by competition
+     * Define a scope to filter matches by competition
      *
      * @param  Builder $query
      * @param  Request $request
@@ -102,7 +102,7 @@ class Team extends Model
     }
 
     /**
-     * Define a scope to filter games by team
+     * Define a scope to filter matches by team
      *
      * @param  Builder $query
      * @param  Request $request

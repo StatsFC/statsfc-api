@@ -1,7 +1,7 @@
 <?php
 namespace App\Transformers;
 
-class GameTransformer extends Transformer
+class MatchTransformer extends Transformer
 {
     /**
      * Transform a match

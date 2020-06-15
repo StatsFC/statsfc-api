@@ -9,17 +9,12 @@ class RoundTransformer extends Transformer
      * @param  $round
      * @return array
      */
-    public function transform($round, $includeSeason = true)
+    public function transform($round)
     {
-        $data = [
-            'id'   => $round->id,
-            'name' => $round->name,
+        return [
+            'id'     => $round->id,
+            'name'   => $round->name,
+            'season' => (new SeasonTransformer)->transform($round->season),
         ];
-
-        if ($includeSeason) {
-            $data['season'] = (new SeasonTransformer)->transform($round->season);
-        }
-
-        return $data;
     }
 }

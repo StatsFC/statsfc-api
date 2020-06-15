@@ -26,8 +26,8 @@ class Customer extends Model
     public function competitions($field = null)
     {
         $query = DB::table('competitions')
-            ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
-            ->join('payments', 'payment_competition.payment_id', '=', 'payments.id')
+            ->join('competition_payment', 'competitions.id', '=', 'competition_payment.competition_id')
+            ->join('payments', 'competition_payment.payment_id', '=', 'payments.id')
             ->select('competitions.*')
             ->where('payments.customer_id', $this->id)
             ->where('payments.type', 'API')

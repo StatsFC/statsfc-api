@@ -177,7 +177,13 @@ class Match extends Model
     public function scopeHasEnded($query)
     {
         return $query
-            ->whereIn('matches.status', ['Postp.', 'FT', 'Pen.', 'AET', 'Aban.'])
+            ->whereIn('matches.status', [
+                self::STATUS_POSTPONED,
+                self::STATUS_FULL_TIME,
+                self::STATUS_PENALTIES,
+                self::STATUS_AFTER_EXTRA_TIME,
+                self::STATUS_ABANDONED,
+            ])
             ->whereRaw('DATE(`matches`.`start`) <= ?', [
                 Carbon::today()->toDateString(),
             ]);
@@ -192,7 +198,13 @@ class Match extends Model
     public function scopeHasNotEnded($query)
     {
         return $query
-            ->whereNotIn('matches.status', ['Postp.', 'FT', 'Pen.', 'AET', 'Aban.'])
+            ->whereNotIn('matches.status', [
+                self::STATUS_POSTPONED,
+                self::STATUS_FULL_TIME,
+                self::STATUS_PENALTIES,
+                self::STATUS_AFTER_EXTRA_TIME,
+                self::STATUS_ABANDONED,
+            ])
             ->whereRaw('DATE(`matches`.`start`) >= ?', [
                 Carbon::today()->toDateString(),
             ]);

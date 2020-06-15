@@ -121,7 +121,7 @@ class Event extends Model
             ->join('players', 'events.player_id', '=', 'players.id')
             ->join('teams', 'events.team_id', '=', 'teams.id')
             ->join('matches', 'events.match_id', '=', 'matches.id')
-            ->where('events.type', '=', 'goal')
+            ->where('events.type', '=', Event::TYPE_GOAL)
             ->where('events.own_goal', '=', false)
             ->groupBy('players.id')
             ->orderBy('goals', 'desc')

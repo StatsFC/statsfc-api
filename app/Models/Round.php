@@ -13,7 +13,6 @@ class Round extends Model
     protected $casts = [
         'id'   => 'integer',
         'name' => 'string',
-        'type' => 'string',
     ];
 
     /**

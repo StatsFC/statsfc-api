@@ -16,19 +16,18 @@ class SubstitutionTransformer extends Transformer
 
         $data = [
             'id'        => $substitution->id,
-            'timestamp' => $substitution->timestamp->toIso8601String(),
-            'matchTime' => $substitution->matchTime,
+            'matchTime' => $substitution->matchTime(),
             'type'      => 'substitution',
-            'subType'   => $substitution->subType,
+            'subType'   => null,
         ];
 
         if ($substitution->team) {
             $data['team'] = $teamTransformer->transform($substitution->team);
         }
 
-        if ($substitution->player && $substitution->player2) {
+        if ($substitution->player && $substitution->assist) {
             $data['playerOff'] = $playerTransformer->transform($substitution->player);
-            $data['playerOn']  = $playerTransformer->transform($substitution->player2);
+            $data['playerOn']  = $playerTransformer->transform($substitution->assist);
         }
 
         return $data;

@@ -1,6 +1,8 @@
 <?php
 namespace App\Transformers;
 
+use App\Models\Player;
+
 class AssistTransformer extends Transformer
 {
     /**
@@ -12,10 +14,13 @@ class AssistTransformer extends Transformer
     public function transform($assist)
     {
         return [
-            'id'        => $assist->id,
-            'name'      => $assist->name,
-            'shortName' => $assist->shortName,
-            'position'  => $assist->position,
+            'id'       => $assist->id,
+            'name'     => $assist->name,
+            'position' => (
+                array_key_exists($assist->position, Player::POSITION_MAP)
+                    ? Player::POSITION_MAP[$assist->position]
+                    : null
+            ),
         ];
     }
 }

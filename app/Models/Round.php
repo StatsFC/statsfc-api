@@ -11,35 +11,10 @@ class Round extends Model
      * @var array
      */
     protected $casts = [
-        'id'     => 'integer',
-        'active' => 'boolean',
+        'id'   => 'integer',
+        'name' => 'string',
+        'type' => 'string',
     ];
-
-    /**
-     * Define fields to be treated as Carbon dates
-     *
-     * @return array
-     */
-    public function getDates()
-    {
-        return [
-            'start',
-            'end',
-            'created_at',
-            'updated_at',
-        ];
-    }
-
-    /**
-     * Define a scope to filter active rounds
-     *
-     * @param  Builder $query
-     * @return Builder
-     */
-    public function scopeActive($query)
-    {
-        return $query->where('active', true);
-    }
 
     /**
      * Define the relationship to a season
@@ -62,12 +37,12 @@ class Round extends Model
     }
 
     /**
-     * Define the relationship to games
+     * Define the relationship to matches
      *
      * @return HasMany
      */
-    public function games()
+    public function matches()
     {
-        return $this->hasMany('App\Models\Game');
+        return $this->hasMany('App\Models\Match');
     }
 }

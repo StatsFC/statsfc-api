@@ -5,35 +5,65 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
-class Goal extends Model
+class Event extends Model
 {
+    const TYPE_GOAL               = 'goal';
+    const TYPE_MISSED_PENALTY     = 'pen miss';
+    const TYPE_RED_CARD           = 'redcard';
+    const TYPE_SECOND_YELLOW_CARD = 'yellowred';
+    const TYPE_SUBSTITUTION       = 'subst';
+    const TYPE_YELLOW_CARD        = 'yellowcard';
+
     /**
      * Define fields to be casted
      *
      * @var array
      */
     protected $casts = [
-        'id'         => 'integer',
-        'game_id'    => 'integer',
-        'team_id'    => 'integer',
-        'player_id'  => 'integer',
-        'assist_id'  => 'integer',
-        'homeGoals'  => 'integer',
-        'awayGoals'  => 'integer',
+        'id'           => 'integer',
+        'match_id'     => 'integer',
+        'team_id'      => 'integer',
+        'player_id'    => 'integer',
+        'assist_id'    => 'integer',
+        'type'         => 'string',
+        'minute'       => 'integer',
+        'extra_minute' => 'integer',
+        'penalty'      => 'boolean',
+        'own_goal'     => 'boolean',
+        'home_score'   => 'integer',
+        'away_score'   => 'integer',
     ];
 
-    /**
-     * Define fields to be treated as Carbon dates
-     *
-     * @return array
-     */
-    public function getDates()
+    public function matchTime()
     {
-        return [
-            'timestamp',
-            'created_at',
-            'updated_at',
-        ];
+        return $this->minute . ($this->extra_minute ? '+' . $this->extra_minute : '') . "'";
+    }
+
+    public function subType()
+    {
+        switch ($this->type) {
+            case self::TYPE_GOAL:
+                if ($this->penalty) {
+                    return 'penalty';
+                }
+
+                if ($this->own_goal) {
+                    return 'own-goal';
+                }
+
+                break;
+
+            case self::TYPE_YELLOW_CARD:
+                return 'first-yellow';
+
+            case self::TYPE_SECOND_YELLOW_CARD:
+                return 'second-yellow';
+
+            case self::TYPE_RED_CARD:
+                return 'red';
+        }
+
+        return null;
     }
 
     /**
@@ -41,9 +71,9 @@ class Goal extends Model
      *
      * @return BelongsTo
      */
-    public function game()
+    public function match()
     {
-        return $this->belongsTo('App\Models\Game');
+        return $this->belongsTo('App\Models\Match');
     }
 
     /**
@@ -84,18 +114,18 @@ class Goal extends Model
             ->select([
                 'players.id',
                 'players.name AS playerName',
-                'players.shortName AS playerShortName',
                 'teams.name AS teamName',
-                'teams.shortName AS teamShortName',
-                DB::raw('COUNT(goals.id) AS goals'),
+                'teams.short_name AS teamShortName',
+                DB::raw('COUNT(events.id) AS goals'),
             ])
-            ->join('players', 'goals.player_id', '=', 'players.id')
-            ->join('teams', 'goals.team_id', '=', 'teams.id')
-            ->join('games', 'goals.game_id', '=', 'games.id')
-            ->whereRaw('IFNULL(goals.subType, "") != "own-goal"')
+            ->join('players', 'events.player_id', '=', 'players.id')
+            ->join('teams', 'events.team_id', '=', 'teams.id')
+            ->join('matches', 'events.match_id', '=', 'matches.id')
+            ->where('events.type', '=', 'goal')
+            ->where('events.own_goal', '=', false)
             ->groupBy('players.id')
             ->orderBy('goals', 'desc')
-            ->orderBy('players.shortName', 'asc');
+            ->orderBy('players.name', 'asc');
     }
 
     /**
@@ -108,15 +138,14 @@ class Goal extends Model
     public function scopeVisibleByCustomer($query, $customer_id)
     {
         return $query
-            ->join('rounds', 'games.round_id', '=', 'rounds.id')
-            ->join('competitions', 'rounds.competition_id', '=', 'competitions.id')
-            ->where('competitions.online', true)
-            ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
-            ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
-            ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
+            ->join('competitions', 'matches.competition_id', '=', 'competitions.id')
+            ->where('competitions.enabled', true)
+            ->join('competition_payment', 'competitions.id', '=', 'competition_payment.competition_id')
+            ->join('payments', 'payments.id', '=', 'competition_payment.payment_id')
+            ->whereRaw('? BETWEEN `payments`.`from` AND `payments`.`to`', [
                 Carbon::today()->toDateString(),
             ])
-            ->where('payment.customer_id', $customer_id);
+            ->where('payments.customer_id', $customer_id);
     }
 
     /**
@@ -129,7 +158,7 @@ class Goal extends Model
     public function scopeFilterTeam($query, $request)
     {
         if ($request->has('team_id')) {
-            return $query->where('goals.team_id', $request->input('team_id'));
+            return $query->where('events.team_id', $request->input('team_id'));
         }
 
         if ($request->has('team')) {
@@ -148,16 +177,13 @@ class Goal extends Model
      */
     public function scopeFilterSeason($query, $request)
     {
-        $query->join('seasons', 'rounds.season_id', '=', 'seasons.id');
+        $query->join('seasons', 'matches.season_id', '=', 'seasons.id');
 
         if ($request->has('season')) {
             return $query->where('seasons.name', $request->input('season'));
         }
 
-        // By default, show games for the current season only
-        return $query->whereRaw('? BETWEEN `seasons`.`start` AND `seasons`.`end`', [
-            Carbon::today()->toDateString(),
-        ]);
+        return $query;
     }
 
     /**

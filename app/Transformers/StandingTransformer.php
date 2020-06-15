@@ -12,24 +12,24 @@ class StandingTransformer extends Transformer
     public function transform($standing)
     {
         $competitionTransformer = new CompetitionTransformer;
-        $roundTransformer       = new RoundTransformer;
+        $seasonTransformer      = new SeasonTransformer;
         $teamTransformer        = new TeamTransformer;
 
         return [
-            'competition'  => $competitionTransformer->transform($standing->competition, false),
-            'round'        => $roundTransformer->transform($standing->round),
-            'team'         => $teamTransformer->transform($standing->team),
-            'position'     => $standing->position,
-            'played'       => $standing->played,
-            'wins'         => $standing->wins,
-            'draws'        => $standing->draws,
-            'losses'       => $standing->losses,
-            'for'          => $standing->for,
-            'against'      => $standing->against,
-            'difference'   => $standing->difference,
-            'points'       => $standing->points,
-            'info'         => $standing->class,
-            'notes'        => $standing->notes,
+            'season'      => $seasonTransformer->transform($standing->season),
+            'competition' => $competitionTransformer->transform($standing->competition, false),
+            'group'       => $standing->group,
+            'team'        => $teamTransformer->transform($standing->team),
+            'position'    => $standing->position,
+            'played'      => $standing->played,
+            'wins'        => $standing->won,
+            'draws'       => $standing->drawn,
+            'losses'      => $standing->lost,
+            'for'         => $standing->goals_for,
+            'against'     => $standing->goals_against,
+            'difference'  => $standing->goal_difference,
+            'points'      => $standing->points,
+            'notes'       => $standing->description,
         ];
     }
 }

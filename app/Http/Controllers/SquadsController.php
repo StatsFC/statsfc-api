@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Transformers\SquadTransformer;
 use App\Models\Team;
+use App\Transformers\SquadTransformer;
 use Illuminate\Http\Request;
 
 class SquadsController extends ApiController

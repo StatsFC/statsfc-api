@@ -15,18 +15,17 @@
             <pre><code class="json">{
     "data": [
         {
+            "season": {
+                "id": 10,
+                "name": "2014\/2015"
+            },
             "competition": {
                 "id": 2,
                 "name": "Premier League",
                 "key": "EPL",
                 "region": "England"
             },
-            "round": {
-                "id": 107,
-                "name": "Premier League",
-                "start": "2014-08-15",
-                "end": null
-            },
+            "group": null,
             "team": {
                 "id": 7,
                 "name": "Chelsea",
@@ -41,8 +40,7 @@
             "against": 32,
             "difference": 41,
             "points": 87,
-            "info": "top1",
-            "notes": null
+            "notes": "Promotion - Champions League (Group Stage)"
         }
     ]
 }</code></pre>

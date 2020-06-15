@@ -15,7 +15,7 @@ class Database
      */
     public function handle($request, Closure $next)
     {
-        DB::statement('SET NAMES latin1');
+        DB::statement('SET NAMES "utf8mb4"');
 
         return $next($request);
     }

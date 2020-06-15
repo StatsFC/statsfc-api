@@ -17,8 +17,10 @@
             "round": {
                 "id": 107,
                 "name": "Premier League",
-                "start": "2014-08-15",
-                "end": null
+                "season": {
+                    "id": 10,
+                    "name": "2015\/2016"
+                },
             },
             "team": {
                 "id": 7,
@@ -34,7 +36,7 @@
             "against": 32,
             "difference": 41,
             "points": 87,
-            "notes": null
+            "notes": "Promotion - Champions League (Group Stage)"
         },
         …
     ]

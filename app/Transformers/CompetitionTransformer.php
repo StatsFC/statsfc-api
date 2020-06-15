@@ -15,13 +15,13 @@ class CompetitionTransformer extends Transformer
             'id'     => $competition->id,
             'name'   => $competition->name,
             'key'    => $competition->key,
-            'region' => $competition->region->name,
+            'region' => $competition->country,
         ];
 
         if ($includeRounds) {
             $roundTransformer = new RoundTransformer;
 
-            $rounds = $competition->rounds()->active()->get();
+            $rounds = $competition->rounds()->get();
 
             $data['rounds'] = $roundTransformer->transformCollection($rounds->all());
         }

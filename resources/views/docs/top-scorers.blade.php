@@ -17,8 +17,7 @@
         {
             "id": 17183,
             "player": {
-                "name": "Sergio Ag\u00c3\u00bcero",
-                "shortName": "Ag\u00c3\u00bcero"
+                "name": "Sergio Ag\u00c3\u00bcero"
             },
             "team": {
                 "name": "Manchester City",

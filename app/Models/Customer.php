@@ -8,13 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     /**
-     * Define non-standard table name
-     *
-     * @var string
-     */
-    protected $table = 'customer';
-
-    /**
      * Define the relationship to rate limiters
      *
      * @return HasMany
@@ -25,7 +18,7 @@ class Customer extends Model
     }
 
     /**
-     * Get the competitions a customer is sibscribed to
+     * Get the competitions a customer is subscribed to
      *
      * @param  string  $field  Field name to return a list of
      * @return Collection
@@ -34,13 +27,13 @@ class Customer extends Model
     {
         $query = DB::table('competitions')
             ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
-            ->join('payment', 'payment_competition.payment_id', '=', 'payment.id')
+            ->join('payments', 'payment_competition.payment_id', '=', 'payments.id')
             ->select('competitions.*')
-            ->where('payment.customer_id', $this->id)
-            ->where('payment.type', 'API')
-            ->where('payment.from', '<=', Carbon::today()->toDateString())
-            ->where('payment.to', '>=', Carbon::today()->toDateString())
-            ->where('competitions.online', true);
+            ->where('payments.customer_id', $this->id)
+            ->where('payments.type', 'API')
+            ->where('payments.from', '<=', Carbon::today()->toDateString())
+            ->where('payments.to', '>=', Carbon::today()->toDateString())
+            ->where('competitions.enabled', true);
 
         if ($field) {
             return $query->lists($field);
@@ -56,8 +49,8 @@ class Customer extends Model
      */
     public function dailyRateLimit()
     {
-        $query = DB::table('payment')
-            ->select('dailyRateLimit')
+        $query = DB::table('payments')
+            ->select('daily_rate_limit')
             ->where('customer_id', $this->id)
             ->where('type', 'API')
             ->where('from', '<=', Carbon::today()->toDateString())
@@ -69,6 +62,6 @@ class Customer extends Model
             return false;
         }
 
-        return (int) $payments[0]->dailyRateLimit;
+        return (int) $payments[0]->daily_rate_limit;
     }
 }

@@ -17,7 +17,6 @@
                 {
                     "id": "17478",
                     "name": "Aaron Ramsey",
-                    "shortName": "Ramsey",
                     "position": "MF"
                 },
                 …

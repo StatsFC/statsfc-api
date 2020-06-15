@@ -32,17 +32,17 @@ class StandingsController extends ApiController
     {
         $customer_id = $request->session()->get('customer_id');
 
-        $standings = Standing::select('tables.*')
+        $standings = Standing::select('standings.*')
             ->visibleByCustomer($customer_id)
             ->filterSeason($request)
             ->filterCompetition($request)
             ->groupBy([
-                'tables.competition_id',
-                'tables.round_id',
-                'tables.team_id',
+                'standings.competition_id',
+                'standings.season_id',
+                'standings.team_id',
             ])
             ->orderBy('competitions.order')
-            ->orderBy('tables.position')
+            ->orderBy('standings.position')
             ->get();
 
         return $this->respond([

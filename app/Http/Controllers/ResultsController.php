@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Game;
+use App\Models\Match;
 use Illuminate\Http\Request;
 
-class ResultsController extends GamesController
+class ResultsController extends MatchesController
 {
     /**
      * Output a list of games that have been played
@@ -16,20 +16,20 @@ class ResultsController extends GamesController
     {
         $customer_id = $request->session()->get('customer_id');
 
-        $games = Game::select('games.*')
+        $matches = Match::select('matches.*')
             ->visibleByCustomer($customer_id)
             ->filterSeason($request)
             ->filterCompetition($request)
             ->filterTeam($request)
             ->filterDates($request)
             ->hasEnded()
-            ->groupBy('games.id')
-            ->orderBy('games.timestamp')
-            ->orderBy('games.id')
+            ->groupBy('matches.id')
+            ->orderBy('matches.start')
+            ->orderBy('matches.id')
             ->get();
 
         return $this->respond([
-            'data' => $this->gameTransformer->transformCollection($games->all()),
+            'data' => $this->matchTransformer->transformCollection($matches->all()),
         ]);
     }
 }

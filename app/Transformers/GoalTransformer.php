@@ -17,10 +17,9 @@ class GoalTransformer extends Transformer
 
         $data = [
             'id'        => $goal->id,
-            'timestamp' => $goal->timestamp->toIso8601String(),
-            'matchTime' => $goal->matchTime,
+            'matchTime' => $goal->matchTime(),
             'type'      => 'goal',
-            'subType'   => $goal->subType,
+            'subType'   => $goal->subType(),
         ];
 
         if ($goal->team) {

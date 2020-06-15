@@ -12,19 +12,19 @@ class Competition extends Model
      * @var array
      */
     protected $casts = [
-        'id'     => 'integer',
-        'online' => 'boolean',
+        'id'      => 'integer',
+        'enabled' => 'boolean',
     ];
 
     /**
-     * Define a scope to filter online competitions
+     * Define a scope to filter enabled competitions
      *
      * @param  Builder $query
      * @return Builder
      */
-    public function scopeOnline($query)
+    public function scopeEnabled($query)
     {
-        return $query->where('online', true);
+        return $query->where('enabled', true);
     }
 
     /**
@@ -37,13 +37,13 @@ class Competition extends Model
     public function scopeVisibleByCustomer($query, $customer_id)
     {
         return $query
-            ->online()
-            ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
-            ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
-            ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
+            ->enabled()
+            ->join('competition_payment', 'competitions.id', '=', 'competition_payment.competition_id')
+            ->join('payments', 'payments.id', '=', 'competition_payment.payment_id')
+            ->whereRaw('? BETWEEN `payments`.`from` AND `payments`.`to`', [
                 Carbon::today()->toDateString(),
             ])
-            ->where('payment.customer_id', $customer_id);
+            ->where('payments.customer_id', $customer_id);
     }
 
     /**

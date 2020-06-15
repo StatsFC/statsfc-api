@@ -12,49 +12,18 @@ class Team extends Model
      * @var array
      */
     protected $casts = [
-        'id'       => 'integer',
-        'venue_id' => 'integer',
-        'national' => 'boolean',
+        'id'   => 'integer',
+        'name' => 'string',
     ];
 
     /**
-     * Define the relationship to a venue
-     *
-     * @return BelongsTo
-     */
-    public function venue()
-    {
-        return $this->belongsTo('App\Models\Venue');
-    }
-
-    /**
-     * Define the relationship to it's cards
+     * Define the relationship to it's events
      *
      * @return HasMany
      */
-    public function cards()
+    public function events()
     {
-        return $this->hasMany('App\Models\Card');
-    }
-
-    /**
-     * Define the relationship to it's goals
-     *
-     * @return HasMany
-     */
-    public function goals()
-    {
-        return $this->hasMany('App\Models\Goal');
-    }
-
-    /**
-     * Define the relationship to it's substitutions
-     *
-     * @return HasMany
-     */
-    public function substitutions()
-    {
-        return $this->hasMany('App\Models\Substitution');
+        return $this->hasMany('App\Models\Event');
     }
 
     /**
@@ -77,18 +46,17 @@ class Team extends Model
     public function scopeVisibleByCustomer($query, $customer_id)
     {
         return $query
-            ->join('games', function ($join) {
-                $join->on('teams.id', '=', 'games.home_id')->orOn('teams.id', '=', 'games.away_id');
+            ->join('matches', function ($join) {
+                $join->on('teams.id', '=', 'matches.home_id')->orOn('teams.id', '=', 'matches.away_id');
             })
-            ->join('rounds', 'games.round_id', '=', 'rounds.id')
-            ->join('competitions', 'rounds.competition_id', '=', 'competitions.id')
-            ->where('competitions.online', true)
-            ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
-            ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
-            ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
+            ->join('competitions', 'matches.competition_id', '=', 'competitions.id')
+            ->where('competitions.enabled', true)
+            ->join('competition_payment', 'competitions.id', '=', 'competition_payment.competition_id')
+            ->join('payments', 'payments.id', '=', 'competition_payment.payment_id')
+            ->whereRaw('? BETWEEN `payments`.`from` AND `payments`.`to`', [
                 Carbon::today()->toDateString(),
             ])
-            ->where('payment.customer_id', $customer_id);
+            ->where('payments.customer_id', $customer_id);
     }
 
     /**
@@ -100,16 +68,13 @@ class Team extends Model
      */
     public function scopeFilterSeason($query, $request)
     {
-        $query->join('seasons', 'rounds.season_id', '=', 'seasons.id');
+        $query->join('seasons', 'matches.season_id', '=', 'seasons.id');
 
         if ($request->has('season')) {
             return $query->where('seasons.name', $request->input('season'));
         }
 
-        // By default, show games for the current season only
-        return $query->whereRaw('? BETWEEN `seasons`.`start` AND `seasons`.`end`', [
-            Carbon::today()->toDateString(),
-        ]);
+        return $query;
     }
 
     /**

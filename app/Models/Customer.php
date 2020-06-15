@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    protected $casts = [
+        'id'                  => 'integer',
+        'ip'                  => 'string',
+        'lift_ip_restriction' => 'boolean',
+    ];
+
     /**
      * Define the relationship to rate limiters
      *

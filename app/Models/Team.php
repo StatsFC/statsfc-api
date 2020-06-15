@@ -12,8 +12,9 @@ class Team extends Model
      * @var array
      */
     protected $casts = [
-        'id'   => 'integer',
-        'name' => 'string',
+        'id'         => 'integer',
+        'name'       => 'string',
+        'short_name' => 'string',
     ];
 
     /**

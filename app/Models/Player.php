@@ -12,6 +12,14 @@ class Player extends Model
         'M' => 'MF',
     ];
 
+    protected $casts = [
+        'id'       => 'integer',
+        'team_id'  => 'integer',
+        'name'     => 'string',
+        'number'   => 'integer',
+        'position' => 'string',
+    ];
+
     /**
      * Define the relationship to a team
      *

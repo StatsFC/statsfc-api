@@ -13,6 +13,9 @@ class Competition extends Model
      */
     protected $casts = [
         'id'      => 'integer',
+        'country' => 'string',
+        'name'    => 'string',
+        'key'     => 'string',
         'enabled' => 'boolean',
     ];
 

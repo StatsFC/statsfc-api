@@ -113,9 +113,9 @@ class Event extends Model
         return $instance->newQuery()
             ->select([
                 'players.id',
-                'players.name AS playerName',
-                'teams.name AS teamName',
-                'teams.short_name AS teamShortName',
+                'players.name AS player_name',
+                'teams.name AS team_name',
+                'teams.short_name AS team_short_name',
                 DB::raw('COUNT(events.id) AS goals'),
             ])
             ->join('players', 'events.player_id', '=', 'players.id')

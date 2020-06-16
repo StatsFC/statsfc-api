@@ -4,21 +4,42 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Game extends Model
+class Match extends Model
 {
+    const STATUS_ABANDONED        = 'Aban.';
+    const STATUS_AFTER_EXTRA_TIME = 'AET';
+    const STATUS_FULL_TIME        = 'FT';
+    const STATUS_PENALTIES        = 'Pen.';
+    const STATUS_POSTPONED        = 'Postp.';
+
+    protected $table = 'matches';
+
     /**
      * Define fields to be casted
      *
      * @var array
      */
     protected $casts = [
-        'id'        => 'integer',
-        'round_id'  => 'integer',
-        'home_id'   => 'integer',
-        'away_id'   => 'integer',
-        'state_id'  => 'integer',
-        'homeGoals' => 'integer',
-        'awayGoals' => 'integer',
+        'id'              => 'integer',
+        'round_id'        => 'integer',
+        'season_id'       => 'integer',
+        'competition_id'  => 'integer',
+        'home_id'         => 'integer',
+        'away_id'         => 'integer',
+        'week'            => 'integer',
+        'status'          => 'string',
+        'home_score'      => 'integer',
+        'home_score_ht'   => 'integer',
+        'home_score_ft'   => 'integer',
+        'home_score_et'   => 'integer',
+        'home_score_pens' => 'integer',
+        'home_score_agg'  => 'integer',
+        'away_score'      => 'integer',
+        'away_score_ht'   => 'integer',
+        'away_score_ft'   => 'integer',
+        'away_score_et'   => 'integer',
+        'away_score_pens' => 'integer',
+        'away_score_agg'  => 'integer',
     ];
 
     /**
@@ -29,7 +50,7 @@ class Game extends Model
     public function getDates()
     {
         return [
-            'timestamp',
+            'start',
             'created_at',
             'updated_at',
         ];
@@ -45,19 +66,18 @@ class Game extends Model
     public function scopeVisibleByCustomer($query, $customer_id)
     {
         return $query
-            ->join('rounds', 'games.round_id', '=', 'rounds.id')
-            ->join('competitions', 'rounds.competition_id', '=', 'competitions.id')
-            ->where('competitions.online', true)
-            ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
-            ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
-            ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
+            ->join('competitions', 'matches.competition_id', '=', 'competitions.id')
+            ->where('competitions.enabled', true)
+            ->join('competition_payment', 'competitions.id', '=', 'competition_payment.competition_id')
+            ->join('payments', 'payments.id', '=', 'competition_payment.payment_id')
+            ->whereRaw('? BETWEEN `payments`.`from` AND `payments`.`to`', [
                 Carbon::today()->toDateString(),
             ])
-            ->where('payment.customer_id', $customer_id);
+            ->where('payments.customer_id', $customer_id);
     }
 
     /**
-     * Define a scope to filter games by team
+     * Define a scope to filter matches by team
      *
      * @param  Builder $query
      * @return Builder
@@ -65,23 +85,25 @@ class Game extends Model
     public function scopeFilterTeam($query, $request)
     {
         if ($request->has('team_id')) {
-            return $query->whereRaw('? IN (games.`home_id`, games.`away_id`)', [
+            return $query->whereRaw('? IN (matches.`home_id`, matches.`away_id`)', [
                 $request->input('team_id'),
             ]);
         }
 
         if ($request->has('team')) {
             return $query
-                ->join('teams AS home', 'games.home_id', '=', 'home.id')
-                ->join('teams AS away', 'games.away_id', '=', 'away.id')
+                ->join('teams AS home', 'matches.home_id', '=', 'home.id')
+                ->join('teams AS away', 'matches.away_id', '=', 'away.id')
                 ->whereRaw('? IN (`home`.`name`, `away`.`name`)', [
                     $request->input('team'),
                 ]);
         }
+
+        return $query;
     }
 
     /**
-     * Define a scope to filter games by season
+     * Define a scope to filter matches by season
      *
      * @param  Builder $query
      * @param  Request $request
@@ -90,23 +112,20 @@ class Game extends Model
     public function scopeFilterSeason($query, $request)
     {
         if ($request->has('season_id')) {
-            return $query->where('rounds.season_id', '=', $request->input('season_id'));
+            return $query->where('matches.season_id', '=', $request->input('season_id'));
         }
 
-        $query->join('seasons', 'rounds.season_id', '=', 'seasons.id');
+        $query->join('seasons', 'matches.season_id', '=', 'seasons.id');
 
         if ($request->has('season')) {
             return $query->where('seasons.name', $request->input('season'));
         }
 
-        // By default, show games for the current season only
-        return $query->whereRaw('? BETWEEN `seasons`.`start` AND `seasons`.`end`', [
-            Carbon::today()->toDateString(),
-        ]);
+        return $query;
     }
 
     /**
-     * Define a scope to filter games by competition
+     * Define a scope to filter matches by competition
      *
      * @param  Builder $query
      * @param  Request $request
@@ -125,10 +144,12 @@ class Game extends Model
         if ($request->has('competition_key')) {
             return $query->where('competitions.key', $request->input('competition_key'));
         }
+
+        return $query;
     }
 
     /**
-     * Define a scope to filter games by from/to dates
+     * Define a scope to filter matches by from/to dates
      *
      * @param  Builder $query
      * @param  Request $request
@@ -137,13 +158,13 @@ class Game extends Model
     public function scopeFilterDates($query, $request)
     {
         if ($request->has('from')) {
-            $query->whereRaw('DATE(`games`.`timestamp`) >= ?', [
+            $query->whereRaw('DATE(`matches`.`start`) >= ?', [
                 $request->input('from'),
             ]);
         }
 
         if ($request->has('to')) {
-            $query->whereRaw('DATE(`games`.`timestamp`) <= ?', [
+            $query->whereRaw('DATE(`matches`.`start`) <= ?', [
                 $request->input('to'),
             ]);
         }
@@ -152,7 +173,7 @@ class Game extends Model
     }
 
     /**
-     * Define a scope to filter games that have ended
+     * Define a scope to filter matches that have ended
      *
      * @param  Builder $query
      * @return Builder
@@ -160,15 +181,20 @@ class Game extends Model
     public function scopeHasEnded($query)
     {
         return $query
-            ->join('states', 'games.state_id', '=', 'states.id')
-            ->where('states.ended', true)
-            ->whereRaw('DATE(`games`.`timestamp`) <= ?', [
+            ->whereIn('matches.status', [
+                self::STATUS_POSTPONED,
+                self::STATUS_FULL_TIME,
+                self::STATUS_PENALTIES,
+                self::STATUS_AFTER_EXTRA_TIME,
+                self::STATUS_ABANDONED,
+            ])
+            ->whereRaw('DATE(`matches`.`start`) <= ?', [
                 Carbon::today()->toDateString(),
             ]);
     }
 
     /**
-     * Define a scope to filter games that have not ended
+     * Define a scope to filter matches that have not ended
      *
      * @param  Builder $query
      * @return Builder
@@ -176,9 +202,14 @@ class Game extends Model
     public function scopeHasNotEnded($query)
     {
         return $query
-            ->join('states', 'games.state_id', '=', 'states.id')
-            ->where('states.ended', false)
-            ->whereRaw('DATE(`games`.`timestamp`) >= ?', [
+            ->whereNotIn('matches.status', [
+                self::STATUS_POSTPONED,
+                self::STATUS_FULL_TIME,
+                self::STATUS_PENALTIES,
+                self::STATUS_AFTER_EXTRA_TIME,
+                self::STATUS_ABANDONED,
+            ])
+            ->whereRaw('DATE(`matches`.`start`) >= ?', [
                 Carbon::today()->toDateString(),
             ]);
     }
@@ -214,63 +245,31 @@ class Game extends Model
     }
 
     /**
-     * Define the relationship to a venue
-     *
-     * @return BelongsTo
-     */
-    public function venue()
-    {
-        return $this->belongsTo('App\Models\Venue');
-    }
-
-    /**
-     * Define the relationship to a state
-     *
-     * @return BelongsTo
-     */
-    public function state()
-    {
-        return $this->belongsTo('App\Models\State');
-    }
-
-    /**
      * Define the relationship to it's cards
-     *
-     * @return HasMany
      */
     public function cards()
     {
-        return $this->hasMany('App\Models\Card');
+        return $this->events()->whereIn('events.type', [
+            Event::TYPE_RED_CARD,
+            Event::TYPE_SECOND_YELLOW_CARD,
+            Event::TYPE_YELLOW_CARD,
+        ]);
     }
 
     /**
      * Define the relationship to it's goals
-     *
-     * @return HasMany
      */
     public function goals()
     {
-        return $this->hasMany('App\Models\Goal');
-    }
-
-    /**
-     * Define the relationship to it's game states
-     *
-     * @return HasMany
-     */
-    public function gameStates()
-    {
-        return $this->hasMany('App\Models\GameState');
+        return $this->events()->where('events.type', '=', Event::TYPE_GOAL);
     }
 
     /**
      * Define the relationship to it's substitutions
-     *
-     * @return HasMany
      */
     public function substitutions()
     {
-        return $this->hasMany('App\Models\Substitution');
+        return $this->events()->where('events.type', '=', Event::TYPE_SUBSTITUTION);
     }
 
     /**
@@ -278,9 +277,9 @@ class Game extends Model
      *
      * @return HasMany
      */
-    public function players()
+    public function matchPlayers()
     {
-        return $this->hasMany('App\Models\GamePlayer');
+        return $this->hasMany('App\Models\MatchPlayer');
     }
 
     /**
@@ -290,6 +289,12 @@ class Game extends Model
      */
     public function hasEnded()
     {
-        return $this->state->ended;
+        return in_array($this->status, [
+            self::STATUS_POSTPONED,
+            self::STATUS_FULL_TIME,
+            self::STATUS_PENALTIES,
+            self::STATUS_AFTER_EXTRA_TIME,
+            self::STATUS_ABANDONED,
+        ]);
     }
 }

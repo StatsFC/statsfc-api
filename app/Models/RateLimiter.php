@@ -29,7 +29,7 @@ class RateLimiter extends Model
     ];
 
     /**
-     * Define a scope to filter online competitions
+     * Define a scope to filter today's rate limiters
      *
      * @param  Builder $query
      * @return Builder

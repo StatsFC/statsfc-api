@@ -8,7 +8,6 @@ class HomeController extends Controller
         $sections = [
             'competitions' => 'Competitions',
             'seasons'      => 'Seasons',
-            'states'       => 'States',
             'fixtures'     => 'Fixtures',
             'results'      => 'Results',
             'standings'    => 'Standings',

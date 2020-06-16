@@ -14,12 +14,11 @@ class TopScorerTransformer extends Transformer
         return [
             'id'     => $topScorer->id,
             'player' => [
-                'name'      => $topScorer->playerName,
-                'shortName' => $topScorer->playerShortName,
+                'name' => $topScorer->player_name,
             ],
             'team'   => [
-                'name'      => $topScorer->teamName,
-                'shortName' => $topScorer->teamShortName,
+                'name'      => $topScorer->team_name,
+                'shortName' => $topScorer->team_short_name,
             ],
             'goals'  => (int) $topScorer->goals,
         ];

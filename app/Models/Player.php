@@ -5,6 +5,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
 {
+    const POSITION_MAP = [
+        'A' => 'FW',
+        'D' => 'DF',
+        'G' => 'GK',
+        'M' => 'MF',
+    ];
+
+    protected $casts = [
+        'id'       => 'integer',
+        'team_id'  => 'integer',
+        'name'     => 'string',
+        'number'   => 'integer',
+        'position' => 'string',
+    ];
+
     /**
      * Define the relationship to a team
      *
@@ -16,32 +31,12 @@ class Player extends Model
     }
 
     /**
-     * Define the relationship to cards
+     * Define the relationship to events
      *
      * @return HasMany
      */
-    public function cards()
+    public function events()
     {
-        return $this->hasMany('App\Models\Card');
-    }
-
-    /**
-     * Define the relationship to goals
-     *
-     * @return HasMany
-     */
-    public function goals()
-    {
-        return $this->hasMany('App\Models\Goal');
-    }
-
-    /**
-     * Define the relationship to substitutions
-     *
-     * @return HasMany
-     */
-    public function substitutions()
-    {
-        return $this->hasMany('App\Models\Substitution');
+        return $this->hasMany('App\Models\Event');
     }
 }

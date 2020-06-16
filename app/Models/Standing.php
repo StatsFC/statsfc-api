@@ -6,27 +6,41 @@ use Illuminate\Database\Eloquent\Model;
 
 class Standing extends Model
 {
-    protected $table = 'tables';
-
     /**
      * Define fields to be casted
      *
      * @var array
      */
     protected $casts = [
-        'id'             => 'integer',
-        'competition_id' => 'integer',
-        'round_id'       => 'integer',
-        'team_id'        => 'integer',
-        'position'       => 'integer',
-        'played'         => 'integer',
-        'wins'           => 'integer',
-        'draws'          => 'integer',
-        'losses'         => 'integer',
-        'for'            => 'integer',
-        'against'        => 'integer',
-        'difference'     => 'integer',
-        'points'         => 'integer',
+        'id'                 => 'integer',
+        'season_id'          => 'integer',
+        'competition_id'     => 'integer',
+        'group'              => 'string',
+        'team_id'            => 'integer',
+        'position'           => 'integer',
+        'played'             => 'integer',
+        'won'                => 'integer',
+        'drawn'              => 'integer',
+        'lost'               => 'integer',
+        'goals_for'          => 'integer',
+        'goals_against'      => 'integer',
+        'goal_difference'    => 'integer',
+        'points'             => 'integer',
+        'home_played'        => 'integer',
+        'home_won'           => 'integer',
+        'home_drawn'         => 'integer',
+        'home_lost'          => 'integer',
+        'home_goals_for'     => 'integer',
+        'home_goals_against' => 'integer',
+        'away_played'        => 'integer',
+        'away_won'           => 'integer',
+        'away_drawn'         => 'integer',
+        'away_lost'          => 'integer',
+        'away_goals_for'     => 'integer',
+        'away_goals_against' => 'integer',
+        'status'             => 'string',
+        'form'               => 'string',
+        'description'        => 'string',
     ];
 
     /**
@@ -39,14 +53,14 @@ class Standing extends Model
     public function scopeVisibleByCustomer($query, $customer_id)
     {
         return $query
-            ->join('competitions', 'tables.competition_id', '=', 'competitions.id')
-            ->where('competitions.online', true)
-            ->join('payment_competition', 'competitions.id', '=', 'payment_competition.competition_id')
-            ->join('payment', 'payment.id', '=', 'payment_competition.payment_id')
-            ->whereRaw('? BETWEEN `payment`.`from` AND `payment`.`to`', [
+            ->join('competitions', 'standings.competition_id', '=', 'competitions.id')
+            ->where('competitions.enabled', true)
+            ->join('competition_payment', 'competitions.id', '=', 'competition_payment.competition_id')
+            ->join('payments', 'payments.id', '=', 'competition_payment.payment_id')
+            ->whereRaw('? BETWEEN `payments`.`from` AND `payments`.`to`', [
                 Carbon::today()->toDateString(),
             ])
-            ->where('payment.customer_id', $customer_id);
+            ->where('payments.customer_id', $customer_id);
     }
 
     /**
@@ -58,18 +72,13 @@ class Standing extends Model
      */
     public function scopeFilterSeason($query, $request)
     {
-        $query
-            ->join('rounds', 'tables.round_id', '=', 'rounds.id')
-            ->join('seasons', 'rounds.season_id', '=', 'seasons.id');
+        $query->join('seasons', 'standings.season_id', '=', 'seasons.id');
 
         if ($request->has('season')) {
             return $query->where('seasons.name', $request->input('season'));
         }
 
-        // By default, show games for the current season only
-        return $query->whereRaw('? BETWEEN `seasons`.`start` AND `seasons`.`end`', [
-            Carbon::today()->toDateString(),
-        ]);
+        return $query;
     }
 
     /**
@@ -92,6 +101,8 @@ class Standing extends Model
         if ($request->has('competition_key')) {
             return $query->where('competitions.key', $request->input('competition_key'));
         }
+
+        return $query;
     }
 
     /**
@@ -102,16 +113,6 @@ class Standing extends Model
     public function competition()
     {
         return $this->belongsTo('App\Models\Competition');
-    }
-
-    /**
-     * Define the relationship to a round
-     *
-     * @return BelongsTo
-     */
-    public function round()
-    {
-        return $this->belongsTo('App\Models\Round');
     }
 
     /**

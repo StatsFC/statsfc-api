@@ -2,7 +2,7 @@
     <span class="input-group-addon" id="basic-addon1">
         <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
     </span>
-    <input type="text" class="form-control api-curl" aria-describedby="basic-addon1" value="curl -H &quot;X-StatsFC-Key: {api_key}&quot; https://dugout.statsfc.com/api/v1/standings">
+    <input type="text" class="form-control api-curl" aria-describedby="basic-addon1" value="curl -H &quot;X-StatsFC-Key: {api_key}&quot; https://dugout.statsfc.com/api/v2/standings">
 </div>
 
 <pre><code class="json">{
@@ -17,8 +17,10 @@
             "round": {
                 "id": 107,
                 "name": "Premier League",
-                "start": "2014-08-15",
-                "end": null
+                "season": {
+                    "id": 10,
+                    "name": "2015\/2016"
+                }
             },
             "team": {
                 "id": 7,
@@ -34,7 +36,7 @@
             "against": 32,
             "difference": 41,
             "points": 87,
-            "notes": null
+            "notes": "Promotion - Champions League (Group Stage)"
         },
         …
     ]

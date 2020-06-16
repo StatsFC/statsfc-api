@@ -23,8 +23,7 @@
             "players": [
                 {
                     "id": "17478",
-                    "name": "Aaron Ramsey",
-                    "shortName": "Ramsey",
+                    "name": "A. Ramsey",
                     "position": "MF"
                 }
             ]

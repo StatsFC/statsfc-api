@@ -10,7 +10,6 @@ class DocsController extends Controller
             'authentication' => 'Authentication',
             'competitions'   => 'Competitions',
             'seasons'        => 'Seasons',
-            'states'         => 'States',
             'fixtures'       => 'Fixtures',
             'results'        => 'Results',
             'standings'      => 'Standings',

@@ -2,7 +2,7 @@
     <span class="input-group-addon" id="basic-addon1">
         <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
     </span>
-    <input type="text" class="form-control api-curl" aria-describedby="basic-addon1" value="curl -H &quot;X-StatsFC-Key: {api_key}&quot; https://dugout.statsfc.com/api/v1/fixtures">
+    <input type="text" class="form-control api-curl" aria-describedby="basic-addon1" value="curl -H &quot;X-StatsFC-Key: {api_key}&quot; https://dugout.statsfc.com/api/v2/fixtures">
 </div>
 
 <pre><code class="json">{
@@ -19,8 +19,10 @@
             "round": {
                 "id": 435,
                 "name": "Premier League",
-                "start": "2015-08-07",
-                "end": "2016-05-14"
+                "season": {
+                    "id": 10,
+                    "name": "2015\/2016"
+                }
             },
             "teams": {
                 "home": {
@@ -38,21 +40,14 @@
                 "home": [],
                 "away": []
             },
-            "score": null,
-            "currentState": {
-                "id": 4,
-                "key": "HT",
-                "name": "Half-Time"
-            },
-            "venue": {
-                "id": 665,
-                "name": "Britannia Stadium",
-                "capacity": 27740
-            },
+            "score": [
+                0,
+                0
+            ],
+            "currentState": "HT",
             "events": [
                 "cards": [],
                 "goals": [],
-                "states": [],
                 "substitutions": []
             ]
         },

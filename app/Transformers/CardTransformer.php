@@ -16,10 +16,9 @@ class CardTransformer extends Transformer
 
         $data = [
             'id'        => $card->id,
-            'timestamp' => $card->timestamp->toIso8601String(),
-            'matchTime' => $card->matchTime,
+            'matchTime' => $card->matchTime(),
             'type'      => 'card',
-            'subType'   => $card->subType,
+            'subType'   => $card->subType(),
         ];
 
         if ($card->team) {

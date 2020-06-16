@@ -14,7 +14,7 @@ class TeamTransformer extends Transformer
         return [
             'id'        => $team->id,
             'name'      => $team->name,
-            'shortName' => $team->shortName,
+            'shortName' => $team->short_name,
         ];
     }
 }

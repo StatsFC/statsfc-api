@@ -11,22 +11,10 @@ class RoundTransformer extends Transformer
      */
     public function transform($round)
     {
-        $start = $round->start;
-        $end   = $round->end;
-
-        if (! is_null($start)) {
-            $start = $start->toDateString();
-        }
-
-        if (! is_null($end)) {
-            $end = $end->toDateString();
-        }
-
         return [
-            'id'    => $round->id,
-            'name'  => $round->name,
-            'start' => $start,
-            'end'   => $end,
+            'id'     => $round->id,
+            'name'   => $round->name,
+            'season' => (new SeasonTransformer)->transform($round->season),
         ];
     }
 }

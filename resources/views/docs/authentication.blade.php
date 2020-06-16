@@ -4,7 +4,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading solo">
-        <pre>curl -H "X-StatsFC-Key: {api_key}" https://dugout.statsfc.com/api/v1/…</pre>
+        <pre>curl -H "X-StatsFC-Key: {api_key}" https://dugout.statsfc.com/api/v2/…</pre>
     </div>
 </div>
 

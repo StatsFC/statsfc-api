@@ -36,7 +36,7 @@ class SeasonsController extends ApiController
             ->distinct()
             ->visibleByCustomer($customer_id)
             ->groupBy('seasons.id')
-            ->orderBy('seasons.start')
+            ->orderBy('seasons.name')
             ->get();
 
         return $this->respond([
